@@ -1,3 +1,33 @@
 <div class='main'>
-    <img src="../../assets//chungnhan.jpg" alt="">
+    <div class='control'>
+        <div class='control-view'>
+            <div class='control-view-ele'>
+                <div>
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                    Background
+                </div>
+                <div class='control-view-ele-control'>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div *ngFor="let ele of listElement; index as index" class='control-view-ele'>
+                <div>
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                    {{ele.name || 'element ' + (index + 1) }}
+                </div>
+                <div class='control-view-ele-control'>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </div>
+            </div>
+            <button class='btn-add-ele' (click)='addElement()'>Add element</button>
+        </div>
+    </div>
+    <div class='view' id='view-parent'>
+        <img src="../../assets//chungnhan.jpg" alt="">
+        <app-template-ele *ngFor="let ele of listElement" [dataElement]="ele"></app-template-ele>
+    </div>
 </div>

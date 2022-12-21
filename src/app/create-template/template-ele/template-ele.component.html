@@ -1,0 +1,5 @@
+<div class='element'
+    [ngStyle]="{'top': dataElement.position.top+'px', 'left':dataElement.position.left+'px' , 'color': dataElement.color, 'font-size': dataElement.fontSize + 'px'}"
+    (mousedown)='onMouseDown($event)' (mouseup)="onMouseUp()" id='element' #drap>
+    {{dataElement.content}}
+</div>
