@@ -1,5 +1,10 @@
-<div class='element'
-    [ngStyle]="{'top': dataElement.position.top+'px', 'left':dataElement.position.left+'px' , 'color': dataElement.color, 'font-size': dataElement.fontSize + 'px'}"
-    (mousedown)='onMouseDown($event)' (mouseup)="onMouseUp()" id='element' #drap>
+<div class='element' [ngStyle]="{
+        'top': dataElement.position.top+'px', 
+        'left':dataElement.position.left+'px' , 
+        'color': dataElement.color, 
+        'font-size': dataElement.fontSize + 'px' ,
+        'width': dataElement.width ? dataElement.width + 'px' : '',
+        'text-align': dataElement.textAlignment
+    }" (mousedown)='onMouseDown($event)' (mouseup)="onMouseUp()" id='element' #drap>
     {{dataElement.content}}
 </div>

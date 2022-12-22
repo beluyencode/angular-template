@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { ELementType } from '../create-template';
 
 @Component({
@@ -7,8 +7,8 @@ import { ELementType } from '../create-template';
   styleUrls: ['./template-ele.component.scss']
 })
 export class TemplateEleComponent implements OnInit {
-
   @Input() dataElement: ELementType;
+  @Output() changeInput=  new EventEmitter<any>();
   @ViewChild('drap') element: ElementRef<HTMLDivElement>;
   mouseDown: boolean = false;
   prevPosition: any = {
@@ -36,9 +36,11 @@ export class TemplateEleComponent implements OnInit {
   }
 
   eventMouseMove(eventMouse: any) {
-    this.renderer2.setStyle(this.element.nativeElement, 'top', this.countPositon(eventMouse, 'top') + 'px');
-    this.renderer2.setStyle(this.element.nativeElement, 'left', this.countPositon(eventMouse, 'left') + 'px');
-    console.log(this.countPositon(eventMouse, 'top'), this.countPositon(eventMouse, 'left'));
+    this.dataElement.position.top = this.countPositon(eventMouse, 'top');
+    this.dataElement.position.left = this.countPositon(eventMouse, 'left');
+    this.changeInput.emit(this.dataElement);
+    // this.renderer2.setStyle(this.element.nativeElement, 'top', this.countPositon(eventMouse, 'top') + 'px');
+    // this.renderer2.setStyle(this.element.nativeElement, 'left', this.countPositon(eventMouse, 'left') + 'px');
     this.prevPosition = {
       top: eventMouse.clientY,
       left: eventMouse.clientX,
@@ -63,7 +65,6 @@ export class TemplateEleComponent implements OnInit {
         return returnValueLeft
       default:
         return 0
-        break;
     }
   }
 

@@ -1,7 +1,7 @@
 <div class='main'>
     <div class='control'>
         <div class='control-view'>
-            <div class='control-view-ele'>
+            <!-- <div class='control-view-ele'>
                 <div>
                     <i class="fa fa-file-image-o" aria-hidden="true"></i>
                     Background
@@ -11,23 +11,55 @@
                     <i class="fa fa-cog" aria-hidden="true"></i>
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </div>
-            </div>
+            </div> -->
             <div *ngFor="let ele of listElement; index as index" class='control-view-ele'>
-                <div>
+                <div class="control-view-ele-text">
                     <i class="fa fa-file-image-o" aria-hidden="true"></i>
                     {{ele.name || 'element ' + (index + 1) }}
                 </div>
                 <div class='control-view-ele-control'>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    <i class="fa fa-cog" aria-hidden="true"></i>
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    <!-- <i class="fa fa-pencil-square-o" aria-hidden="true"></i> -->
+                    <i class="fa fa-cog" aria-hidden="true" (click)="editElement(ele)" ></i>
+                    <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteElement(ele)"></i>
                 </div>
             </div>
-            <button class='btn-add-ele' (click)='addElement()'>Add element</button>
+            <button class='btn' (click)='addElement()'>Add element</button>
         </div>
     </div>
     <div class='view' id='view-parent'>
         <img src="../../assets//chungnhan.jpg" alt="">
-        <app-template-ele *ngFor="let ele of listElement" [dataElement]="ele"></app-template-ele>
+        <app-template-ele *ngFor="let ele of listElement" [dataElement]="ele" (changeInput)="changeElement($event)"></app-template-ele>
+    </div>
+</div>
+<div *ngIf="popupEdit.isOpen" class="popup">
+    <div class="pos-background">
+        <div  class="background-popup"></div>
+        <div class="popup-content">
+            <div class="popup-content-header">
+                EDIT: {{popupEdit.data.name}}
+            </div>
+            <div class="popup-content-ele ">
+                Element name: <input type="text" [(ngModel)]="popupEdit.data.name">
+            </div>
+            <div  class="popup-content-ele ">
+                Element text: <textarea type="text" [(ngModel)]="popupEdit.data.content"></textarea>
+            </div>
+            <div  class="popup-content-ele ">
+                Width: <input type="text" [(ngModel)]="popupEdit.data.width">
+            </div>
+            <div  class="popup-content-ele ">
+                Text size: <input type="text" [(ngModel)]="popupEdit.data.fontSize">
+            </div>
+            <div  class="popup-content-ele ">
+                Text alignment: <input type="text" [(ngModel)]="popupEdit.data.textAlignment">
+            </div>
+            <div  class="popup-content-ele ">
+                text color: <input type="color" [(ngModel)]="popupEdit.data.color">
+            </div>
+            <div class="popup-content-footer">
+                <button class="btn" (click)="closePopup()">Huỷ bỏ</button>
+                <button class="btn btn-save" (click)="save()">Lưu</button>
+            </div>
+        </div>
     </div>
 </div>
