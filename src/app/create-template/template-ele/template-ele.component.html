@@ -5,6 +5,6 @@
         'font-size': dataElement.fontSize + 'px' ,
         'width': dataElement.width ? dataElement.width + 'px' : '',
         'text-align': dataElement.textAlignment
-    }" (mousedown)='onMouseDown($event)' (mouseup)="onMouseUp()" id='element' #drap>
+    }" (mousedown)='onMouseDown($event)' (mouseup)="onMouseUp()" (mouseleave)="onMouseLeave()" id='element' #drap>
     {{dataElement.content}}
 </div>

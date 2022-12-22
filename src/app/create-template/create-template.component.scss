@@ -1,13 +1,13 @@
+
+
 .main {
     display: flex;
-    height: 700px;
     user-select: none;
-    width: 100%;
     border: 1px solid black;
+    width: fit-content;
 
     .control {
-        width: 30%;
-        max-width: 30%;
+        width: 320px;
         height: calc(100%);
         overflow: auto;
 
@@ -45,11 +45,10 @@
     }
 
     .view {
-        width: 70%;
         position: relative;
         img {
-            width: 100%;
-            height: 100%;
+            width: 1123px;
+            height: 794px;
         }
     }
 }

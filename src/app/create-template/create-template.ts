@@ -4,6 +4,7 @@ export interface ELementType {
     fontSize: number
     content: string,
     width: number,
+    type: string,
     textAlignment: string
     position: {
         top: 0,

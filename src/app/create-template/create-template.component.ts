@@ -14,11 +14,12 @@ export class CreateTemplateComponent implements OnInit {
       "color": "",
       "fontSize": "25",
       "content": "Ông/Bà :",
+      'type': 'text',
       "textAlignment": "left",
       "width": null,
       "position": {
-        "top": 259,
-        "left": 236
+        "top": 322,
+        "left": 320
       }
     },
     {
@@ -27,11 +28,12 @@ export class CreateTemplateComponent implements OnInit {
       "color": "",
       "fontSize": "25",
       "content": "Phạm Việt Long",
+      'type': 'text',
       "textAlignment": "left",
       "width": null,
       "position": {
-        "top": 257,
-        "left": 366
+        "top": 321,
+        "left": 470
       }
     },
     {
@@ -41,10 +43,11 @@ export class CreateTemplateComponent implements OnInit {
       "fontSize": "25",
       "content": "Ngày sinh: ",
       "textAlignment": "left",
+      'type': 'text',
       "width": null,
       "position": {
-        "top": 306,
-        "left": 237
+        "top": 374,
+        "left": 319
       }
     },
     {
@@ -54,10 +57,11 @@ export class CreateTemplateComponent implements OnInit {
       "fontSize": "25",
       "content": "21/01/2002",
       "textAlignment": "left",
+      'type': 'text',
       "width": null,
       "position": {
-        "top": 306,
-        "left": 366
+        "top": 374,
+        "left": 469
       }
     },
     {
@@ -66,11 +70,12 @@ export class CreateTemplateComponent implements OnInit {
       "color": "",
       "fontSize": "25",
       "width": "700",
+      'type': 'text',
       "textAlignment": "center",
       "content": "Đã đạt thành tích thành tích xuất sắc trong quá trình học tập. Góp phần giúp đất nước ta sánh vai với các cường quốc năm châu.",
       "position": {
-        "top": 371,
-        "left": 80
+        "top": 446,
+        "left": 202
       }
     }
   ]
@@ -78,6 +83,14 @@ export class CreateTemplateComponent implements OnInit {
     isOpen: false,
     data: null
   }
+  selectTypeElement = [
+    { 
+      name: 'text'
+    },
+    {
+      name: 'image'
+    }
+  ]
 
   constructor(
     private createTemplateService: CreateTemplateService,
@@ -136,15 +149,18 @@ export class CreateTemplateComponent implements OnInit {
     }
   }
 
-  save() {
+  saveEdit() {
     this.listElement = this.listElement.map((ele: any) => {
       if (ele.id === this.popupEdit.data.id) {
         return this.popupEdit.data;
       }
       return ele;
     })
-    console.log(this.listElement);
-
     this.closePopup();
   }
+
+  save() {
+    console.log(this.listElement);
+  }
+
 }

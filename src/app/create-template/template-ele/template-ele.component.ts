@@ -8,7 +8,8 @@ import { ELementType } from '../create-template';
 })
 export class TemplateEleComponent implements OnInit {
   @Input() dataElement: ELementType;
-  @Output() changeInput=  new EventEmitter<any>();
+  @Output() changeInput =  new EventEmitter<any>();
+  @Output() openPopupEdit =  new EventEmitter<any>();
   @ViewChild('drap') element: ElementRef<HTMLDivElement>;
   mouseDown: boolean = false;
   prevPosition: any = {
@@ -72,11 +73,12 @@ export class TemplateEleComponent implements OnInit {
     this.element.nativeElement.onmousemove = null;
     if (!this.isMove) {
       console.log('popup');
+      this.openPopupEdit.emit(this.dataElement);
     }
     this.isMove = false;
   }
 
-  onMouseMove(event: any) {
-
+  onMouseLeave() {
+    this.element.nativeElement.onmousemove = null
   }
 }
