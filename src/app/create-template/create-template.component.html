@@ -24,14 +24,13 @@
                 </div>
             </div>
             <button class='btn' (click)='addElement()'>Add element</button>
-            <button class='btn btn-save' (click)='save()'>Save</button>
-
+            <button class='btn btn-save' (click)='saveToPDF()'>Save as PNG</button>
         </div>
     </div>
-    <div class='view' id='view-parent'>
+    <div class='view' id='view-pdf'>
         <img src="../../assets//chungnhan.jpg" alt="">
-        <app-template-ele *ngFor="let ele of listElement" [dataElement]="ele"
-            (changeInput)="changeElement($event)" (openPopupEdit)="editElement($event)"></app-template-ele>
+        <app-template-ele *ngFor="let ele of listElement" [dataElement]="ele" (changeInput)="changeElement($event)"
+            (openPopupEdit)="editElement($event)"></app-template-ele>
     </div>
 </div>
 <div *ngIf="popupEdit.isOpen" class="popup">
@@ -54,7 +53,8 @@
                 Element text: <textarea type="text" [(ngModel)]="popupEdit.data.content"></textarea>
             </div>
             <div class="popup-content-ele " *ngIf="popupEdit.data.type === 'image'">
-                Imgage: <input type="file" >
+                Imgage: <input type="file" class='input-qr-input' accept=" image/*" (dragover)="onDragOver($event)"
+                    (drop)="dropFile($event)" (change)="chooseFile($event)" [files]="popupEdit.data.image">
             </div>
             <div class="popup-content-ele ">
                 Width: <input type="text" [(ngModel)]="popupEdit.data.width">
@@ -63,7 +63,10 @@
                 Text size: <input type="text" [(ngModel)]="popupEdit.data.fontSize">
             </div>
             <div class="popup-content-ele ">
-                Text alignment: <input type="text" [(ngModel)]="popupEdit.data.textAlignment">
+                Text alignment: {{popupEdit.data.textAlignment}}
+                <ng-select [(ngModel)]="popupEdit.data.textAlignment">
+                    <ng-option *ngFor="let op of selectTextAlignment" [value]="op.name">{{op.name}}</ng-option>
+                </ng-select>
             </div>
             <div class="popup-content-ele ">
                 text color: <input type="color" [(ngModel)]="popupEdit.data.color">

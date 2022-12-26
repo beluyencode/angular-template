@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import html2canvas from 'html2canvas';
+import { jsPDF } from "jspdf";
+import { fakeData, selectTextAlignment, selectTypeElement } from './create-template';
 import { CreateTemplateService } from './create-template.service';
 
 @Component({
@@ -7,90 +10,13 @@ import { CreateTemplateService } from './create-template.service';
   styleUrls: ['./create-template.component.scss']
 })
 export class CreateTemplateComponent implements OnInit {
-  listElement: any = [
-    {
-      "name": "Ông/Bà :",
-      "id": "63a4226a7611a8963af46677",
-      "color": "",
-      "fontSize": "25",
-      "content": "Ông/Bà :",
-      'type': 'text',
-      "textAlignment": "left",
-      "width": null,
-      "position": {
-        "top": 322,
-        "left": 320
-      }
-    },
-    {
-      "name": "Phạm Việt Long",
-      "id": "63a4226a679bdd171ee94dd2",
-      "color": "",
-      "fontSize": "25",
-      "content": "Phạm Việt Long",
-      'type': 'text',
-      "textAlignment": "left",
-      "width": null,
-      "position": {
-        "top": 321,
-        "left": 470
-      }
-    },
-    {
-      "name": "Ngày sinh: ",
-      "id": "63a4226b6d450c9857b96623",
-      "color": "",
-      "fontSize": "25",
-      "content": "Ngày sinh: ",
-      "textAlignment": "left",
-      'type': 'text',
-      "width": null,
-      "position": {
-        "top": 374,
-        "left": 319
-      }
-    },
-    {
-      "name": "21/01/2002",
-      "id": "63a4231f1ed7c63557b3840e",
-      "color": "",
-      "fontSize": "25",
-      "content": "21/01/2002",
-      "textAlignment": "left",
-      'type': 'text',
-      "width": null,
-      "position": {
-        "top": 374,
-        "left": 469
-      }
-    },
-    {
-      "name": "Khen thưởng",
-      "id": "63a42347fdfc25ea736fd9e3",
-      "color": "",
-      "fontSize": "25",
-      "width": "700",
-      'type': 'text',
-      "textAlignment": "center",
-      "content": "Đã đạt thành tích thành tích xuất sắc trong quá trình học tập. Góp phần giúp đất nước ta sánh vai với các cường quốc năm châu.",
-      "position": {
-        "top": 446,
-        "left": 202
-      }
-    }
-  ]
+  listElement: any = fakeData;
   popupEdit: any = {
     isOpen: false,
     data: null
-  }
-  selectTypeElement = [
-    { 
-      name: 'text'
-    },
-    {
-      name: 'image'
-    }
-  ]
+  };
+  selectTypeElement = selectTypeElement;
+  selectTextAlignment = selectTextAlignment;
 
   constructor(
     private createTemplateService: CreateTemplateService,
@@ -118,7 +44,9 @@ export class CreateTemplateComponent implements OnInit {
       color: '',
       fontSize: 20,
       width: 0,
-      TextAlignment: 'left',
+      type: 'text',
+      textAlignment: 'left',
+      image: null,
       content: 'element ' + this.listElement.length,
       position: {
         top: 0,
@@ -163,4 +91,59 @@ export class CreateTemplateComponent implements OnInit {
     console.log(this.listElement);
   }
 
+  dropFile(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    const listFiles = new DataTransfer();
+    listFiles.items.add(event.dataTransfer.files[0]);
+    this.convertImgToBase64(event.dataTransfer.files[0]).then(data => {
+      this.popupEdit.data.image = data
+    })
+  }
+
+  chooseFile(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    const listFiles = new DataTransfer();
+    listFiles.items.add(event.target.files[0]);
+    console.log(event.target.files[0]);
+
+    this.convertImgToBase64(event.target.files[0]).then(data => {
+      this.popupEdit.data.image = data
+    })
+  }
+
+  onDragOver(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  convertImgToBase64(file: File) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    })
+  }
+
+  convertBase64tofile(base64: string) {
+    const blob = new Blob([base64])
+  }
+
+  saveToPDF() {
+    var source = document.getElementById('view-pdf')!;
+    html2canvas(source).then((canvas) => {
+      const url = canvas.toDataURL();
+      const link = document.createElement("a");
+      link.download = 'test.png';
+      link.href = url;
+      link.click();
+      // const doc = new jsPDF();
+      // doc.addImage(url, 'PNG', 0, 10, 210, 160);
+      // doc.save("new.pdf");
+    })
+
+
+  }
 }
