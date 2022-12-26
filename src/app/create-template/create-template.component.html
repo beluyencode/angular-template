@@ -1,17 +1,15 @@
-<div class='main'>
+<div class='main-create-template'>
     <div class='control'>
         <div class='control-view'>
-            <!-- <div class='control-view-ele'>
+            <div class='control-view-ele'>
                 <div>
                     <i class="fa fa-file-image-o" aria-hidden="true"></i>
                     Background
                 </div>
                 <div class='control-view-ele-control'>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    <i class="fa fa-cog" aria-hidden="true"></i>
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    <i class="fa fa-cog" aria-hidden="true" (click)="editBackground()"></i>
                 </div>
-            </div> -->
+            </div>
             <div *ngFor="let ele of listElement; index as index" class='control-view-ele'>
                 <div class="control-view-ele-text">
                     <i class="fa fa-file-image-o" aria-hidden="true"></i>
@@ -28,7 +26,7 @@
         </div>
     </div>
     <div class='view' id='view-pdf'>
-        <img src="../../assets//chungnhan.jpg" alt="">
+        <img [src]='background.data' alt="">
         <app-template-ele *ngFor="let ele of listElement" [dataElement]="ele" (changeInput)="changeElement($event)"
             (openPopupEdit)="editElement($event)"></app-template-ele>
     </div>
@@ -45,7 +43,7 @@
             </div>
             <div class="popup-content-ele ">
                 Element Type:
-                <ng-select [(ngModel)]="popupEdit.data.type">
+                <ng-select [(ngModel)]="popupEdit.data.type" [clearable]="false" [searchable]="false">
                     <ng-option *ngFor="let op of selectTypeElement" [value]="op.name">{{op.name}}</ng-option>
                 </ng-select>
             </div>
@@ -53,19 +51,26 @@
                 Element text: <textarea type="text" [(ngModel)]="popupEdit.data.content"></textarea>
             </div>
             <div class="popup-content-ele " *ngIf="popupEdit.data.type === 'image'">
-                Imgage: <input type="file" class='input-qr-input' accept=" image/*" (dragover)="onDragOver($event)"
-                    (drop)="dropFile($event)" (change)="chooseFile($event)" [files]="popupEdit.data.image">
+                Image: <input type="file" class='input-qr-input' accept=" image/*" (dragover)="onDragOver($event)"
+                    (drop)="dropFile($event , 'element') " (change)="chooseFile($event , 'element')"
+                    [files]="convertBase64tofile(popupEdit.data.image)">
             </div>
             <div class="popup-content-ele ">
                 Width: <input type="text" [(ngModel)]="popupEdit.data.width">
             </div>
             <div class="popup-content-ele ">
-                Text size: <input type="text" [(ngModel)]="popupEdit.data.fontSize">
+                Text size: <input type="number" [(ngModel)]="popupEdit.data.fontSize">
             </div>
             <div class="popup-content-ele ">
                 Text alignment: {{popupEdit.data.textAlignment}}
-                <ng-select [(ngModel)]="popupEdit.data.textAlignment">
+                <ng-select [(ngModel)]="popupEdit.data.textAlignment" [clearable]="false" [searchable]="false">
                     <ng-option *ngFor="let op of selectTextAlignment" [value]="op.name">{{op.name}}</ng-option>
+                </ng-select>
+            </div>
+            <div class="popup-content-ele ">
+                Value Dynamic:
+                <ng-select [(ngModel)]="popupEdit.data.valueDynamic" [clearable]="false" [searchable]="false">
+                    <ng-option *ngFor="let op of selectTypeParams" [value]="op.name">{{op.name}}</ng-option>
                 </ng-select>
             </div>
             <div class="popup-content-ele ">
@@ -74,6 +79,25 @@
             <div class="popup-content-footer">
                 <button class="btn" (click)="closePopup()">Huỷ bỏ</button>
                 <button class="btn btn-save" (click)="saveEdit()">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="popupEditBackground.isOpen" class="popup">
+    <div class="pos-background">
+        <div class="background-popup"></div>
+        <div class="popup-content">
+            <div class="popup-content-header">
+                EDIT: {{popupEditBackground.data.name}}
+            </div>
+            <div class="popup-content-ele ">
+                Image: <input type="file" class='input-qr-input' accept=" image/*" (dragover)="onDragOver($event)"
+                    (drop)="dropFile($event, 'background')" (change)="chooseFile($event, 'background')"
+                    [files]="convertBase64tofile(popupEditBackground.data.image)">
+            </div>
+            <div class="popup-content-footer">
+                <button class="btn" (click)="closePopup()">Huỷ bỏ</button>
+                <button class="btn btn-save" (click)="saveEditBackground()">Lưu</button>
             </div>
         </div>
     </div>

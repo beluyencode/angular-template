@@ -6,5 +6,8 @@
         'width': dataElement.width ? dataElement.width + 'px' : '',
         'text-align': dataElement.textAlignment
     }" (mousedown)='onMouseDown($event)' (mouseup)="onMouseUp()" (mouseleave)="onMouseLeave()" id='element' #drap>
-    {{dataElement.content}}
+    <div *ngIf="dataElement.type === 'text'">
+        {{dataElement.content}}
+    </div>
+    <img src={{dataElement.image.data}} alt="" *ngIf="dataElement.type === 'image'">
 </div>

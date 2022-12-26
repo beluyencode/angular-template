@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ELementType } from '../create-template';
 
 @Component({
@@ -8,8 +8,8 @@ import { ELementType } from '../create-template';
 })
 export class TemplateEleComponent implements OnInit {
   @Input() dataElement: ELementType;
-  @Output() changeInput =  new EventEmitter<any>();
-  @Output() openPopupEdit =  new EventEmitter<any>();
+  @Output() changeInput = new EventEmitter<any>();
+  @Output() openPopupEdit = new EventEmitter<any>();
   @ViewChild('drap') element: ElementRef<HTMLDivElement>;
   mouseDown: boolean = false;
   prevPosition: any = {
@@ -19,7 +19,7 @@ export class TemplateEleComponent implements OnInit {
   listenMouseMove: any;
   isMove = false;
 
-  constructor(private renderer2: Renderer2) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -29,11 +29,11 @@ export class TemplateEleComponent implements OnInit {
     this.prevPosition = {
       top: event.clientY,
       left: event.clientX
-    }
-    this.element.nativeElement.onmousemove = (event) => {
+    };
+    this.element.nativeElement.onmousemove = (events: any) => {
       this.isMove = true;
-      this.eventMouseMove(event);
-    }
+      this.eventMouseMove(events);
+    };
   }
 
   eventMouseMove(eventMouse: any) {
@@ -45,7 +45,7 @@ export class TemplateEleComponent implements OnInit {
     this.prevPosition = {
       top: eventMouse.clientY,
       left: eventMouse.clientX,
-    }
+    };
   }
 
   countPositon(event: any, type: string) {
@@ -53,19 +53,19 @@ export class TemplateEleComponent implements OnInit {
       case 'top':
         const returnValueTop = (this.element.nativeElement.offsetTop - this.prevPosition.top + event.clientY);
         if (returnValueTop < 0) {
-          this.element.nativeElement.onmousemove = null
-          return 0
+          this.element.nativeElement.onmousemove = null;
+          return 0;
         }
-        return returnValueTop
+        return returnValueTop;
       case 'left':
-        const returnValueLeft = (this.element.nativeElement.offsetLeft - this.prevPosition.left + event.clientX)
+        const returnValueLeft = (this.element.nativeElement.offsetLeft - this.prevPosition.left + event.clientX);
         if (returnValueLeft < 0) {
-          this.element.nativeElement.onmousemove = null
-          return 0
+          this.element.nativeElement.onmousemove = null;
+          return 0;
         }
-        return returnValueLeft
+        return returnValueLeft;
       default:
-        return 0
+        return 0;
     }
   }
 
@@ -79,6 +79,6 @@ export class TemplateEleComponent implements OnInit {
   }
 
   onMouseLeave() {
-    this.element.nativeElement.onmousemove = null
+    this.element.nativeElement.onmousemove = null;
   }
 }

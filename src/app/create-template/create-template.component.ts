@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import html2canvas from 'html2canvas';
-import { jsPDF } from "jspdf";
-import { fakeData, selectTextAlignment, selectTypeElement } from './create-template';
+// import { jsPDF } from "jspdf";
+import { fakeData, selectTextAlignment, selectTypeElement, selectTypeParams } from './create-template';
 import { CreateTemplateService } from './create-template.service';
 
 @Component({
@@ -10,13 +10,19 @@ import { CreateTemplateService } from './create-template.service';
   styleUrls: ['./create-template.component.scss']
 })
 export class CreateTemplateComponent implements OnInit {
-  listElement: any = fakeData;
+  listElement: any = fakeData.data;
+  background = fakeData.background;
   popupEdit: any = {
+    isOpen: false,
+    data: null
+  };
+  popupEditBackground: any = {
     isOpen: false,
     data: null
   };
   selectTypeElement = selectTypeElement;
   selectTextAlignment = selectTextAlignment;
+  selectTypeParams = selectTypeParams;
 
   constructor(
     private createTemplateService: CreateTemplateService,
@@ -34,7 +40,7 @@ export class CreateTemplateComponent implements OnInit {
         return event;
       }
       return ele;
-    })
+    });
   }
 
   addElement() {
@@ -56,25 +62,37 @@ export class CreateTemplateComponent implements OnInit {
   }
 
   deleteElement(ele: any) {
-    this.listElement = this.listElement.filter((elePrev: any) => elePrev.id !== ele.id)
+    this.listElement = this.listElement.filter((elePrev: any) => elePrev.id !== ele.id);
   }
 
   editElement(ele: any) {
-    console.log(ele);
     this.popupEdit = {
       isOpen: true,
       data: {
         ...ele
       }
-    }
+    };
     // this.modalService.openModal(this.idEditPopup)
+  }
+
+  editBackground() {
+    this.popupEditBackground = {
+      isOpen: true,
+      data: {
+        image: this.background
+      }
+    };
   }
 
   closePopup() {
     this.popupEdit = {
       isOpen: false,
       data: null
-    }
+    };
+    this.popupEditBackground = {
+      isOpen: false,
+      data: null
+    };
   }
 
   saveEdit() {
@@ -83,34 +101,47 @@ export class CreateTemplateComponent implements OnInit {
         return this.popupEdit.data;
       }
       return ele;
-    })
+    });
     this.closePopup();
   }
 
-  save() {
-    console.log(this.listElement);
-  }
-
-  dropFile(event: any) {
+  dropFile(event: any, type: string) {
     event.preventDefault();
     event.stopPropagation();
     const listFiles = new DataTransfer();
     listFiles.items.add(event.dataTransfer.files[0]);
-    this.convertImgToBase64(event.dataTransfer.files[0]).then(data => {
-      this.popupEdit.data.image = data
-    })
+    this.convertImgToBase64(event.dataTransfer.files[0]).then((data: any) => {
+      switch (type) {
+        case 'element':
+          this.popupEdit.data.image = data;
+          break;
+        case 'background':
+          this.popupEditBackground.data.image = data;
+          break;
+        default:
+          break;
+      }
+    });
   }
 
-  chooseFile(event: any) {
+  chooseFile(event: any, type: string) {
     event.preventDefault();
     event.stopPropagation();
     const listFiles = new DataTransfer();
     listFiles.items.add(event.target.files[0]);
-    console.log(event.target.files[0]);
+    this.convertImgToBase64(event.target.files[0]).then((data: any) => {
+      switch (type) {
+        case 'element':
+          this.popupEdit.data.image = data;
+          break;
+        case 'background':
+          this.popupEditBackground.data.image = data;
+          break;
+        default:
+          break;
+      }
+    });
 
-    this.convertImgToBase64(event.target.files[0]).then(data => {
-      this.popupEdit.data.image = data
-    })
   }
 
   onDragOver(event: any) {
@@ -122,28 +153,40 @@ export class CreateTemplateComponent implements OnInit {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
+      reader.onload = () => resolve({
+        data: reader.result,
+        name: file.name
+      });
       reader.onerror = error => reject(error);
-    })
+    });
   }
-
-  convertBase64tofile(base64: string) {
-    const blob = new Blob([base64])
+  convertBase64tofile(data: any) {
+    const listFiles = new DataTransfer();
+    if (data) {
+      const blob = new Blob([data.data]);
+      const file = new File([blob], data.name);
+      listFiles.items.add(file);
+    }
+    return listFiles.files;
   }
 
   saveToPDF() {
-    var source = document.getElementById('view-pdf')!;
+    console.log(this.listElement);
+    const source = document.getElementById('view-pdf');
     html2canvas(source).then((canvas) => {
       const url = canvas.toDataURL();
-      const link = document.createElement("a");
+      const link = document.createElement('a');
       link.download = 'test.png';
       link.href = url;
       link.click();
       // const doc = new jsPDF();
       // doc.addImage(url, 'PNG', 0, 10, 210, 160);
       // doc.save("new.pdf");
-    })
+    });
+  }
 
-
+  saveEditBackground() {
+    this.background = this.popupEditBackground.data.image;
+    this.closePopup();
   }
 }
