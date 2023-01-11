@@ -1,0 +1,339 @@
+{
+    "jsonrpc": "2.0",
+    "status": 1,
+    "message": "Successfully checked",
+    "error_grammar_count_total": 24,
+    "error_grammar_percent": "18%",
+    "check_grammar_feedback": [
+        {
+            "context": "When explore Hoan Kiem Lake in the centre of Hanoi, visitors are give chance discovering astonding places like as: The Turtle Tower, Ngoc Son Temple, The Huc Bridge,   and more.",
+            "error_grammar": "Hoan",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "Loan",
+                "Horn",
+                "Han",
+                "Joan",
+                "Hoax",
+                "Roan",
+                "Koan",
+                "Moan",
+                "Hogan",
+                "Hoeing",
+                "HON",
+                "Hon",
+                "Ho an",
+                "Hohn",
+                "Huan",
+                "Ioan",
+                "Yoan"
+            ]
+        },
+        {
+            "context": "When explore Hoan Kiem Lake in the centre of Hanoi, visitors are give chance discovering astonding places like as: The Turtle Tower, Ngoc Son Temple, The Huc Bridge,   and more.",
+            "error_grammar": "chance",
+            "feedback_grammar": "You probably need an article here.",
+            "feedback_grammar_suggestion": [
+                "a chance"
+            ]
+        },
+        {
+            "context": "When explore Hoan Kiem Lake in the centre of Hanoi, visitors are give chance discovering astonding places like as: The Turtle Tower, Ngoc Son Temple, The Huc Bridge,   and more.",
+            "error_grammar": "astonding",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "astounding"
+            ]
+        },
+        {
+            "context": "When explore Hoan Kiem Lake in the centre of Hanoi, visitors are give chance discovering astonding places like as: The Turtle Tower, Ngoc Son Temple, The Huc Bridge,   and more.",
+            "error_grammar": "Ngoc",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "NGC",
+                "Ngoy"
+            ]
+        },
+        {
+            "context": "When explore Hoan Kiem Lake in the centre of Hanoi, visitors are give chance discovering astonding places like as: The Turtle Tower, Ngoc Son Temple, The Huc Bridge,   and more.",
+            "error_grammar": "Huc",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "Hub",
+                "Hut",
+                "Hue",
+                "HUD",
+                "Hui",
+                "Hug",
+                "Hum",
+                "HCC",
+                "HFC",
+                "HMC",
+                "PUC",
+                "Huck",
+                "Hus",
+                "Huh",
+                "HIC",
+                "AUC",
+                "BUC",
+                "CUC",
+                "EUC",
+                "GUC",
+                "HAC",
+                "HEC",
+                "HPC",
+                "HRC",
+                "HSC",
+                "HU",
+                "HUF",
+                "HUG",
+                "HUL",
+                "Hun",
+                "MUC",
+                "RUC",
+                "UC",
+                "UUC",
+                "Luc"
+            ]
+        },
+        {
+            "context": "Today, the Turtle Tower (‘Tháp Rùa' in Vietnamese) stands cloze to the lake in memori of the populate legend.",
+            "error_grammar": "cloze",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "close",
+                "clone",
+                "clove"
+            ]
+        },
+        {
+            "context": "Today, the Turtle Tower (‘Tháp Rùa' in Vietnamese) stands cloze to the lake in memori of the populate legend.",
+            "error_grammar": "memori",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "memory",
+                "memoir"
+            ]
+        },
+        {
+            "context": "Today, the Turtle Tower (‘Tháp Rùa' in Vietnamese) stands cloze to the lake in memori of the populate legend.",
+            "error_grammar": "the populate",
+            "feedback_grammar": "This is probably an article error. You cannot use \"a\" or \"the\" with an infinitive verb. ",
+            "feedback_grammar_suggestion": []
+        },
+        {
+            "context": "Was built in a pleasant stance with nature , the towel maintained a certain   sophisticating and appealling due to its France influence and authentic Vietnam achitecture .",
+            "error_grammar": " ,",
+            "feedback_grammar": "Put a space after the comma, but not before the comma",
+            "feedback_grammar_suggestion": [
+                ","
+            ]
+        },
+        {
+            "context": "Was built in a pleasant stance with nature , the towel maintained a certain   sophisticating and appealling due to its France influence and authentic Vietnam achitecture .",
+            "error_grammar": "appealling",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "appealing",
+                "appalling",
+                "appeal ling"
+            ]
+        },
+        {
+            "context": "Was built in a pleasant stance with nature , the towel maintained a certain   sophisticating and appealling due to its France influence and authentic Vietnam achitecture .",
+            "error_grammar": "achitecture",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "architecture"
+            ]
+        },
+        {
+            "context": "Was built in a pleasant stance with nature , the towel maintained a certain   sophisticating and appealling due to its France influence and authentic Vietnam achitecture .",
+            "error_grammar": " .",
+            "feedback_grammar": "Don't put a space before the full stop",
+            "feedback_grammar_suggestion": [
+                "."
+            ]
+        },
+        {
+            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
+            "error_grammar": "Huc",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "Hub",
+                "Hut",
+                "Hue",
+                "HUD",
+                "Hui",
+                "Hug",
+                "Hum",
+                "HCC",
+                "HFC",
+                "HMC",
+                "PUC",
+                "Huck",
+                "Hus",
+                "Huh",
+                "HIC",
+                "AUC",
+                "BUC",
+                "CUC",
+                "EUC",
+                "GUC",
+                "HAC",
+                "HEC",
+                "HPC",
+                "HRC",
+                "HSC",
+                "HU",
+                "HUF",
+                "HUG",
+                "HUL",
+                "Hun",
+                "MUC",
+                "RUC",
+                "UC",
+                "UUC",
+                "Luc"
+            ]
+        },
+        {
+            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
+            "error_grammar": "a",
+            "feedback_grammar": "Use \"an\" instead of 'a' if the following word starts with a vowel sound, e.g. 'an article', 'an hour'",
+            "feedback_grammar_suggestion": [
+                "an"
+            ]
+        },
+        {
+            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
+            "error_grammar": "ancient beautiful",
+            "feedback_grammar": "In English, \"age\" adjectives (ancient) normally go AFTER \"quality\" or \"opinion\" adjectives (beautiful). Revise:  \"beautiful ancient\".",
+            "feedback_grammar_suggestion": [
+                "beautiful ancient"
+            ]
+        },
+        {
+            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
+            "error_grammar": "refered",
+            "feedback_grammar": "You have a spelling error. With two-syllable words that have a stress on the second syllable, double the final consonant before adding the suffix -ed: \"referred\".",
+            "feedback_grammar_suggestion": [
+                "referred"
+            ]
+        },
+        {
+            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
+            "error_grammar": " ,",
+            "feedback_grammar": "Put a space after the comma, but not before the comma",
+            "feedback_grammar_suggestion": [
+                ","
+            ]
+        },
+        {
+            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
+            "error_grammar": "Hoan",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "Loan",
+                "Horn",
+                "Han",
+                "Joan",
+                "Hoax",
+                "Roan",
+                "Koan",
+                "Moan",
+                "Hogan",
+                "Hoeing",
+                "HON",
+                "Hon",
+                "Ho an",
+                "Hohn",
+                "Huan",
+                "Ioan",
+                "Yoan"
+            ]
+        },
+        {
+            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
+            "error_grammar": "Ngoc",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "NGC",
+                "Ngoy"
+            ]
+        },
+        {
+            "context": "Painted in a red vibrant   color and was constructed by fine wood, The Huc Bridge is really a wondrous germ that perfectly mixxes with theirs abundant green-fillled suroundings.",
+            "error_grammar": "Huc",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "Hub",
+                "Hut",
+                "Hue",
+                "HUD",
+                "Hui",
+                "Hug",
+                "Hum",
+                "HCC",
+                "HFC",
+                "HMC",
+                "PUC",
+                "Huck",
+                "Hus",
+                "Huh",
+                "HIC",
+                "AUC",
+                "BUC",
+                "CUC",
+                "EUC",
+                "GUC",
+                "HAC",
+                "HEC",
+                "HPC",
+                "HRC",
+                "HSC",
+                "HU",
+                "HUF",
+                "HUG",
+                "HUL",
+                "Hun",
+                "MUC",
+                "RUC",
+                "UC",
+                "UUC",
+                "Luc"
+            ]
+        },
+        {
+            "context": "Painted in a red vibrant   color and was constructed by fine wood, The Huc Bridge is really a wondrous germ that perfectly mixxes with theirs abundant green-fillled suroundings.",
+            "error_grammar": "really",
+            "feedback_grammar": "Put the intensifying adverb before the adjective it modifies. Revise: \"a really wondrous germ\".",
+            "feedback_grammar_suggestion": [
+                "a really wondrous germ"
+            ]
+        },
+        {
+            "context": "Painted in a red vibrant   color and was constructed by fine wood, The Huc Bridge is really a wondrous germ that perfectly mixxes with theirs abundant green-fillled suroundings.",
+            "error_grammar": "mixxes",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "mixes",
+                "minxes"
+            ]
+        },
+        {
+            "context": "Painted in a red vibrant   color and was constructed by fine wood, The Huc Bridge is really a wondrous germ that perfectly mixxes with theirs abundant green-fillled suroundings.",
+            "error_grammar": "green-fillled",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": []
+        },
+        {
+            "context": "Painted in a red vibrant   color and was constructed by fine wood, The Huc Bridge is really a wondrous germ that perfectly mixxes with theirs abundant green-fillled suroundings.",
+            "error_grammar": "suroundings",
+            "feedback_grammar": "Possible spelling mistake found",
+            "feedback_grammar_suggestion": [
+                "surroundings"
+            ]
+        }
+    ]
+}

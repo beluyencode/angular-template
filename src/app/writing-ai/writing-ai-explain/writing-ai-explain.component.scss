@@ -1,0 +1,54 @@
+.explain-div {
+    width: 687px;
+
+    .explain-tab {
+        .explain-btn {
+            border: 1px solid #1B9946;
+            border-radius: 10px;
+            color: #1B9946;
+            background-color: white;
+            position: relative;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 10px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .explain-btn-arrow {
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #C4C4C4;
+        }
+
+        .explain-btn:hover {
+            opacity: .7;
+        }
+
+        .explain-btn-active {
+            background-color: #1B9946;
+            color: white;
+        }
+
+        .explain-btn-active:hover {
+            opacity: 1 !important;
+        }
+    }
+
+    .explain-container {
+        margin: 12px 0px;
+        border: 1px solid #C4C4C4;
+        border-radius: 10px;
+
+        .explain-content {
+            margin: 10px;
+        }
+
+    }
+}

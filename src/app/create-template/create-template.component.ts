@@ -172,7 +172,7 @@ export class CreateTemplateComponent implements OnInit {
 
   saveToPDF() {
     console.log(this.listElement);
-    const source = document.getElementById('view-pdf');
+    const source = document.getElementById('view-pdf')!;
     html2canvas(source).then((canvas) => {
       const url = canvas.toDataURL();
       const link = document.createElement('a');

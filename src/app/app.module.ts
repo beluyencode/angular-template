@@ -3,14 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { CreateTemplateModule } from './create-template/create-template.module';
+import { WritingAiModule } from './writing-ai/writing-ai.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    CreateTemplateModule
+    CreateTemplateModule,
+    WritingAiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
