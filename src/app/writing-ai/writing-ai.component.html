@@ -1,1 +1,7 @@
-<p>writing-ai works!</p>
+<div class='writing-results-div'>
+    <div class='writing-results-container'>
+        <div class='writing-results-content' #writingResults>
+            <app-writing-ai-line *ngFor="let line of data" [data]='line'></app-writing-ai-line>
+        </div>
+    </div>
+</div>

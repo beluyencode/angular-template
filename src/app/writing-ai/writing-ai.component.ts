@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CheckGrammarFeedbackType, WritingAiResType } from './writing-ai';
 import { WritingAiService } from './writing-ai.service';
 
@@ -8,10 +8,12 @@ import { WritingAiService } from './writing-ai.service';
   styleUrls: ['./writing-ai.component.scss']
 })
 export class WritingAiComponent implements OnInit {
+  @ViewChild('writingResults') ele: ElementRef;
   data: any = [];
 
   constructor(
-    private writingAi: WritingAiService
+    private writingAi: WritingAiService,
+    private renderer2: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,11 @@ export class WritingAiComponent implements OnInit {
     });
     data.push(array.slice(prevIndex, array.length));
     return data;
+  }
+
+  createGrammarError() {
+    const div = this.renderer2.createElement('span');
+
   }
 
 

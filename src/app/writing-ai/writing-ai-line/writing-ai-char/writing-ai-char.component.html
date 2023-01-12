@@ -1,0 +1,68 @@
+<ng-container *ngIf="!char.isError">
+    {{char.text}}
+</ng-container>
+<ng-container *ngIf="char.isError">
+    <span class='error-char-all' #charError>
+        <span class='error-char' [ngClass]="{'error-char-spelling': typeError === 'SPELLING'}">{{char.text}}</span>
+        <div class='error-popup' [ngClass]="{'error-popup-active ':isOpenPopup, 'error-char-right' : isTouchMargin}"
+            #charErrorMenu>
+            <div class='error-popup-container' *ngIf=" typeError === 'GRAMMAR'">
+                <div class='error-popup-header'>
+                    <div class='donet'>
+
+                    </div>
+                    GRAMMAR
+                </div>
+                <div class='error-popup-title'>
+                    {{dataError?.error_grammar}}
+                    <ng-container *ngIf="dataError!.feedback_grammar_suggestion.length > 0">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        <span class='char-correct'>
+                            {{dataError!.feedback_grammar_suggestion[0]}}
+                        </span>
+                    </ng-container>
+                </div>
+                <div class='error-popup-sub-title'>
+                    <p>
+                        {{dataError!.feedback_grammar}}
+                    </p>
+                </div>
+                <div class='error-popup-footer'>
+                    <div class='hashtag hashtag-active'>
+                        Accept
+                    </div>
+                    <div class='hashtag'>
+                        Dismiss
+                    </div>
+                </div>
+            </div>
+            <div class='error-popup-container' *ngIf=" typeError === 'SPELLING'">
+                <div class='error-popup-header'>
+                    <div class='donet donet-blue'></div>
+                    SPELLING
+                </div>
+                <div class='error-popup-title'>
+                    {{dataError?.error_grammar}}
+                    <ng-container *ngIf="dataError!.feedback_grammar_suggestion.length > 0">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        <span class='char-correct'>
+                            {{dataError!.feedback_grammar_suggestion[0]}}
+                        </span>
+                    </ng-container>
+                </div>
+                <div class='error-popup-sub-title'>
+                    <p>
+                        Do you mean :
+                    </p>
+                </div>
+                <div class='error-popup-footer'>
+                    <ng-container *ngFor="let tag of dataError!.feedback_grammar_suggestion">
+                        <div class='hashtag'>
+                            {{tag}}
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </span>
+</ng-container>
