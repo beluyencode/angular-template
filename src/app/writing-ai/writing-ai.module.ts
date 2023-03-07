@@ -9,10 +9,11 @@ import { WritingAiCharComponent } from './writing-ai-line/writing-ai-char/writin
 
 
 
+
 @NgModule({
   declarations: [
-    WritingAiComponent,
     WritingAiExplainComponent,
+    WritingAiComponent,
     WritingAiLineComponent,
     WritingAiCharComponent
   ],
@@ -20,9 +21,9 @@ import { WritingAiCharComponent } from './writing-ai-line/writing-ai-char/writin
     CommonModule,
     FormsModule,
     HttpClientModule
-  ], exports: [
-    WritingAiComponent,
-    WritingAiExplainComponent
+  ],
+  exports: [
+    WritingAiComponent
   ]
 })
 export class WritingAiModule { }

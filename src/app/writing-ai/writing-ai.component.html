@@ -1,7 +1,39 @@
 <div class='writing-results-div'>
+    <button class='btn-save-your-change' (click)='checkGrammar()' [disabled]="loading">
+        Check Grammar
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf="loading"></i>
+    </button>
     <div class='writing-results-container'>
-        <div class='writing-results-content' #writingResults>
-            <app-writing-ai-line *ngFor="let line of data" [data]='line'></app-writing-ai-line>
+        <div class='writing-results-content' #writingResults [attr.contenteditable]='!loading' spellcheck="false"
+            data-gramm='false' (paste)='whenPaste($event)'>
+            <div class='writing-results-content-text' (copy)="whenCopy($event)">
+                <ng-container *ngFor="let char of arrayChar">
+                    <app-writing-ai-line *ngIf="char.dataError" [data]='char.dataError'></app-writing-ai-line>
+                    <ng-container *ngIf="!char.dataError">
+                        <span>{{char.text}}</span>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class='writing-results-overall'>
+        <div class='writing-results-overall-ele line-green '>
+            Word Count
+            <span>
+                {{wordCount}}
+            </span>
+        </div>
+        <div class='writing-results-overall-ele line-red '>
+            Grammar Errors
+            <span>
+                {{grammarError}}
+            </span>
+        </div>
+        <div class='writing-results-overall-ele line-blue '>
+            Spelling Errors
+            <span>
+                {{spellingErros}}
+            </span>
         </div>
     </div>
 </div>

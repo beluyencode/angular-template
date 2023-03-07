@@ -2,15 +2,18 @@
     position: relative;
 
     .error-char {
-        border-bottom: 2px solid #EA4343;
         cursor: pointer;
-
+        text-decoration-line: underline;
+        text-decoration-thickness: 2px;
+        text-decoration-color: #EA4343;
+        text-underline-position: under;
+        display: inline-block;
+        white-space: pre;
 
     }
 
     .error-char-spelling {
-        border-bottom: 2px solid #0062AE;
-
+        text-decoration-color: #0062AE;
     }
 
     .error-char:hover {
@@ -18,11 +21,14 @@
     }
 
     .error-popup-active {
+        // display: block !important;
         visibility: visible !important;
+        left: auto !important;
+        content-visibility: visible !important;
+
     }
 
     .error-char-right {
-        left: auto !important;
         right: 0px;
     }
 
@@ -32,9 +38,11 @@
         background: #FFFFFF;
         border: 1px solid #C4C4C4;
         border-radius: 10px;
-        left: 0px;
+        left: -999em;
         min-width: 235px;
         visibility: hidden;
+        content-visibility: hidden;
+        // display: none;
 
         .error-popup-container {
             margin: 10px;
@@ -107,6 +115,12 @@
                 padding: 5px 10px;
                 line-height: 14px;
                 color: #0062AE;
+                cursor: pointer;
+            }
+
+            .hashtag:hover {
+                background: #0062AE;
+                color: white;
             }
 
             .hashtag-active {
@@ -115,5 +129,21 @@
             }
 
         }
+    }
+}
+
+.char-error-grammar {
+    color: #EA4343;
+    text-decoration-line: line-through;
+}
+
+@media only screen and (max-width: 560px) {
+    .error-popup {
+        position: fixed !important;
+        bottom: 0px !important;
+        left: 0px !important;
+        top: auto;
+        min-width: 100vw !important;
+        border-radius: 0px !important;
     }
 }

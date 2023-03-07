@@ -4,14 +4,17 @@
   </div>
 </div> -->
 
-<div class='center'>
+<!-- <div class='center'>
   <div class="div-content">
-    <app-writing-ai-explain [vocabulary]="vocabulary"></app-writing-ai-explain>
+    <app-writing-ai-explain></app-writing-ai-explain>
   </div>
-</div>
+</div> -->
 
 <div class='center'>
   <div class="div-content">
-    <app-writing-ai></app-writing-ai>
+    <app-writing-ai *ngIf=' arrGrammar?.data' [dataGrammar]="arrGrammar" [context]="arrGrammar.userOptionText">
+    </app-writing-ai>
   </div>
 </div>
+
+<!-- <app-standalone *ngFor="let a of data" [math]="a"></app-standalone> -->

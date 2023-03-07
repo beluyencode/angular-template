@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { CreateTemplateModule } from './create-template/create-template.module';
+import { StandaloneComponent } from './standalone/standalone.component';
 import { WritingAiModule } from './writing-ai/writing-ai.module';
 
 @NgModule({
@@ -12,7 +13,8 @@ import { WritingAiModule } from './writing-ai/writing-ai.module';
   imports: [
     BrowserModule,
     CreateTemplateModule,
-    WritingAiModule
+    WritingAiModule,
+    StandaloneComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

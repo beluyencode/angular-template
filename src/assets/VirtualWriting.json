@@ -2,337 +2,161 @@
     "jsonrpc": "2.0",
     "status": 1,
     "message": "Successfully checked",
-    "error_grammar_count_total": 24,
-    "error_grammar_percent": "18%",
+    "error_grammar_count_total": 15,
+    "error_grammar_percent": "6%",
     "check_grammar_feedback": [
         {
-            "context": "When explore Hoan Kiem Lake in the centre of Hanoi, visitors are give chance discovering astonding places like as: The Turtle Tower, Ngoc Son Temple, The Huc Bridge,   and more.",
-            "error_grammar": "Hoan",
+            "context": "While some people disagree with this, I complete agre that it brings some drawbacks to people and social communities.",
+            "error_grammar": "agre",
             "feedback_grammar": "Possible spelling mistake found",
             "feedback_grammar_suggestion": [
-                "Loan",
-                "Horn",
-                "Han",
-                "Joan",
-                "Hoax",
-                "Roan",
-                "Koan",
-                "Moan",
-                "Hogan",
-                "Hoeing",
-                "HON",
-                "Hon",
-                "Ho an",
-                "Hohn",
-                "Huan",
-                "Ioan",
-                "Yoan"
+                "are",
+                "age",
+                "agree",
+                "acre",
+                "Agra",
+                "GRE",
+                "ogre",
+                "AGR",
+                "ague",
+                "AGE",
+                "ARE",
+                "Ager"
             ]
         },
         {
-            "context": "When explore Hoan Kiem Lake in the centre of Hanoi, visitors are give chance discovering astonding places like as: The Turtle Tower, Ngoc Son Temple, The Huc Bridge,   and more.",
-            "error_grammar": "chance",
-            "feedback_grammar": "You probably need an article here.",
+            "context": "When individuals often hear or watch negative news, they feel the social always fight against them.",
+            "error_grammar": "always",
+            "feedback_grammar": "You have a problem with your word order. Rearrange your sentence:  \"they always feel the social\".",
             "feedback_grammar_suggestion": [
-                "a chance"
+                "they always feel the social"
             ]
         },
         {
-            "context": "When explore Hoan Kiem Lake in the centre of Hanoi, visitors are give chance discovering astonding places like as: The Turtle Tower, Ngoc Son Temple, The Huc Bridge,   and more.",
-            "error_grammar": "astonding",
+            "context": "For example, the media usually show the corruptions of government in Cambodia, that makes citizen disobey the authority and they often have strikes and protest on the road.",
+            "error_grammar": "and",
+            "feedback_grammar": "Use a comma before \"and\" between two independent clauses.",
+            "feedback_grammar_suggestion": [
+                ", and"
+            ]
+        },
+        {
+            "context": "For example, the media usually show the corruptions of government in Cambodia, that makes citizen disobey the authority and they often have strikes and protest on the road.",
+            "error_grammar": "often have strikes",
+            "feedback_grammar": "The adverb \"often\" is usually put between 'have' and 'strikes'.",
+            "feedback_grammar_suggestion": [
+                "have often strikes"
+            ]
+        },
+        {
+            "context": "If people always read unpleasant news and emergency on the newpapers, they will feel tired and stress.",
+            "error_grammar": "newpapers",
             "feedback_grammar": "Possible spelling mistake found",
             "feedback_grammar_suggestion": [
-                "astounding"
+                "newspapers",
+                "new papers"
             ]
         },
         {
-            "context": "When explore Hoan Kiem Lake in the centre of Hanoi, visitors are give chance discovering astonding places like as: The Turtle Tower, Ngoc Son Temple, The Huc Bridge,   and more.",
-            "error_grammar": "Ngoc",
+            "context": "When this problem prolong for a period of time, people might sufer different kinds of diseases like headache, vasculor and cardiac ilneses.",
+            "error_grammar": "prolong",
+            "feedback_grammar": "The word \"problem\" is a singular noun. Your verb should be conjugated for a singular subject. ",
+            "feedback_grammar_suggestion": [
+                "prolongs"
+            ]
+        },
+        {
+            "context": "When this problem prolong for a period of time, people might sufer different kinds of diseases like headache, vasculor and cardiac ilneses.",
+            "error_grammar": "period of time",
+            "feedback_grammar": "Use simply \"period\".",
+            "feedback_grammar_suggestion": [
+                "period"
+            ]
+        },
+        {
+            "context": "When this problem prolong for a period of time, people might sufer different kinds of diseases like headache, vasculor and cardiac ilneses.",
+            "error_grammar": "sufer",
             "feedback_grammar": "Possible spelling mistake found",
             "feedback_grammar_suggestion": [
-                "NGC",
-                "Ngoy"
+                "super",
+                "suffer",
+                "safer",
+                "surfer",
+                "surer",
+                "Rufer"
             ]
         },
         {
-            "context": "When explore Hoan Kiem Lake in the centre of Hanoi, visitors are give chance discovering astonding places like as: The Turtle Tower, Ngoc Son Temple, The Huc Bridge,   and more.",
-            "error_grammar": "Huc",
+            "context": "When this problem prolong for a period of time, people might sufer different kinds of diseases like headache, vasculor and cardiac ilneses.",
+            "error_grammar": "vasculor",
             "feedback_grammar": "Possible spelling mistake found",
             "feedback_grammar_suggestion": [
-                "Hub",
-                "Hut",
-                "Hue",
-                "HUD",
-                "Hui",
-                "Hug",
-                "Hum",
-                "HCC",
-                "HFC",
-                "HMC",
-                "PUC",
-                "Huck",
-                "Hus",
-                "Huh",
-                "HIC",
-                "AUC",
-                "BUC",
-                "CUC",
-                "EUC",
-                "GUC",
-                "HAC",
-                "HEC",
-                "HPC",
-                "HRC",
-                "HSC",
-                "HU",
-                "HUF",
-                "HUG",
-                "HUL",
-                "Hun",
-                "MUC",
-                "RUC",
-                "UC",
-                "UUC",
-                "Luc"
+                "vascular"
             ]
         },
         {
-            "context": "Today, the Turtle Tower (‘Tháp Rùa' in Vietnamese) stands cloze to the lake in memori of the populate legend.",
-            "error_grammar": "cloze",
+            "context": "When this problem prolong for a period of time, people might sufer different kinds of diseases like headache, vasculor and cardiac ilneses.",
+            "error_grammar": "ilneses",
             "feedback_grammar": "Possible spelling mistake found",
             "feedback_grammar_suggestion": [
-                "close",
-                "clone",
-                "clove"
+                "illness",
+                "lenses",
+                "illnesses",
+                "geneses"
             ]
         },
         {
-            "context": "Today, the Turtle Tower (‘Tháp Rùa' in Vietnamese) stands cloze to the lake in memori of the populate legend.",
-            "error_grammar": "memori",
+            "context": "In sum, I believe that the trend of news reports in the newspapers or magazines to show the negative developments of society is detrimental to people and social communities because it influences people to have unacceptable behaviors and it also makes them unhealthy because it has negative effective on many persons.",
+            "error_grammar": "developments",
+            "feedback_grammar": "Your subject (the negative developments) is plural, but you have used a verb conjugated for a singular subject. Use a singular subject or a plural verb: \"\" or \"the negative developments are\". ",
+            "feedback_grammar_suggestion": [
+                "",
+                "the negative developments are"
+            ]
+        },
+        {
+            "context": "In sum, I believe that the trend of news reports in the newspapers or magazines to show the negative developments of society is detrimental to people and social communities because it influences people to have unacceptable behaviors and it also makes them unhealthy because it has negative effective on many persons.",
+            "error_grammar": "is",
+            "feedback_grammar": "The noun \"developments\" is plural, so your verb should be conjugated for a plural subject.",
+            "feedback_grammar_suggestion": [
+                "developments of society are"
+            ]
+        },
+        {
+            "context": "In sum, I believe that the trend of news reports in the newspapers or magazines to show the negative developments of society is detrimental to people and social communities because it influences people to have unacceptable behaviors and it also makes them unhealthy because it has negative effective on many persons.",
+            "error_grammar": "and",
+            "feedback_grammar": "Use a comma before \"and\" between two independent clauses.",
+            "feedback_grammar_suggestion": [
+                ", and"
+            ]
+        },
+        {
+            "context": "In sum, I believe that the trend of news reports in the newspapers or magazines to show the negative developments of society is detrimental to people and social communities because it influences people to have unacceptable behaviors and it also makes them unhealthy because it has negative effective on many persons.",
+            "error_grammar": "persons",
+            "feedback_grammar": "Unless you are using \"persons\" as a legal term meaning \"individuals,\" you should use the irregular plural form \"people\".",
+            "feedback_grammar_suggestion": [
+                "people"
+            ]
+        },
+        {
+            "context": "Helo",
+            "error_grammar": "Helo",
             "feedback_grammar": "Possible spelling mistake found",
             "feedback_grammar_suggestion": [
-                "memory",
-                "memoir"
-            ]
-        },
-        {
-            "context": "Today, the Turtle Tower (‘Tháp Rùa' in Vietnamese) stands cloze to the lake in memori of the populate legend.",
-            "error_grammar": "the populate",
-            "feedback_grammar": "This is probably an article error. You cannot use \"a\" or \"the\" with an infinitive verb. ",
-            "feedback_grammar_suggestion": []
-        },
-        {
-            "context": "Was built in a pleasant stance with nature , the towel maintained a certain   sophisticating and appealling due to its France influence and authentic Vietnam achitecture .",
-            "error_grammar": " ,",
-            "feedback_grammar": "Put a space after the comma, but not before the comma",
-            "feedback_grammar_suggestion": [
-                ","
-            ]
-        },
-        {
-            "context": "Was built in a pleasant stance with nature , the towel maintained a certain   sophisticating and appealling due to its France influence and authentic Vietnam achitecture .",
-            "error_grammar": "appealling",
-            "feedback_grammar": "Possible spelling mistake found",
-            "feedback_grammar_suggestion": [
-                "appealing",
-                "appalling",
-                "appeal ling"
-            ]
-        },
-        {
-            "context": "Was built in a pleasant stance with nature , the towel maintained a certain   sophisticating and appealling due to its France influence and authentic Vietnam achitecture .",
-            "error_grammar": "achitecture",
-            "feedback_grammar": "Possible spelling mistake found",
-            "feedback_grammar_suggestion": [
-                "architecture"
-            ]
-        },
-        {
-            "context": "Was built in a pleasant stance with nature , the towel maintained a certain   sophisticating and appealling due to its France influence and authentic Vietnam achitecture .",
-            "error_grammar": " .",
-            "feedback_grammar": "Don't put a space before the full stop",
-            "feedback_grammar_suggestion": [
-                "."
-            ]
-        },
-        {
-            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
-            "error_grammar": "Huc",
-            "feedback_grammar": "Possible spelling mistake found",
-            "feedback_grammar_suggestion": [
-                "Hub",
-                "Hut",
-                "Hue",
-                "HUD",
-                "Hui",
-                "Hug",
-                "Hum",
-                "HCC",
-                "HFC",
-                "HMC",
-                "PUC",
-                "Huck",
-                "Hus",
-                "Huh",
-                "HIC",
-                "AUC",
-                "BUC",
-                "CUC",
-                "EUC",
-                "GUC",
-                "HAC",
-                "HEC",
-                "HPC",
-                "HRC",
-                "HSC",
-                "HU",
-                "HUF",
-                "HUG",
-                "HUL",
-                "Hun",
-                "MUC",
-                "RUC",
-                "UC",
-                "UUC",
-                "Luc"
-            ]
-        },
-        {
-            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
-            "error_grammar": "a",
-            "feedback_grammar": "Use \"an\" instead of 'a' if the following word starts with a vowel sound, e.g. 'an article', 'an hour'",
-            "feedback_grammar_suggestion": [
-                "an"
-            ]
-        },
-        {
-            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
-            "error_grammar": "ancient beautiful",
-            "feedback_grammar": "In English, \"age\" adjectives (ancient) normally go AFTER \"quality\" or \"opinion\" adjectives (beautiful). Revise:  \"beautiful ancient\".",
-            "feedback_grammar_suggestion": [
-                "beautiful ancient"
-            ]
-        },
-        {
-            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
-            "error_grammar": "refered",
-            "feedback_grammar": "You have a spelling error. With two-syllable words that have a stress on the second syllable, double the final consonant before adding the suffix -ed: \"referred\".",
-            "feedback_grammar_suggestion": [
-                "referred"
-            ]
-        },
-        {
-            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
-            "error_grammar": " ,",
-            "feedback_grammar": "Put a space after the comma, but not before the comma",
-            "feedback_grammar_suggestion": [
-                ","
-            ]
-        },
-        {
-            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
-            "error_grammar": "Hoan",
-            "feedback_grammar": "Possible spelling mistake found",
-            "feedback_grammar_suggestion": [
-                "Loan",
-                "Horn",
-                "Han",
-                "Joan",
-                "Hoax",
-                "Roan",
-                "Koan",
-                "Moan",
-                "Hogan",
-                "Hoeing",
-                "HON",
-                "Hon",
-                "Ho an",
-                "Hohn",
-                "Huan",
-                "Ioan",
-                "Yoan"
-            ]
-        },
-        {
-            "context": "The Huc Bridge, a ancient beautiful short wooden red bridge, commonly also refered as ‘the bride which the light is absorbed' , serves as a connected point between Hoan Kiem Lake and Ngoc Son Temple.",
-            "error_grammar": "Ngoc",
-            "feedback_grammar": "Possible spelling mistake found",
-            "feedback_grammar_suggestion": [
-                "NGC",
-                "Ngoy"
-            ]
-        },
-        {
-            "context": "Painted in a red vibrant   color and was constructed by fine wood, The Huc Bridge is really a wondrous germ that perfectly mixxes with theirs abundant green-fillled suroundings.",
-            "error_grammar": "Huc",
-            "feedback_grammar": "Possible spelling mistake found",
-            "feedback_grammar_suggestion": [
-                "Hub",
-                "Hut",
-                "Hue",
-                "HUD",
-                "Hui",
-                "Hug",
-                "Hum",
-                "HCC",
-                "HFC",
-                "HMC",
-                "PUC",
-                "Huck",
-                "Hus",
-                "Huh",
-                "HIC",
-                "AUC",
-                "BUC",
-                "CUC",
-                "EUC",
-                "GUC",
-                "HAC",
-                "HEC",
-                "HPC",
-                "HRC",
-                "HSC",
-                "HU",
-                "HUF",
-                "HUG",
-                "HUL",
-                "Hun",
-                "MUC",
-                "RUC",
-                "UC",
-                "UUC",
-                "Luc"
-            ]
-        },
-        {
-            "context": "Painted in a red vibrant   color and was constructed by fine wood, The Huc Bridge is really a wondrous germ that perfectly mixxes with theirs abundant green-fillled suroundings.",
-            "error_grammar": "really",
-            "feedback_grammar": "Put the intensifying adverb before the adjective it modifies. Revise: \"a really wondrous germ\".",
-            "feedback_grammar_suggestion": [
-                "a really wondrous germ"
-            ]
-        },
-        {
-            "context": "Painted in a red vibrant   color and was constructed by fine wood, The Huc Bridge is really a wondrous germ that perfectly mixxes with theirs abundant green-fillled suroundings.",
-            "error_grammar": "mixxes",
-            "feedback_grammar": "Possible spelling mistake found",
-            "feedback_grammar_suggestion": [
-                "mixes",
-                "minxes"
-            ]
-        },
-        {
-            "context": "Painted in a red vibrant   color and was constructed by fine wood, The Huc Bridge is really a wondrous germ that perfectly mixxes with theirs abundant green-fillled suroundings.",
-            "error_grammar": "green-fillled",
-            "feedback_grammar": "Possible spelling mistake found",
-            "feedback_grammar_suggestion": []
-        },
-        {
-            "context": "Painted in a red vibrant   color and was constructed by fine wood, The Huc Bridge is really a wondrous germ that perfectly mixxes with theirs abundant green-fillled suroundings.",
-            "error_grammar": "suroundings",
-            "feedback_grammar": "Possible spelling mistake found",
-            "feedback_grammar_suggestion": [
-                "surroundings"
+                "Held",
+                "Help",
+                "Hello",
+                "Hero",
+                "Hell",
+                "Helm",
+                "Halo",
+                "Helot",
+                "ELO",
+                "HEL",
+                "He lo",
+                "Belo",
+                "Hely",
+                "Melo"
             ]
         }
     ]

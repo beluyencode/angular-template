@@ -4,8 +4,11 @@
 }
 
 .center {
+    width: 700px;
+    margin: auto;
+
     .div-content {
-        width: fit-content;
+        height: 100%;
         margin: 50px auto;
     }
 }

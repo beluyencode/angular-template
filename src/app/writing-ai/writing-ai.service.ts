@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { WritingAiResType } from './writing-ai';
+import { CONSTANTS } from 'constants/constants';
+import { environment } from 'environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,12 @@ export class WritingAiService {
     private http: HttpClient
   ) { }
 
-  getData() {
-    return this.http.get<WritingAiResType>('./assets/VirtualWriting.json');
+  checkGrammar(text: string) {
+    const body = {
+      text: text,
+    };
+    return this.http.post(environment.BASE_API_URL_WRITING_AI + CONSTANTS.API.IELTS.PRACTICE.WRITING_AI.CHECK_GRAMMAR, body, { headers: this.myHeader });
   }
+
+
 }

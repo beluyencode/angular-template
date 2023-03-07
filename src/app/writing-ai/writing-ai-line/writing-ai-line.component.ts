@@ -16,35 +16,47 @@ export class WritingAiLineComponent implements OnInit {
       text = this.getTextAfter(text, ele.error_grammar);
       this.arrayChar.push({
         text: ele.error_grammar,
-        isError: true
-      })
-    })
+        isError: true,
+        isDismiss: ele.isDismiss
+      });
+    });
     if (text) {
       this.arrayChar.push({
         text: text,
         isError: false
       });
     }
-    console.log(this.data, this.arrayChar);
-
+    console.log(this.arrayChar);
   }
 
-  getTextAfter(text: string, error_grammar: string) {
-    let textCut = text.split(!['.', ','].includes(error_grammar.trim()) ? (' ' + error_grammar + ' ') : error_grammar);
+  getTextAfter(text: string, error_grammar: any) {
+    // tslint:disable-next-line:quotemark
+    const error_grammar_change = error_grammar.replaceAll('‘', "'").replaceAll('’', "'");
+    const rex = new RegExp(error_grammar_change, 'g');
+    const isDotOrComma = ['.', ','].includes(error_grammar_change.trim());
+    let textCut = text.split(isDotOrComma ? error_grammar_change : ' ' + error_grammar_change);
     if (textCut.length > 2) {
-      textCut = [textCut[0], ...text.split(textCut[0] + (' ' + error_grammar + ' ')).filter(element => element !== '')]
+      const mathText = Array.from(text.matchAll(rex));
+      textCut = [textCut[0], text.slice(mathText[0].index + error_grammar_change.length)];
     }
     if (textCut.length < 2) {
-      textCut = text.split(error_grammar)
+      textCut = text.split(error_grammar_change);
     }
     if (textCut) {
-      this.arrayChar.push({
-        text: textCut[0],
-        isError: false
-      });
-      return ['.', ','].includes(error_grammar.trim()) ? textCut[1] : (' ' + textCut[1]);
+      if (isDotOrComma) {
+        this.arrayChar.push({
+          text: textCut[0],
+          isError: false
+        });
+      } else {
+        this.arrayChar.push({
+          text: textCut[0] + ' ',
+          isError: false
+        });
+      }
+      return textCut[1];
     } else {
-      return null
+      return null;
     }
   }
 

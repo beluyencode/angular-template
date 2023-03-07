@@ -1,14 +1,114 @@
 .writing-results-div {
-    width: 687px;
+    width: 100%;
+    height: 100%;
+    position: relative;
 
     .writing-results-container {
         border: 1px solid #C4C4C4;
         border-radius: 10px;
+        height: calc(100% - 95px);
+
 
         .writing-results-content {
-            margin: 15px;
-            font-size: 20px;
+            background-color: white;
+            border-radius: 10px;
+            outline: none;
+            height: 100%;
+            padding: 15px;
+            font-size: 16px;
             line-height: 28px;
+            white-space: pre-line;
+            overflow-x: auto;
         }
     }
+
+    .writing-results-overall {
+        display: flex;
+        margin-top: 10px;
+
+        .writing-results-overall-ele {
+            margin-right: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            text-align: center;
+
+            span {
+                display: block;
+                font-size: 18px;
+            }
+        }
+
+        .line-green {
+            border-bottom: 3px solid #1B9946;
+
+            span {
+                color: #1B9946;
+            }
+        }
+
+        .line-red {
+            border-bottom: 3px solid #EC5A5A;
+
+            span {
+                color: #EC5A5A;
+            }
+        }
+
+        .line-blue {
+            border-bottom: 3px solid #0062AE;
+
+            span {
+                color: #0062AE;
+            }
+        }
+    }
+}
+
+.span-pre-line {
+    white-space: pre-line;
+}
+
+.btn-save-your-change:disabled {
+    opacity: 0.7;
+    cursor: default;
+}
+
+.btn-save-your-change {
+    margin-bottom: 10px;
+    margin-left: auto;
+    display: flex;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 3px 10px;
+    outline: 0;
+    border: none !important;
+    border-radius: 7px;
+    background-color: #4BB543;
+    color: white;
+    align-items: center;
+
+    i {
+        font-size: 17px;
+        margin-left: 5px;
+    }
+}
+
+.btn-save-your-change:hover {
+    opacity: 0.7;
+}
+
+.noSelect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }

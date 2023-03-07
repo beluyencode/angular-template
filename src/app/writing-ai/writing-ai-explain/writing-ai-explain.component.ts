@@ -7,13 +7,13 @@ import { Component, Input } from '@angular/core';
 })
 export class WritingAiExplainComponent {
   @Input() vocabulary = '';
-  tab = 0
+  tab = 0;
 
   changeTab(tabId: number) {
     if (this.tab === tabId) {
       this.tab = 0;
     } else {
-      this.tab = tabId
+      this.tab = tabId;
     }
   }
 
