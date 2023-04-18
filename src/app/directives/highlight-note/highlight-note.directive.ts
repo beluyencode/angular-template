@@ -1,4 +1,5 @@
-import { Directive, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
+import { TranslatePopupComponent } from './translate-popup/translate-popup.component';
 
 @Directive({
   selector: '[appHighlightNote]'
@@ -15,29 +16,27 @@ export class HighlightNoteDirective implements OnInit {
   divContentHTMl: HTMLDivElement;
   divContentMenu: HTMLDivElement;
   divNoteTextarea: HTMLDivElement;
-  divTranslate: HTMLDivElement;
   Textarea: ElementRef;
   BtnHighlight: ElementRef;
   BtnNote: ElementRef;
   BtnClean: ElementRef;
   BtnCleanAll: ElementRef;
-  BtnTranslate: ElementRef;
+  BtnTranslate: HTMLElement;
 
   // id element
   idContentHtml: string;
   idContentMenu: string;
   idNoteTextarea: string;
-  idDivTranslate: string;
   idTextarea: string;
   idBtnHighlight: string;
+  idDivTranslate: string;
   idNote: string;
   idClean: string;
   idCleanALl: string;
-  idTranslate: string
+  idBtnTranslate: string
 
   // Array id note and highlight
   arrIdSpecialVersion: Array<any>;
-
   multiIdSpecial: Array<string> = [];
 
   //position 
@@ -75,6 +74,12 @@ export class HighlightNoteDirective implements OnInit {
 
   // Event when after selection
   @HostListener('mousedown', ['$event']) mousedown(event: MouseEvent) {
+    const translate = document.getElementById(this.idDivTranslate);
+    if (translate) {
+      if (!translate.contains((event.target as Node))) {
+        this.viewContainerRef.clear();
+      }
+    }
     this.positionFixed.x = event.clientX;
     this.positionFixed.y = event.clientY;
   }
@@ -105,6 +110,7 @@ export class HighlightNoteDirective implements OnInit {
   // Event when click anywhere
   @HostListener('window:click', ['$event']) documentCLick(event: MouseEvent) {
     if (document.getSelection()?.toString() === '') {
+
       if ((event.target as HTMLElement).parentElement?.id !== this.idContentMenu) {
         this.render.setStyle(this.divContentMenu, 'display', 'none');
       }
@@ -130,7 +136,7 @@ export class HighlightNoteDirective implements OnInit {
     }
   }
 
-  constructor(private ele: ElementRef, private render: Renderer2) { }
+  constructor(private ele: ElementRef, private render: Renderer2, private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void {
     this.arrIdSpecialVersion = [];
@@ -140,16 +146,14 @@ export class HighlightNoteDirective implements OnInit {
     this.idClean = this.ele.nativeElement.id + 'clean';
     this.idNoteTextarea = this.ele.nativeElement.id + 'noteTextarea';
     this.idTextarea = this.ele.nativeElement.id + 'textarea';
-    this.idDivTranslate = this.ele.nativeElement.id + 'translate';
     this.idCleanALl = this.ele.nativeElement.id + 'cleanALl';
-    this.idTranslate = this.ele.nativeElement.id + 'translate'
+    this.idBtnTranslate = this.ele.nativeElement.id + 'translate'
     this.render.appendChild(this.ele.nativeElement, this.createViewContextMenu());
     this.render.appendChild(this.ele.nativeElement, this.createViewNote());
-    this.render.appendChild(this.ele.nativeElement, this.createTranslate());
     this.render.listen(window, 'scroll', () => {
       this.render.setStyle(this.divContentMenu, 'display', 'none');
       this.render.setStyle(this.divNoteTextarea, 'display', 'none');
-      this.render.setStyle(this.divTranslate, 'display', 'none');
+      this.viewContainerRef.clear();
     });
   }
 
@@ -164,6 +168,7 @@ export class HighlightNoteDirective implements OnInit {
         this.render.setStyle(this.divContentMenu, 'top', ((this.positionFixed.y - 50 > 0) ? (this.positionFixed.y - 50) : this.positionFixed.y) + 'px');
         this.render.setStyle(this.divContentMenu, 'display', 'none');
         this.render.setStyle(this.divNoteTextarea, 'display', 'none');
+        this.viewContainerRef.clear();
         if (getRangeAt.toString() === ''
           || getRangeAt!.commonAncestorContainer!.parentElement!.id === ''
           || getRangeAt!.commonAncestorContainer!.parentElement!.id === this.ele.nativeElement.id
@@ -268,8 +273,8 @@ export class HighlightNoteDirective implements OnInit {
 
     //create btn translate
     this.BtnTranslate = this.render.createElement('button');
-    this.render.setAttribute(this.BtnTranslate, 'id', this.idTranslate);
-    this.render.listen(this.BtnCleanAll, 'click', () => {
+    this.render.setAttribute(this.BtnTranslate, 'id', this.idBtnTranslate);
+    this.render.listen(this.BtnTranslate, 'click', () => {
       this.translate();
     });
     const btnTranslateIcon = this.render.createElement('img');
@@ -291,17 +296,8 @@ export class HighlightNoteDirective implements OnInit {
     return this.divContentMenu;
   }
 
-  //create translate
-  createTranslate() {
-    this.divTranslate = this.render.createElement('div');
-    this.render.setAttribute(this.divTranslate, 'id', this.idDivTranslate);
-    this.render.addClass(this.divTranslate, 'popupTranslate');
-
-    return this.divTranslate
-  }
-
   checkIsClickContextMenuBtn(event: MouseEvent) {
-    const boolean = [this.idBtnHighlight, this.idClean, this.idCleanALl, this.idNote, this.idTranslate].some((ele: string) => {
+    const boolean = [this.idBtnHighlight, this.idClean, this.idCleanALl, this.idNote, this.idBtnTranslate].some((ele: string) => {
       return ele === (event.target as HTMLElement).id || ele === (event.target as HTMLElement).parentElement?.id
     });
     return boolean
@@ -361,9 +357,9 @@ export class HighlightNoteDirective implements OnInit {
       this.render.setAttribute(newSpan, 'id', id);
       selection.getRangeAt(0).surroundContents(newSpan);
     }
-
     document.getSelection()!.empty();
     this.render.setStyle(this.divContentMenu, 'display', 'none');
+    this.viewContainerRef.clear();
   }
 
   // startOrEnd : true tính vị trí từ điểm position tới cuối / false tính vị trí từ điểm đàu tiên đến posiotion / undefined lấy all
@@ -494,7 +490,19 @@ export class HighlightNoteDirective implements OnInit {
   }
 
   translate() {
-
+    if (document.getSelection()) {
+      this.viewContainerRef.clear();
+      const componentRef = this.viewContainerRef.createComponent(TranslatePopupComponent);
+      componentRef.instance.id = this.idDivTranslate;
+      componentRef.instance.text = document.getSelection()?.toString();
+      componentRef.instance.positionFixed = {
+        x: this.positionFixed.x - 278,
+        y: this.positionFixed.y + 35
+      }
+      componentRef.instance.close = () => {
+        this.viewContainerRef.clear();
+      }
+    }
   }
 
 }

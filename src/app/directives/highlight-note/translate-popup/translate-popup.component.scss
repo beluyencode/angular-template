@@ -1,0 +1,129 @@
+.div-translate {
+    background: #F1F4FC;
+    box-shadow: 0px 4px 20px rgba(109, 127, 179, 0.4);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 350px;
+    height: 400px;
+    position: fixed;
+    animation: fadeIn 0.3s;
+    -webkit-animation: fadeIn 0.3s;
+    -moz-animation: fadeIn 0.3s;
+    -o-animation: fadeIn 0.3s;
+    -ms-animation: fadeIn 0.3s;
+
+    .div-translate-header {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        background: #6D7FB3;
+        padding: 10px 15px;
+        display: flex;
+        align-content: center;
+        justify-content: space-between;
+        color: white;
+
+        span {
+            text-overflow: ellipsis;
+            width: 200px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        button {
+            background: #6D7FB3;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.7;
+        }
+    }
+
+    .content {
+        padding: 15px;
+
+        .read-text {
+            color: #0030C3;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            button {
+                color: #0030C3;
+                background-color: #F1F4FC;
+                border: none;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                opacity: 0.7;
+            }
+
+        }
+
+    }
+
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

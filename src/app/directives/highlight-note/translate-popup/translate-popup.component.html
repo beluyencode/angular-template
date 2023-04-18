@@ -1,0 +1,20 @@
+<div class='div-translate unselectable' [id]="id"
+    [ngStyle]="{'top': positionFixed.y +'px', 'left':positionFixed.x+'px'}" unselectable="on">
+    <div class='div-translate-header'>
+        <span>{{text}}</span>
+        <button (click)="close()">x</button>
+    </div>
+    <div class='content'>
+        <div class='read-text'>
+            <span>
+                {{text}}
+            </span>
+            <button (click)="speak()" [disabled]='disableBtnSpeak'>
+                <i class="fa fa-volume-up" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</div>
