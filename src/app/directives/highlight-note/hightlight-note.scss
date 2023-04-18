@@ -1,0 +1,94 @@
+.popupOnRightClick {
+    width: 200px !important;
+    display: none;
+    border: 1px solid rgb(133, 130, 130);
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    position: fixed;
+
+    button {
+        padding: 7px 5px;
+        padding-left: 15px;
+        border: none;
+        text-align: left;
+        background-color: white;
+        width: 100%;
+    }
+
+    button:hover {
+        background-color: #1D68AB;
+        color: white;
+    }
+
+    button:disabled {
+        color: #1010104D;
+    }
+
+    button:disabled:hover {
+        background-color: white;
+        color: #1010104D;
+    }
+
+
+    .buttonFirst {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .buttonEnd {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+}
+
+.popupNote {
+    min-width: 200px;
+    position: fixed;
+    display: none;
+
+    textarea {
+        color: black !important;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+        overflow: auto !important;
+        outline: none;
+        border-color: #ccc  !important;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    div {
+        padding: 10px;
+        box-shadow: 1px 1px 1px #999;
+        border: 1px solid #6a6767 !important;
+        border-radius: 5px;
+        background-color: white;
+    }
+}
+
+.yellow-text {
+    background-color: yellow;
+    color: black;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.highLightText {
+    background-color: yellow;
+    cursor: pointer;
+}
+
+.noteText {
+    border: 1px solid black;
+    cursor: pointer;
+    background-color: yellow;
+    color: black;
+}

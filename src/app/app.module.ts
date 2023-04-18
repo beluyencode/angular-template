@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CreateTemplateModule } from './create-template/create-template.module';
 import { StandaloneComponent } from './standalone/standalone.component';
-import { WritingAiModule } from './writing-ai/writing-ai.module';
+import { HighlightNoteModule } from './directives/highlight-note/highlight-note.module';
 
 @NgModule({
   declarations: [
@@ -13,8 +13,8 @@ import { WritingAiModule } from './writing-ai/writing-ai.module';
   imports: [
     BrowserModule,
     CreateTemplateModule,
-    WritingAiModule,
-    StandaloneComponent
+    StandaloneComponent,
+    HighlightNoteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

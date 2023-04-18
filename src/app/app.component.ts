@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WritingAiService } from './writing-ai/writing-ai.service';
 
 @Component({
   selector: 'app-root',
