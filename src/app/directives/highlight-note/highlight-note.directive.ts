@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appHighlightNote]'
@@ -8,9 +8,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, OnChanges, On
 // Để sửa dụng phải đặt id cho element sử dụng directive này
 //
 
-export class HighlightNoteDirective implements OnInit, OnChanges {
-  @Input() content: string;
-  @Output() changePosition = new EventEmitter<any>();
+export class HighlightNoteDirective implements OnInit {
   @Input() placeHolder = 'Comment...';
 
   //element
@@ -49,92 +47,69 @@ export class HighlightNoteDirective implements OnInit, OnChanges {
     id: ''
   };
 
+  // event create menu when right click
   @HostListener('contextmenu', ['$event']) contextmenu(event: any) {
     event.preventDefault();
-    if (event.target.parentElement.id === this.idContentMenu || event.target.parentElement.id === this.idNoteTextarea) {
-      return;
-    } else {
-      const getSelection = document.getSelection()!;
-      this.positionFixed.x = event.clientX;
-      this.positionFixed.y = event.clientY;
-      this.render.setStyle(this.divContentMenu, 'left', this.positionFixed.x + 'px');
-      this.render.setStyle(this.divContentMenu, 'top', this.positionFixed.y + 'px');
-      this.render.setStyle(this.divContentMenu, 'display', 'none');
-      this.render.setStyle(this.divNoteTextarea, 'display', 'none');
-      const getRangeAt = getSelection.getRangeAt(0)!;
-      if (getRangeAt.toString() === ''
-        || getRangeAt!.commonAncestorContainer!.parentElement!.id === ''
-        || getRangeAt!.commonAncestorContainer!.parentElement!.id === this.ele.nativeElement.id
-        || this.ele.nativeElement.contains(getRangeAt.commonAncestorContainer)) {
-        if (getRangeAt.toString() !== '' && !this.checkEleInRange(getSelection)) {
-          this.render.setProperty(this.BtnHighlight, 'disabled', false);
-          this.render.setProperty(this.BtnNote, 'disabled', false);
-          this.position.start = getRangeAt.startOffset;
-          this.position.end = getRangeAt.endOffset;
-        } else {
-          this.render.setProperty(this.BtnHighlight, 'disabled', true);
-          this.render.setProperty(this.BtnNote, 'disabled', true);
-        }
-      } else {
-        this.render.setProperty(this.BtnHighlight, 'disabled', false);
-        this.render.setProperty(this.BtnNote, 'disabled', false);
-        this.position.start = getSelection.anchorOffset;
-        this.position.end = getSelection.focusOffset;
-        this.positionFixed.id = event.target.id;
-      }
-      this.render.setStyle(this.divContentMenu, 'display', 'flex');
-    }
+    this.openMenu(event);
   }
 
-  checkEleInRange(selection: any) {
+  // check element is in range
+  checkEleInRange(selection: Selection) {
     let booleanValue = false;
     this.arrIdSpecialVersion.forEach((item) => {
       item.id.forEach((id: string) => {
-        if (document.getElementById(id) && selection.containsNode(document.getElementById(id), true)) {
-          booleanValue = true;
+        const ele = document.getElementById(id);
+        if (ele) {
+          if (selection.containsNode(ele, true)) {
+            booleanValue = true;
+          }
         }
       });
     });
     return booleanValue;
   }
 
-  @HostListener('mouseup', ['$event']) mouseup(event: any) {
+  // Event when after selection
+  @HostListener('mousedown', ['$event']) mousedown(event: MouseEvent) {
+    console.log(event.clientY);
+
     this.positionFixed.x = event.clientX;
     this.positionFixed.y = event.clientY;
-    if (event.target.id !== this.idContentMenu) {
+  }
+
+  // Event when after selection
+  @HostListener('mouseup', ['$event']) mouseup(event: MouseEvent) {
+    if ((event?.target as HTMLElement).id !== this.idContentMenu) {
       this.render.setStyle(this.divContentMenu, 'display', 'none');
     }
-    if (event.target.id !== this.idTextarea) {
+    if ((event?.target as HTMLElement).id !== this.idTextarea) {
       this.render.setStyle(this.divNoteTextarea, 'display', 'none');
-      this.positionFixed.id = event.target.id;
+      this.positionFixed.id = (event?.target as HTMLElement).id;
     }
-    const notePosition = this.includeArrIdSpecial(event.target.id);
-    if (notePosition.isInclude && this.arrIdSpecialVersion[notePosition.index].note) {
-      this.render.setStyle(this.divNoteTextarea, 'left', this.positionFixed.x + 'px');
-      this.render.setStyle(this.divNoteTextarea, 'top', this.positionFixed.y + 'px');
-      this.render.setStyle(this.divNoteTextarea, 'display', 'block');
-      this.render.setProperty(this.Textarea, 'value', this.arrIdSpecialVersion[notePosition.index].comment);
+    if (document.getSelection()?.toString() !== '') {
+      setTimeout(() => {
+        this.openMenu(event);
+      })
     }
   }
 
+  // Event when click anywhere
   @HostListener('window:click', ['$event']) documentCLick(event: any) {
-    this.positionFixed.x = event.clientX;
-    this.positionFixed.y = event.clientY;
-    if (event.target.parentElement?.id !== this.idContentMenu) {
+    if ((event.target as HTMLElement).parentElement?.id !== this.idContentMenu) {
       this.render.setStyle(this.divContentMenu, 'display', 'none');
     }
-    const boolean = event.target.id === this.idBtnHighlight || event.target.id === this.idNote;
+    const boolean = (event.target as HTMLElement).id === this.idBtnHighlight || (event.target as HTMLElement).id === this.idNote;
     if (!boolean) {
-      if (event.target.id !== this.idTextarea) {
-        this.positionFixed.id = event.target.id;
+      if ((event.target as HTMLElement).id !== this.idTextarea) {
+        this.positionFixed.id = (event.target as HTMLElement).id;
       }
-      if (event.target.parentElement) {
-        if (event.target.parentElement.id !== this.idNoteTextarea && !this.includeArrIdSpecial(event.target.id).isInclude) {
+      if ((event.target as HTMLElement).parentElement) {
+        if ((event.target as HTMLElement).parentElement?.id !== this.idNoteTextarea && !this.includeArrIdSpecial((event.target as HTMLElement).id).isInclude) {
           this.render.setStyle(this.divNoteTextarea, 'display', 'none');
         }
       }
     }
-    const notePosition = this.includeArrIdSpecial(event.target.id);
+    const notePosition = this.includeArrIdSpecial((event.target as HTMLElement).id);
     if (notePosition.isInclude && this.arrIdSpecialVersion[notePosition.index].note) {
       event.preventDefault();
       this.render.setStyle(this.divNoteTextarea, 'left', this.positionFixed.x + 'px');
@@ -147,15 +122,8 @@ export class HighlightNoteDirective implements OnInit, OnChanges {
 
   constructor(private ele: ElementRef, private render: Renderer2) { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['content']?.previousValue) {
-      this.content = changes['content'].currentValue;
-    }
-  }
-
   ngOnInit(): void {
     this.arrIdSpecialVersion = [];
-    this.idContentHtml = this.ele.nativeElement.id + 'contentHTML';
     this.idContentMenu = this.ele.nativeElement.id + 'contentMenu';
     this.idBtnHighlight = this.ele.nativeElement.id + 'highlight';
     this.idNote = this.ele.nativeElement.id + 'note';
@@ -163,25 +131,53 @@ export class HighlightNoteDirective implements OnInit, OnChanges {
     this.idNoteTextarea = this.ele.nativeElement.id + 'noteTextarea';
     this.idTextarea = this.ele.nativeElement.id + 'textarea';
     this.idCleanALl = this.ele.nativeElement.id + 'cleanALl';
-    this.render.appendChild(this.ele.nativeElement, this.createViewContent());
     this.render.appendChild(this.ele.nativeElement, this.createViewContextMenu());
     this.render.appendChild(this.ele.nativeElement, this.createViewNote());
     this.render.listen(window, 'scroll', () => {
       this.render.setStyle(this.divContentMenu, 'display', 'none');
       this.render.setStyle(this.divNoteTextarea, 'display', 'none');
     });
+  }
 
+  openMenu(event: MouseEvent) {
+    if ((event.target as HTMLElement)?.parentElement?.id === this.idContentMenu || (event.target as HTMLElement).parentElement?.id === this.idNoteTextarea) {
+      return;
+    } else {
+      const getSelection = document.getSelection()!;
+      if (getSelection.rangeCount > 0) {
+        const getRangeAt = getSelection?.getRangeAt(0);
+        this.render.setStyle(this.divContentMenu, 'left', this.positionFixed.x + 'px');
+        this.render.setStyle(this.divContentMenu, 'top', this.positionFixed.y + 'px');
+        this.render.setStyle(this.divContentMenu, 'display', 'none');
+        this.render.setStyle(this.divNoteTextarea, 'display', 'none');
+        if (getRangeAt.toString() === ''
+          || getRangeAt!.commonAncestorContainer!.parentElement!.id === ''
+          || getRangeAt!.commonAncestorContainer!.parentElement!.id === this.ele.nativeElement.id
+          || this.ele.nativeElement.contains(getRangeAt.commonAncestorContainer)) {
+          if (getRangeAt.toString() !== '' && !this.checkEleInRange(getSelection)) {
+            this.render.setProperty(this.BtnHighlight, 'disabled', false);
+            this.render.setProperty(this.BtnNote, 'disabled', false);
+            this.position.start = getRangeAt.startOffset;
+            this.position.end = getRangeAt.endOffset;
+          } else {
+            this.render.setProperty(this.BtnHighlight, 'disabled', true);
+            this.render.setProperty(this.BtnNote, 'disabled', true);
+          }
+        } else {
+          this.render.setProperty(this.BtnHighlight, 'disabled', false);
+          this.render.setProperty(this.BtnNote, 'disabled', false);
+          this.position.start = getSelection.anchorOffset;
+          this.position.end = getSelection.focusOffset;
+          this.positionFixed.id = (event.target as HTMLElement).id;
+        }
+        this.render.setStyle(this.divContentMenu, 'display', 'flex');
+      }
+    }
   }
 
   // Generate id for element
   ObjectId(m = Math, d = Date, h = 16, s = (sELe: any) => m.floor(sELe).toString(h)) {
     return s(d.now() / 1000) + ' '.repeat(h).replace(/./g, () => s(m.random() * h));
-  }
-
-  createViewContent() {
-    this.divContentHTMl = this.render.createElement('div');
-    this.render.setAttribute(this.divContentHTMl, 'id', this.idContentHtml);
-    return this.divContentHTMl;
   }
 
   // Create text area note
@@ -214,33 +210,45 @@ export class HighlightNoteDirective implements OnInit, OnChanges {
     this.divContentMenu = this.render.createElement('div');
     this.render.setAttribute(this.divContentMenu, 'id', this.idContentMenu);
     this.render.addClass(this.divContentMenu, 'noselect');
+
+    //create btn hightlight
     this.BtnHighlight = this.render.createElement('button');
     this.render.setAttribute(this.BtnHighlight, 'id', this.idBtnHighlight);
     this.render.listen(this.BtnHighlight, 'click', () => {
       this.highlight(false);
     });
     this.render.appendChild(this.BtnHighlight, this.render.createText('Highlight'));
+
+    //create btn note
     this.BtnNote = this.render.createElement('button');
     this.render.setAttribute(this.BtnNote, 'id', this.idNote);
     this.render.listen(this.BtnNote, 'click', () => {
       this.note();
     });
     this.render.appendChild(this.BtnNote, this.render.createText('Note'));
+
+    //create btn clean
     this.BtnClean = this.render.createElement('button');
     this.render.setAttribute(this.BtnClean, 'id', this.idClean);
     this.render.listen(this.BtnClean, 'click', () => {
       this.clean();
     });
     this.render.appendChild(this.BtnClean, this.render.createText('Clear'));
+
+    //create btn clean all
     this.BtnCleanAll = this.render.createElement('button');
     this.render.setAttribute(this.BtnCleanAll, 'id', this.idCleanALl);
     this.render.listen(this.BtnCleanAll, 'click', () => {
       this.cleanAll();
     });
     this.render.appendChild(this.BtnCleanAll, this.render.createText('Clear All'));
+
+    //add class
     this.render.addClass(this.divContentMenu, 'popupOnRightClick');
     this.render.addClass(this.BtnHighlight, 'buttonFirst');
     this.render.addClass(this.BtnCleanAll, 'buttonEnd');
+
+    //append child
     this.render.appendChild(this.divContentMenu, this.BtnHighlight);
     this.render.appendChild(this.divContentMenu, this.BtnNote);
     this.render.appendChild(this.divContentMenu, this.BtnClean);

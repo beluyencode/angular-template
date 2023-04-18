@@ -2,7 +2,6 @@
     width: 200px !important;
     display: none;
     border: 1px solid rgb(133, 130, 130);
-    flex-direction: column;
     background-color: white;
     border-radius: 10px;
     box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
@@ -53,7 +52,7 @@
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
         overflow: auto !important;
         outline: none;
-        border-color: #ccc  !important;
+        border-color: #ccc !important;
         padding: 10px;
         border-radius: 6px;
     }
