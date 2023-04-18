@@ -15,21 +15,25 @@ export class HighlightNoteDirective implements OnInit {
   divContentHTMl: HTMLDivElement;
   divContentMenu: HTMLDivElement;
   divNoteTextarea: HTMLDivElement;
+  divTranslate: HTMLDivElement;
   Textarea: ElementRef;
   BtnHighlight: ElementRef;
   BtnNote: ElementRef;
   BtnClean: ElementRef;
   BtnCleanAll: ElementRef;
+  BtnTranslate: ElementRef;
 
   // id element
   idContentHtml: string;
   idContentMenu: string;
   idNoteTextarea: string;
+  idDivTranslate: string;
   idTextarea: string;
   idBtnHighlight: string;
   idNote: string;
   idClean: string;
   idCleanALl: string;
+  idTranslate: string
 
   // Array id note and highlight
   arrIdSpecialVersion: Array<any>;
@@ -71,8 +75,6 @@ export class HighlightNoteDirective implements OnInit {
 
   // Event when after selection
   @HostListener('mousedown', ['$event']) mousedown(event: MouseEvent) {
-    console.log(event.clientY);
-
     this.positionFixed.x = event.clientX;
     this.positionFixed.y = event.clientY;
   }
@@ -86,37 +88,45 @@ export class HighlightNoteDirective implements OnInit {
       this.render.setStyle(this.divNoteTextarea, 'display', 'none');
       this.positionFixed.id = (event?.target as HTMLElement).id;
     }
-    if (document.getSelection()?.toString() !== '') {
-      setTimeout(() => {
-        this.openMenu(event);
-      })
+    const range = document.getSelection();
+    if (range?.toString() !== '') {
+      if (this.positionFixed.y > event.clientY) {
+        this.positionFixed.x = event.clientX;
+        this.positionFixed.y = event.clientY;
+      }
+      if (!this.checkIsClickContextMenuBtn(event)) {
+        setTimeout(() => {
+          this.openMenu(event);
+        })
+      }
     }
   }
 
   // Event when click anywhere
-  @HostListener('window:click', ['$event']) documentCLick(event: any) {
-    if ((event.target as HTMLElement).parentElement?.id !== this.idContentMenu) {
-      this.render.setStyle(this.divContentMenu, 'display', 'none');
-    }
-    const boolean = (event.target as HTMLElement).id === this.idBtnHighlight || (event.target as HTMLElement).id === this.idNote;
-    if (!boolean) {
-      if ((event.target as HTMLElement).id !== this.idTextarea) {
-        this.positionFixed.id = (event.target as HTMLElement).id;
+  @HostListener('window:click', ['$event']) documentCLick(event: MouseEvent) {
+    if (document.getSelection()?.toString() === '') {
+      if ((event.target as HTMLElement).parentElement?.id !== this.idContentMenu) {
+        this.render.setStyle(this.divContentMenu, 'display', 'none');
       }
-      if ((event.target as HTMLElement).parentElement) {
-        if ((event.target as HTMLElement).parentElement?.id !== this.idNoteTextarea && !this.includeArrIdSpecial((event.target as HTMLElement).id).isInclude) {
-          this.render.setStyle(this.divNoteTextarea, 'display', 'none');
+      if (!this.checkIsClickContextMenuBtn(event)) {
+        if ((event.target as HTMLElement).id !== this.idTextarea) {
+          this.positionFixed.id = (event.target as HTMLElement).id;
+        }
+        if ((event.target as HTMLElement).parentElement) {
+          if ((event.target as HTMLElement).parentElement?.id !== this.idNoteTextarea && !this.includeArrIdSpecial((event.target as HTMLElement).id).isInclude) {
+            this.render.setStyle(this.divNoteTextarea, 'display', 'none');
+          }
         }
       }
-    }
-    const notePosition = this.includeArrIdSpecial((event.target as HTMLElement).id);
-    if (notePosition.isInclude && this.arrIdSpecialVersion[notePosition.index].note) {
-      event.preventDefault();
-      this.render.setStyle(this.divNoteTextarea, 'left', this.positionFixed.x + 'px');
-      this.render.setStyle(this.divNoteTextarea, 'top', this.positionFixed.y + 'px');
-      this.render.setStyle(this.divNoteTextarea, 'display', 'block');
-      this.render.setProperty(this.Textarea, 'value', this.arrIdSpecialVersion[notePosition.index].comment);
-      this.render.selectRootElement(this.Textarea).focus();
+      const notePosition = this.includeArrIdSpecial((event.target as HTMLElement).id);
+      if (notePosition.isInclude && this.arrIdSpecialVersion[notePosition.index].note) {
+        event.preventDefault();
+        this.render.setStyle(this.divNoteTextarea, 'left', ((this.positionFixed.x + 250 > window.innerWidth) ? this.positionFixed.x - 250 : this.positionFixed.x) + 'px');
+        this.render.setStyle(this.divNoteTextarea, 'top', this.positionFixed.y + 'px');
+        this.render.setStyle(this.divNoteTextarea, 'display', 'block');
+        this.render.setProperty(this.Textarea, 'value', this.arrIdSpecialVersion[notePosition.index].comment);
+        this.render.selectRootElement(this.Textarea).focus();
+      }
     }
   }
 
@@ -130,12 +140,16 @@ export class HighlightNoteDirective implements OnInit {
     this.idClean = this.ele.nativeElement.id + 'clean';
     this.idNoteTextarea = this.ele.nativeElement.id + 'noteTextarea';
     this.idTextarea = this.ele.nativeElement.id + 'textarea';
+    this.idDivTranslate = this.ele.nativeElement.id + 'translate';
     this.idCleanALl = this.ele.nativeElement.id + 'cleanALl';
+    this.idTranslate = this.ele.nativeElement.id + 'translate'
     this.render.appendChild(this.ele.nativeElement, this.createViewContextMenu());
     this.render.appendChild(this.ele.nativeElement, this.createViewNote());
+    this.render.appendChild(this.ele.nativeElement, this.createTranslate());
     this.render.listen(window, 'scroll', () => {
       this.render.setStyle(this.divContentMenu, 'display', 'none');
       this.render.setStyle(this.divNoteTextarea, 'display', 'none');
+      this.render.setStyle(this.divTranslate, 'display', 'none');
     });
   }
 
@@ -146,8 +160,8 @@ export class HighlightNoteDirective implements OnInit {
       const getSelection = document.getSelection()!;
       if (getSelection.rangeCount > 0) {
         const getRangeAt = getSelection?.getRangeAt(0);
-        this.render.setStyle(this.divContentMenu, 'left', this.positionFixed.x + 'px');
-        this.render.setStyle(this.divContentMenu, 'top', this.positionFixed.y + 'px');
+        this.render.setStyle(this.divContentMenu, 'left', ((this.positionFixed.x + 279 > window.innerWidth) ? this.positionFixed.x - 279 : this.positionFixed.x) + 'px');
+        this.render.setStyle(this.divContentMenu, 'top', ((this.positionFixed.y - 50 > 0) ? (this.positionFixed.y - 50) : this.positionFixed.y) + 'px');
         this.render.setStyle(this.divContentMenu, 'display', 'none');
         this.render.setStyle(this.divNoteTextarea, 'display', 'none');
         if (getRangeAt.toString() === ''
@@ -217,7 +231,10 @@ export class HighlightNoteDirective implements OnInit {
     this.render.listen(this.BtnHighlight, 'click', () => {
       this.highlight(false);
     });
-    this.render.appendChild(this.BtnHighlight, this.render.createText('Highlight'));
+    const btnHighlightIcon = this.render.createElement('img');
+    this.render.setAttribute(btnHighlightIcon, 'src', './assets/img/Highlighter.svg');
+    this.render.setAttribute(btnHighlightIcon, 'alt', 'assets/img/Highlighter.svg');
+    this.render.appendChild(this.BtnHighlight, btnHighlightIcon);
 
     //create btn note
     this.BtnNote = this.render.createElement('button');
@@ -225,15 +242,19 @@ export class HighlightNoteDirective implements OnInit {
     this.render.listen(this.BtnNote, 'click', () => {
       this.note();
     });
-    this.render.appendChild(this.BtnNote, this.render.createText('Note'));
+    const btnNoteIcon = this.render.createElement('img');
+    this.render.setAttribute(btnNoteIcon, 'src', './assets/img/Sticky note.svg');
+    this.render.appendChild(this.BtnNote, btnNoteIcon);
 
     //create btn clean
     this.BtnClean = this.render.createElement('button');
     this.render.setAttribute(this.BtnClean, 'id', this.idClean);
-    this.render.listen(this.BtnClean, 'click', () => {
-      this.clean();
+    this.render.listen(this.BtnClean, 'click', (event: MouseEvent) => {
+      this.clean(event);
     });
-    this.render.appendChild(this.BtnClean, this.render.createText('Clear'));
+    const btnCleanIcon = this.render.createElement('img');
+    this.render.setAttribute(btnCleanIcon, 'src', './assets/img/Eraser.svg');
+    this.render.appendChild(this.BtnClean, btnCleanIcon);
 
     //create btn clean all
     this.BtnCleanAll = this.render.createElement('button');
@@ -241,51 +262,49 @@ export class HighlightNoteDirective implements OnInit {
     this.render.listen(this.BtnCleanAll, 'click', () => {
       this.cleanAll();
     });
-    this.render.appendChild(this.BtnCleanAll, this.render.createText('Clear All'));
+    const btnCleanAllIcon = this.render.createElement('img');
+    this.render.setAttribute(btnCleanAllIcon, 'src', './assets/img/Bin.svg');
+    this.render.appendChild(this.BtnCleanAll, btnCleanAllIcon);
+
+    //create btn translate
+    this.BtnTranslate = this.render.createElement('button');
+    this.render.setAttribute(this.BtnTranslate, 'id', this.idTranslate);
+    this.render.listen(this.BtnCleanAll, 'click', () => {
+      this.translate();
+    });
+    const btnTranslateIcon = this.render.createElement('img');
+    this.render.setAttribute(btnTranslateIcon, 'src', './assets/img/Language.svg');
+    this.render.appendChild(this.BtnTranslate, btnTranslateIcon);
 
     //add class
     this.render.addClass(this.divContentMenu, 'popupOnRightClick');
     this.render.addClass(this.BtnHighlight, 'buttonFirst');
-    this.render.addClass(this.BtnCleanAll, 'buttonEnd');
+    this.render.addClass(this.BtnTranslate, 'buttonEnd');
 
     //append child
     this.render.appendChild(this.divContentMenu, this.BtnHighlight);
     this.render.appendChild(this.divContentMenu, this.BtnNote);
     this.render.appendChild(this.divContentMenu, this.BtnClean);
     this.render.appendChild(this.divContentMenu, this.BtnCleanAll);
+    this.render.appendChild(this.divContentMenu, this.BtnTranslate);
+
     return this.divContentMenu;
   }
 
-  getPosition() {
-    let positionSelection = 0;
-    let elementHtml: any = [];
-    let positionSelectionInelementHtml: any = [];
-    elementHtml = Array.from(window.getSelection()!.getRangeAt(0)!.startContainer!.parentNode!.childNodes);
-    positionSelectionInelementHtml = Array.from(elementHtml).map(ele =>
-      ele === document.getSelection()!.getRangeAt(0).startContainer
-    );
-    for (let index = 0; index < elementHtml.length; index++) {
-      if (elementHtml[index].constructor.name === 'HTMLSpanElement') {
-        positionSelection++;
-      }
-      if (positionSelectionInelementHtml[index]) {
-        break;
-      }
-    }
-    if (!this.checkTrueFasleArr(positionSelectionInelementHtml)) {
-      return -1;
-    }
-    return positionSelection;
+  //create translate
+  createTranslate() {
+    this.divTranslate = this.render.createElement('div');
+    this.render.setAttribute(this.divTranslate, 'id', this.idDivTranslate);
+    this.render.addClass(this.divTranslate, 'popupTranslate');
+
+    return this.divTranslate
   }
 
-  checkTrueFasleArr(array: Array<any>) {
-    let boolean = false;
-    array.forEach(ele => {
-      if (ele) {
-        boolean = ele;
-      }
+  checkIsClickContextMenuBtn(event: MouseEvent) {
+    const boolean = [this.idBtnHighlight, this.idClean, this.idCleanALl, this.idNote, this.idTranslate].some((ele: string) => {
+      return ele === (event.target as HTMLElement).id || ele === (event.target as HTMLElement).parentElement?.id
     });
-    return boolean;
+    return boolean
   }
 
   highlight(highlightNote?: boolean) {
@@ -426,7 +445,9 @@ export class HighlightNoteDirective implements OnInit {
     this.positionFixed.id = this.arrIdSpecialVersion[this.arrIdSpecialVersion.length - 1].id[0];
   }
 
-  clean() {
+  clean(event: MouseEvent) {
+    event.preventDefault()
+    event.stopPropagation();
     const selection = document.getSelection()!.getRangeAt(0) as any;
     const includeArrId = this.includeArrIdSpecial(selection!.commonAncestorContainer?.parentNode?.id);
     if (includeArrId.isInclude) {
@@ -457,11 +478,6 @@ export class HighlightNoteDirective implements OnInit {
 
   cleanAll() {
     this.render.setStyle(this.divContentMenu, 'display', 'none');
-    this.cleanAllSpecial();
-    this.arrIdSpecialVersion = [];
-  }
-
-  cleanAllSpecial() {
     this.arrIdSpecialVersion.forEach(item => {
       item.id.forEach((id: string) => {
         const ele = document.getElementById(id);
@@ -474,7 +490,13 @@ export class HighlightNoteDirective implements OnInit {
     [...arrTagNoName].forEach(ele => {
       ele.outerHTML = ele.textContent;
     });
+    this.arrIdSpecialVersion = [];
   }
+
+  translate() {
+
+  }
+
 }
 
 
