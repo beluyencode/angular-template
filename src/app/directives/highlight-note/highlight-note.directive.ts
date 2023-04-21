@@ -179,11 +179,12 @@ export class HighlightNoteDirective implements OnInit {
           || getRangeAt!.commonAncestorContainer!.parentElement!.id === ''
           || getRangeAt!.commonAncestorContainer!.parentElement!.id === this.ele.nativeElement.id
           || this.ele.nativeElement.contains(getRangeAt.commonAncestorContainer)) {
-          if (getRangeAt.toString() !== '' && !this.checkEleInRange(getSelection)) {
+          if (getRangeAt.toString().trim() !== '' && !this.checkEleInRange(getSelection)) {
             this.render.setProperty(this.BtnHighlight, 'disabled', false);
             this.render.setProperty(this.BtnNote, 'disabled', false);
             this.render.setProperty(this.BtnHighlightPink, 'disabled', false);
             this.render.setProperty(this.BtnHighlightGreen, 'disabled', false);
+            this.render.setProperty(this.BtnTranslate, 'disabled', false);
             this.position.start = getRangeAt.startOffset;
             this.position.end = getRangeAt.endOffset;
           } else {
@@ -191,12 +192,14 @@ export class HighlightNoteDirective implements OnInit {
             this.render.setProperty(this.BtnHighlightPink, 'disabled', true);
             this.render.setProperty(this.BtnHighlightGreen, 'disabled', true);
             this.render.setProperty(this.BtnNote, 'disabled', true);
+            this.render.setProperty(this.BtnTranslate, 'disabled', true);
           }
         } else {
           this.render.setProperty(this.BtnHighlight, 'disabled', false);
           this.render.setProperty(this.BtnHighlightPink, 'disabled', false);
           this.render.setProperty(this.BtnHighlightGreen, 'disabled', false);
           this.render.setProperty(this.BtnNote, 'disabled', false);
+          this.render.setProperty(this.BtnTranslate, 'disabled', false);
           this.position.start = getSelection.anchorOffset;
           this.position.end = getSelection.focusOffset;
           this.positionFixed.id = (event.target as HTMLElement).id;
@@ -249,7 +252,7 @@ export class HighlightNoteDirective implements OnInit {
       this.highlight(false);
     });
     const btnHighlightIcon = this.render.createElement('img');
-    this.render.setAttribute(btnHighlightIcon, 'src', './assets/img/Highlighter.svg');
+    this.render.setAttribute(btnHighlightIcon, 'src', './assets/highlight-note/Highlighter.svg');
     this.render.appendChild(this.BtnHighlight, btnHighlightIcon);
 
     //create btn hightlight pink
@@ -259,7 +262,7 @@ export class HighlightNoteDirective implements OnInit {
       this.highlight(false, 'highLightText-pink');
     });
     const btnHighlightIconPink = this.render.createElement('img');
-    this.render.setAttribute(btnHighlightIconPink, 'src', './assets/img/Highlighter_pink.svg');
+    this.render.setAttribute(btnHighlightIconPink, 'src', './assets/highlight-note/Highlighter_pink.svg');
     this.render.appendChild(this.BtnHighlightPink, btnHighlightIconPink);
 
     //create btn hightlight green
@@ -269,7 +272,7 @@ export class HighlightNoteDirective implements OnInit {
       this.highlight(false, 'highLightText-green');
     });
     const btnHighlightIconGreen = this.render.createElement('img');
-    this.render.setAttribute(btnHighlightIconGreen, 'src', './assets/img/Highlighter_green.svg');
+    this.render.setAttribute(btnHighlightIconGreen, 'src', './assets/highlight-note/Highlighter_green.svg');
     this.render.appendChild(this.BtnHighlightGreen, btnHighlightIconGreen);
 
     //create btn note
@@ -279,7 +282,7 @@ export class HighlightNoteDirective implements OnInit {
       this.note();
     });
     const btnNoteIcon = this.render.createElement('img');
-    this.render.setAttribute(btnNoteIcon, 'src', './assets/img/Sticky note.svg');
+    this.render.setAttribute(btnNoteIcon, 'src', './assets/highlight-note/Sticky note.svg');
     this.render.appendChild(this.BtnNote, btnNoteIcon);
 
     //create btn clean
@@ -289,7 +292,7 @@ export class HighlightNoteDirective implements OnInit {
       this.clean(event);
     });
     const btnCleanIcon = this.render.createElement('img');
-    this.render.setAttribute(btnCleanIcon, 'src', './assets/img/Eraser.svg');
+    this.render.setAttribute(btnCleanIcon, 'src', './assets/highlight-note/Eraser.svg');
     this.render.appendChild(this.BtnClean, btnCleanIcon);
 
     //create btn clean all
@@ -299,7 +302,7 @@ export class HighlightNoteDirective implements OnInit {
       this.cleanAll();
     });
     const btnCleanAllIcon = this.render.createElement('img');
-    this.render.setAttribute(btnCleanAllIcon, 'src', './assets/img/Bin.svg');
+    this.render.setAttribute(btnCleanAllIcon, 'src', './assets/highlight-note/Bin.svg');
     this.render.appendChild(this.BtnCleanAll, btnCleanAllIcon);
 
     //create btn translate
@@ -309,7 +312,7 @@ export class HighlightNoteDirective implements OnInit {
       this.translate();
     });
     const btnTranslateIcon = this.render.createElement('img');
-    this.render.setAttribute(btnTranslateIcon, 'src', './assets/img/Language.svg');
+    this.render.setAttribute(btnTranslateIcon, 'src', './assets/highlight-note/Language.svg');
     this.render.appendChild(this.BtnTranslate, btnTranslateIcon);
 
     //add class
@@ -477,15 +480,20 @@ export class HighlightNoteDirective implements OnInit {
     event.preventDefault()
     event.stopPropagation();
     const selection = document.getSelection()!.getRangeAt(0) as any;
-    const includeArrId = this.includeArrIdSpecial(selection!.commonAncestorContainer?.parentNode?.id);
+    console.log(document.getSelection()?.getRangeAt(0));
+    const includeArrId = this.includeArrIdSpecial(selection!.commonAncestorContainer?.parentElement?.id);
     if (includeArrId.isInclude) {
-      this.arrIdSpecialVersion[includeArrId.index].id.forEach((ele: any) => {
-        const elementHtml = document.getElementById(ele);
-        if (elementHtml) {
-          elementHtml.outerHTML = elementHtml.outerText;
-        }
-      });
-      this.arrIdSpecialVersion.splice(includeArrId.index, 1);
+      if (this.arrIdSpecialVersion.length !== 1) {
+        this.arrIdSpecialVersion[includeArrId.index].id.forEach((ele: any) => {
+          const elementHtml = document.getElementById(ele);
+          if (elementHtml) {
+            elementHtml.outerHTML = elementHtml.outerText;
+          }
+        });
+        this.arrIdSpecialVersion.splice(includeArrId.index, 1);
+      } else {
+        this.cleanAll();
+      }
     }
     this.render.setStyle(this.divContentMenu, 'display', 'none');
   }
@@ -523,13 +531,16 @@ export class HighlightNoteDirective implements OnInit {
   }
 
   translate() {
-    if (document.getSelection()) {
+    const selection = document.getSelection()
+    if (selection) {
       this.viewContainerRef.clear();
       const componentRef = this.viewContainerRef.createComponent(TranslatePopupComponent);
       componentRef.instance.id = this.idDivTranslate;
-      componentRef.instance.text = document.getSelection()?.toString();
+      componentRef.instance.text = selection.toString();
+      console.log(selection.getRangeAt(0));
+
       componentRef.instance.positionFixed = {
-        x: this.positionFixed.x - 278,
+        x: this.positionFixed.x - 304,
         y: this.positionFixed.y + 35
       }
       componentRef.instance.close = () => {

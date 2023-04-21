@@ -5,11 +5,13 @@ import { TranslatePopupComponent } from './translate-popup/translate-popup.compo
 import { TranslatePopupService } from './translate-popup/translate-popup.service';
 
 import { HttpClientModule } from '@angular/common/http'
+import { SanitizeHtmlPipe } from './sanitize-html.pipe';
 
 @NgModule({
   declarations: [
     HighlightNoteDirective,
     TranslatePopupComponent,
+    SanitizeHtmlPipe
   ],
   imports: [
     CommonModule,

@@ -126,7 +126,7 @@
         box-shadow: 0px 4px 20px rgba(109, 127, 179, 0.4);
         border-radius: 8px;
         resize: vertical;
-        width: 250px;
+        width: 200px;
     }
 
     div {
@@ -165,17 +165,17 @@
 
 .highLightText {
     background: #FFF7B4;
-    cursor: default;
+    cursor: pointer;
 }
 
 .highLightText-pink {
     background: #FFD6E0;
-    cursor: default;
+    cursor: pointer;
 }
 
 .highLightText-green {
     background: #C9FFD5;
-    cursor: default;
+    cursor: pointer;
 }
 
 .noteText {
