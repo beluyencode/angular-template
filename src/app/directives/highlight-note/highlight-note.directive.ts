@@ -18,6 +18,8 @@ export class HighlightNoteDirective implements OnInit {
   divNoteTextarea: HTMLDivElement;
   Textarea: ElementRef;
   BtnHighlight: ElementRef;
+  BtnHighlightPink: ElementRef;
+  BtnHighlightGreen: ElementRef;
   BtnNote: ElementRef;
   BtnClean: ElementRef;
   BtnCleanAll: ElementRef;
@@ -29,6 +31,8 @@ export class HighlightNoteDirective implements OnInit {
   idNoteTextarea: string;
   idTextarea: string;
   idBtnHighlight: string;
+  idBtnHighlightPink: string;
+  idBtnHighlightGreen: string;
   idDivTranslate: string;
   idNote: string;
   idClean: string;
@@ -142,6 +146,8 @@ export class HighlightNoteDirective implements OnInit {
     this.arrIdSpecialVersion = [];
     this.idContentMenu = this.ele.nativeElement.id + 'contentMenu';
     this.idBtnHighlight = this.ele.nativeElement.id + 'highlight';
+    this.idBtnHighlightPink = this.ele.nativeElement.id + 'highlight_pink';
+    this.idBtnHighlightGreen = this.ele.nativeElement.id + 'highlight_green';
     this.idNote = this.ele.nativeElement.id + 'note';
     this.idClean = this.ele.nativeElement.id + 'clean';
     this.idNoteTextarea = this.ele.nativeElement.id + 'noteTextarea';
@@ -164,7 +170,7 @@ export class HighlightNoteDirective implements OnInit {
       const getSelection = document.getSelection()!;
       if (getSelection.rangeCount > 0) {
         const getRangeAt = getSelection?.getRangeAt(0);
-        this.render.setStyle(this.divContentMenu, 'left', ((this.positionFixed.x + 279 > window.innerWidth) ? this.positionFixed.x - 279 : this.positionFixed.x) + 'px');
+        this.render.setStyle(this.divContentMenu, 'left', ((this.positionFixed.x + 335 > window.innerWidth) ? this.positionFixed.x - 334 : this.positionFixed.x) + 'px');
         this.render.setStyle(this.divContentMenu, 'top', ((this.positionFixed.y - 50 > 0) ? (this.positionFixed.y - 50) : this.positionFixed.y) + 'px');
         this.render.setStyle(this.divContentMenu, 'display', 'none');
         this.render.setStyle(this.divNoteTextarea, 'display', 'none');
@@ -176,14 +182,20 @@ export class HighlightNoteDirective implements OnInit {
           if (getRangeAt.toString() !== '' && !this.checkEleInRange(getSelection)) {
             this.render.setProperty(this.BtnHighlight, 'disabled', false);
             this.render.setProperty(this.BtnNote, 'disabled', false);
+            this.render.setProperty(this.BtnHighlightPink, 'disabled', false);
+            this.render.setProperty(this.BtnHighlightGreen, 'disabled', false);
             this.position.start = getRangeAt.startOffset;
             this.position.end = getRangeAt.endOffset;
           } else {
             this.render.setProperty(this.BtnHighlight, 'disabled', true);
+            this.render.setProperty(this.BtnHighlightPink, 'disabled', true);
+            this.render.setProperty(this.BtnHighlightGreen, 'disabled', true);
             this.render.setProperty(this.BtnNote, 'disabled', true);
           }
         } else {
           this.render.setProperty(this.BtnHighlight, 'disabled', false);
+          this.render.setProperty(this.BtnHighlightPink, 'disabled', false);
+          this.render.setProperty(this.BtnHighlightGreen, 'disabled', false);
           this.render.setProperty(this.BtnNote, 'disabled', false);
           this.position.start = getSelection.anchorOffset;
           this.position.end = getSelection.focusOffset;
@@ -230,7 +242,7 @@ export class HighlightNoteDirective implements OnInit {
     this.render.setAttribute(this.divContentMenu, 'id', this.idContentMenu);
     this.render.addClass(this.divContentMenu, 'noselect');
 
-    //create btn hightlight
+    //create btn hightlight yellow
     this.BtnHighlight = this.render.createElement('button');
     this.render.setAttribute(this.BtnHighlight, 'id', this.idBtnHighlight);
     this.render.listen(this.BtnHighlight, 'click', () => {
@@ -238,8 +250,27 @@ export class HighlightNoteDirective implements OnInit {
     });
     const btnHighlightIcon = this.render.createElement('img');
     this.render.setAttribute(btnHighlightIcon, 'src', './assets/img/Highlighter.svg');
-    this.render.setAttribute(btnHighlightIcon, 'alt', 'assets/img/Highlighter.svg');
     this.render.appendChild(this.BtnHighlight, btnHighlightIcon);
+
+    //create btn hightlight pink
+    this.BtnHighlightPink = this.render.createElement('button');
+    this.render.setAttribute(this.BtnHighlightPink, 'id', this.idBtnHighlightPink);
+    this.render.listen(this.BtnHighlightPink, 'click', () => {
+      this.highlight(false, 'highLightText-pink');
+    });
+    const btnHighlightIconPink = this.render.createElement('img');
+    this.render.setAttribute(btnHighlightIconPink, 'src', './assets/img/Highlighter_pink.svg');
+    this.render.appendChild(this.BtnHighlightPink, btnHighlightIconPink);
+
+    //create btn hightlight green
+    this.BtnHighlightGreen = this.render.createElement('button');
+    this.render.setAttribute(this.BtnHighlightGreen, 'id', this.idBtnHighlightGreen);
+    this.render.listen(this.BtnHighlightGreen, 'click', () => {
+      this.highlight(false, 'highLightText-green');
+    });
+    const btnHighlightIconGreen = this.render.createElement('img');
+    this.render.setAttribute(btnHighlightIconGreen, 'src', './assets/img/Highlighter_green.svg');
+    this.render.appendChild(this.BtnHighlightGreen, btnHighlightIconGreen);
 
     //create btn note
     this.BtnNote = this.render.createElement('button');
@@ -288,9 +319,11 @@ export class HighlightNoteDirective implements OnInit {
 
     //append child
     this.render.appendChild(this.divContentMenu, this.BtnHighlight);
+    this.render.appendChild(this.divContentMenu, this.BtnHighlightPink);
+    this.render.appendChild(this.divContentMenu, this.BtnHighlightGreen);
     this.render.appendChild(this.divContentMenu, this.BtnNote);
     this.render.appendChild(this.divContentMenu, this.BtnClean);
-    this.render.appendChild(this.divContentMenu, this.BtnCleanAll);
+    // this.render.appendChild(this.divContentMenu, this.BtnCleanAll);
     this.render.appendChild(this.divContentMenu, this.BtnTranslate);
 
     return this.divContentMenu;
@@ -303,7 +336,7 @@ export class HighlightNoteDirective implements OnInit {
     return boolean
   }
 
-  highlight(highlightNote?: boolean) {
+  highlight(highlightNote?: boolean, className: string = 'highLightText') {
     const selection = document.getSelection()!;
     const range = selection.getRangeAt(0);
     if (selection.getRangeAt(0).commonAncestorContainer.constructor.name !== 'Text') {
@@ -316,15 +349,15 @@ export class HighlightNoteDirective implements OnInit {
       arrTextELe.forEach((eleText: any, eleTextIndex: number) => {
         if (eleTextIndex === 0) {
           if (range.startContainer.constructor.name === 'Text') {
-            eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false, range.startOffset, true));
+            eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false, className, range.startOffset, true));
           } else {
             if (arrTextELe.length === 1) {
-              eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false));
+              eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false, className));
             } else {
               range.startContainer.childNodes.forEach((ele, index) => {
                 if (index > range.startOffset) {
                   if (ele.contains(eleText)) {
-                    eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false));
+                    eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false, className));
                   }
                 }
               });
@@ -332,15 +365,15 @@ export class HighlightNoteDirective implements OnInit {
           }
         } else if (eleTextIndex === arrTextELe.length - 1) {
           if (range.endContainer.constructor.name === 'Text') {
-            eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false, range.endOffset - 1, false));
+            eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false, className, range.endOffset - 1, false));
           } else {
             if (range.endContainer.contains(eleText)) {
             } else {
-              eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false));
+              eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false, className));
             }
           }
         } else {
-          eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false));
+          eleText.replaceWith(this.createSpanHightLightWithStartOrEnd(eleText.textContent, highlightNote ?? false, className));
         }
       });
       this.arrIdSpecialVersion.push({ id: this.multiIdSpecial, note: highlightNote, comment: '' });
@@ -351,8 +384,7 @@ export class HighlightNoteDirective implements OnInit {
       if (highlightNote) {
         this.render.addClass(newSpan, 'noteText');
       } else {
-        this.render.addClass(newSpan, 'highLightText');
-
+        this.render.addClass(newSpan, className);
       }
       this.render.setAttribute(newSpan, 'id', id);
       selection.getRangeAt(0).surroundContents(newSpan);
@@ -363,10 +395,10 @@ export class HighlightNoteDirective implements OnInit {
   }
 
   // startOrEnd : true tính vị trí từ điểm position tới cuối / false tính vị trí từ điểm đàu tiên đến posiotion / undefined lấy all
-  createSpanHightLightWithStartOrEnd(contentText: string, highlightNote: boolean, position?: number, startOrEnd?: boolean) {
+  createSpanHightLightWithStartOrEnd(contentText: string, highlightNote: boolean, className: string, position?: number, startOrEnd?: boolean) {
     const newEle = this.render.createElement('tag-no-name');
     const arrContent = contentText.split('');
-    let classCSS = 'highLightText';
+    let classCSS = className;
     if (highlightNote) {
       classCSS = 'noteText';
     }
@@ -486,6 +518,7 @@ export class HighlightNoteDirective implements OnInit {
     [...arrTagNoName].forEach(ele => {
       ele.outerHTML = ele.textContent;
     });
+    document.getSelection()?.removeAllRanges();
     this.arrIdSpecialVersion = [];
   }
 

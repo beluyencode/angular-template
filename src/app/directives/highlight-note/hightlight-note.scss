@@ -1,5 +1,4 @@
 .content {
-    font-family: 'Inter';
     font-style: normal;
     line-height: 150%;
 }
@@ -166,6 +165,16 @@
 
 .highLightText {
     background: #FFF7B4;
+    cursor: default;
+}
+
+.highLightText-pink {
+    background: #FFD6E0;
+    cursor: default;
+}
+
+.highLightText-green {
+    background: #C9FFD5;
     cursor: default;
 }
 
