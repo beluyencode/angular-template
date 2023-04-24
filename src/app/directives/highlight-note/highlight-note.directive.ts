@@ -540,7 +540,7 @@ export class HighlightNoteDirective implements OnInit {
       console.log(selection.getRangeAt(0));
 
       componentRef.instance.positionFixed = {
-        x: this.positionFixed.x - 304,
+        x: this.positionFixed.x - 360,
         y: this.positionFixed.y + 35
       }
       componentRef.instance.close = () => {

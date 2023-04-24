@@ -19,17 +19,16 @@
                 <i class="fa fa-volume-up" aria-hidden="true"></i>
             </button>
         </div>
-        <!-- <div class='translate-gg'>
+        <div class='translate-gg' *ngIf="translate">
             Dịch: {{translate}}
-        </div> -->
+        </div>
         <div *ngIf="tab === 'Tra câu'">
-            <div *ngFor="let line of html2" class='sentences'>
+            <div *ngFor="let line of sentences" class='sentences'>
                 - <span [innerHTML]="line.fields.vi"></span> <br>
                 - <span [innerHTML]="line.fields.en"></span>
             </div>
         </div>
-        <div [innerHTML]="html| sanitizeHtml" class='view-translate' #translate_div>
-
+        <div class='view-translate' #translate_div>
         </div>
     </div>
 </div>
