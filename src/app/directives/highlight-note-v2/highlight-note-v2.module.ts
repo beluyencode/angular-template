@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HighlightNoteDirective } from './highlight-note.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { SanitizeHtmlPipe } from './sanitize-html.pipe';
 import { TranslatePopupComponent } from './translate-popup/translate-popup.component';
 import { TranslatePopupService } from './translate-popup/translate-popup.service';
+import { HighlightNoteV2Directive } from './highlight-note-v2.directive';
 
-import { HttpClientModule } from '@angular/common/http'
-import { SanitizeHtmlPipe } from './sanitize-html.pipe';
+
 
 @NgModule({
   declarations: [
-    HighlightNoteDirective,
+    HighlightNoteV2Directive,
     TranslatePopupComponent,
     SanitizeHtmlPipe
   ],
@@ -18,10 +19,10 @@ import { SanitizeHtmlPipe } from './sanitize-html.pipe';
     HttpClientModule
   ],
   exports: [
-    HighlightNoteDirective
+    HighlightNoteV2Directive
   ],
   providers: [
     TranslatePopupService
   ]
 })
-export class HighlightNoteModule { }
+export class HighlightNoteV2Module { }

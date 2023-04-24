@@ -63,44 +63,54 @@ export class TranslatePopupComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngOnInit() {
     window.speechSynthesis.cancel();
-    this.subject = this.translateService.translate(this.text).subscribe((res: any) => {
-      if (res.sentences[0]) {
-        this.sentences = res.sentences;
-        this.listTab = [
-          'Tra câu',
-        ];
+    this.translateService.translate(this.text).subscribe({
+      next: (res: any) => {
+        if (res.sentences[0] && this.text.trim().split(' ').length <= 4) {
+          this.sentences = res.sentences;
+          this.listTab = [
+            'Tra câu',
+          ];
+        }
+        if (res.tratu[0]) {
+          this.tratu = res.tratu[0].fields.fulltext.split('</script>')[1] ?? res.tratu[0].fields.fulltext;
+          this.eleTranslate.nativeElement.innerHTML = this.tratu;
+          this.listTab = [
+            ...this.listTabConst.filter((ele: string) => this.tratu.includes(ele)),
+            ...this.listTab
+          ];
+        }
         this.tab = this.listTab[0];
-      }
-      if (res.tratu[0]) {
-        this.tratu = res.tratu[0].fields.fulltext.split('</script>')[1] ?? res.tratu[0].fields.fulltext;
-        this.eleTranslate.nativeElement.innerHTML = this.tratu;
-        this.listTab = [
-          ...this.listTab,
-          ...this.listTabConst.filter((ele: string) => this.tratu.includes(ele))
-        ];
-        this.tab = this.listTab[1] ?? this.listTab[0];
-      }
-      if (!res.sentences[0] && !res.tratu[0]) {
+        if (!res.tratu[0]) {
+          this.translateService.translateGoogle(this.text).subscribe((res: any) => {
+            this.translate = '';
+            res[0].forEach((element: any) => {
+              this.translate += element[0]
+            });
+            this.listTab = [
+              ...this.listTab,
+              'Dịch'
+            ];
+            this.tab = this.listTab[0];
+          })
+        } else {
+          this.removeNode();
+          this.changeTab(this.tab);
+        }
+      },
+      error: (error) => {
         this.translateService.translateGoogle(this.text).subscribe((res: any) => {
           this.translate = '';
           res[0].forEach((element: any) => {
-            this.translate += element[0]
+            this.translate += element[0];
           });
+          this.listTab = [
+            ...this.listTab,
+            'Dịch'
+          ];
+          this.tab = this.listTab[0];
         })
-      } else {
-        this.removeNode();
-        this.changeTab(this.tab);
-
       }
-    },
-      (error) => {
-        this.translateService.translateGoogle(this.text).subscribe((res: any) => {
-          this.translate = '';
-          res[0].forEach((element: any) => {
-            this.translate += element[0]
-          });
-        })
-      })
+    })
   }
 
   removeNode() {

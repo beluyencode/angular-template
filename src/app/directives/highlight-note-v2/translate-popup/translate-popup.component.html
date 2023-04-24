@@ -1,7 +1,7 @@
 <div class='div-translate unselectable' [id]="id"
     [ngStyle]="{'top': positionFixed.y +'px', 'left':positionFixed.x+'px'}" unselectable="on">
     <div class='div-translate-header'>
-        <span>{{text}}</span>
+        <span>Dictionary</span>
         <button (click)="close()">x</button>
     </div>
     <div class='content'>
@@ -19,7 +19,7 @@
                 <i class="fa fa-volume-up" aria-hidden="true"></i>
             </button>
         </div>
-        <div class='translate-gg' *ngIf="translate">
+        <div class='translate-gg' *ngIf="translate && tab === 'Dịch'">
             Dịch: {{translate}}
         </div>
         <div *ngIf="tab === 'Tra câu'">

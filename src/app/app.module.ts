@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CreateTemplateModule } from './create-template/create-template.module';
 import { StandaloneComponent } from './standalone/standalone.component';
-import { HighlightNoteModule } from './directives/highlight-note/highlight-note.module';
+import { HighlightNoteV2Module } from './directives/highlight-note-v2/highlight-note-v2.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { HighlightNoteModule } from './directives/highlight-note/highlight-note.
     BrowserModule,
     CreateTemplateModule,
     StandaloneComponent,
-    HighlightNoteModule
+    HighlightNoteV2Module
   ],
   providers: [],
   bootstrap: [AppComponent]

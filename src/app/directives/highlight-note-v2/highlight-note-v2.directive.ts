@@ -1,15 +1,16 @@
 import { Directive, ElementRef, HostListener, Input, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
 import { TranslatePopupComponent } from './translate-popup/translate-popup.component';
 
+
 @Directive({
-  selector: '[appHighlightNote]'
+  selector: '[appHighlightNoteV2]'
 })
 
 //
 // Để sửa dụng phải đặt id cho element sử dụng directive này
 //
 
-export class HighlightNoteDirective implements OnInit {
+export class HighlightNoteV2Directive implements OnInit {
   @Input() placeHolder = 'Comment...';
 
   //element
@@ -131,7 +132,7 @@ export class HighlightNoteDirective implements OnInit {
       const notePosition = this.includeArrIdSpecial((event.target as HTMLElement).id);
       if (notePosition.isInclude && this.arrIdSpecialVersion[notePosition.index].note) {
         event.preventDefault();
-        this.render.setStyle(this.divNoteTextarea, 'left', ((this.positionFixed.x + 250 > window.innerWidth) ? this.positionFixed.x - 250 : this.positionFixed.x) + 'px');
+        this.render.setStyle(this.divNoteTextarea, 'left', ((this.positionFixed.x + 200 > window.innerWidth) ? this.positionFixed.x - 200 : this.positionFixed.x) + 'px');
         this.render.setStyle(this.divNoteTextarea, 'top', this.positionFixed.y + 'px');
         this.render.setStyle(this.divNoteTextarea, 'display', 'block');
         this.render.setProperty(this.Textarea, 'value', this.arrIdSpecialVersion[notePosition.index].comment);
@@ -153,7 +154,8 @@ export class HighlightNoteDirective implements OnInit {
     this.idNoteTextarea = this.ele.nativeElement.id + 'noteTextarea';
     this.idTextarea = this.ele.nativeElement.id + 'textarea';
     this.idCleanALl = this.ele.nativeElement.id + 'cleanALl';
-    this.idBtnTranslate = this.ele.nativeElement.id + 'translate'
+    this.idBtnTranslate = this.ele.nativeElement.id + 'translate';
+    this.idDivTranslate = this.ele.nativeElement.id + 'translate_div'
     this.render.appendChild(this.ele.nativeElement, this.createViewContextMenu());
     this.render.appendChild(this.ele.nativeElement, this.createViewNote());
     this.render.listen(window, 'scroll', () => {
@@ -469,7 +471,7 @@ export class HighlightNoteDirective implements OnInit {
     this.render.setStyle(this.divContentMenu, 'display', 'none');
     this.render.setProperty(this.Textarea, 'value', '');
     this.render.setStyle(this.divNoteTextarea, 'left', this.divContentMenu['style'].left);
-    this.render.setStyle(this.divNoteTextarea, 'top', this.divContentMenu['style'].top);
+    this.render.setStyle(this.divNoteTextarea, 'top', +this.divContentMenu['style'].top.split('px')[0] - 40 + 'px');
     this.render.setStyle(this.divNoteTextarea, 'display', 'block');
     this.highlight(true);
     this.render.selectRootElement(this.Textarea).focus();
@@ -540,8 +542,8 @@ export class HighlightNoteDirective implements OnInit {
       console.log(selection.getRangeAt(0));
 
       componentRef.instance.positionFixed = {
-        x: this.positionFixed.x - 360,
-        y: this.positionFixed.y + 35
+        x: this.positionFixed.x - 380,
+        y: this.positionFixed.y + 35 + 450 > window.innerHeight ? (this.positionFixed.y - 450 < 0 ? 0 : this.positionFixed.y - 450) : this.positionFixed.y + 35
       }
       componentRef.instance.close = () => {
         this.viewContainerRef.clear();
