@@ -7,7 +7,7 @@ export class TranslatePopupService {
   constructor(private http: HttpClient) { }
 
   translate(text: string) {
-    const url = `https://api.tracau.vn/WBBcwnwQpV89/s/suggestions/vi`;
+    const url = `https://api.tracau.vn/WBBcwnwQpV89/s/${text}/vi`;
     return this.http.get(url);
   }
 

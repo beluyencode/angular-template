@@ -5,6 +5,12 @@
         <button (click)="close()">x</button>
     </div>
     <div class='content'>
+        <div class='tabs'>
+            <div *ngFor="let tabItem of listTab; index as index" [ngClass]="{'active': tabItem === tab}" class="tab"
+                (click)='changeTab(tabItem)'>
+                {{tabItem}}
+            </div>
+        </div>
         <div class='read-text'>
             <span>
                 {{text}}
@@ -13,8 +19,14 @@
                 <i class="fa fa-volume-up" aria-hidden="true"></i>
             </button>
         </div>
-        <div class='translate-gg'>
+        <!-- <div class='translate-gg'>
             Dịch: {{translate}}
+        </div> -->
+        <div *ngIf="tab === 'Tra câu'">
+            <div *ngFor="let line of html2" class='sentences'>
+                - <span [innerHTML]="line.fields.vi"></span> <br>
+                - <span [innerHTML]="line.fields.en"></span>
+            </div>
         </div>
         <div [innerHTML]="html| sanitizeHtml" class='view-translate' #translate_div>
 
