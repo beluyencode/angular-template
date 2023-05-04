@@ -539,8 +539,6 @@ export class HighlightNoteV2Directive implements OnInit {
       const componentRef = this.viewContainerRef.createComponent(TranslatePopupComponent);
       componentRef.instance.id = this.idDivTranslate;
       componentRef.instance.text = selection.toString();
-      console.log(selection.getRangeAt(0));
-
       componentRef.instance.positionFixed = {
         x: this.positionFixed.x - 380,
         y: this.positionFixed.y + 35 + 450 > window.innerHeight ? (this.positionFixed.y - 450 < 0 ? 0 : this.positionFixed.y - 450) : this.positionFixed.y + 35

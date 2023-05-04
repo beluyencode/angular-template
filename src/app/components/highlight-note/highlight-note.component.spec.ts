@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TemplateEleComponent } from './template-ele.component';
+import { HighlightNoteComponent } from './highlight-note.component';
 
-describe('TemplateEleComponent', () => {
-  let component: TemplateEleComponent;
-  let fixture: ComponentFixture<TemplateEleComponent>;
+describe('HighlightNoteComponent', () => {
+  let component: HighlightNoteComponent;
+  let fixture: ComponentFixture<HighlightNoteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TemplateEleComponent ]
+      declarations: [ HighlightNoteComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TemplateEleComponent);
+    fixture = TestBed.createComponent(HighlightNoteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
