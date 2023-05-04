@@ -482,7 +482,6 @@ export class HighlightNoteV2Directive implements OnInit {
     event.preventDefault()
     event.stopPropagation();
     const selection = document.getSelection()!.getRangeAt(0) as any;
-    console.log(document.getSelection()?.getRangeAt(0));
     const includeArrId = this.includeArrIdSpecial(selection!.commonAncestorContainer?.parentElement?.id);
     if (includeArrId.isInclude) {
       if (this.arrIdSpecialVersion.length !== 1) {
