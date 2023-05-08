@@ -1,5 +1,9 @@
 <div class="example-boundary">
-    <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
-        I can only be dragged within the dotted container
+    <div class="example-box " cdkDragBoundary=".example-boundary" cdkDrag>
+        I can only be dragged
+        <div class='example-box-wh'>
+        </div>
+        <div class='example-box-rotate'></div>
+        <div class='example-box-dotnet' (mousedown)="rotate($event)"></div>
     </div>
 </div>
