@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 })
 export class CreateTemplateComponent {
 
-
   rotate(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();

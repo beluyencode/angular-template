@@ -16,7 +16,19 @@
         }
     }
 
+    .list-item-active {
+        background-color: #0d99ff;
+        color: white;
+    }
+
+    .list-item-active:hover {
+        opacity: 0.8;
+        background-color: #0d99ff !important;
+        color: white;
+    }
+
     .list-item-fisrt {
+        font-weight: 500;
         height: 40px;
     }
 
@@ -32,4 +44,5 @@
         width: 100%;
         border-bottom: 1px solid #e5e5e5;
     }
+
 }
