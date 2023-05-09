@@ -1,9 +1,11 @@
-<div class="example-boundary">
-    <div class="example-box " cdkDragBoundary=".example-boundary" cdkDrag>
-        I can only be dragged
-        <div class='example-box-wh'>
-        </div>
-        <div class='example-box-rotate'></div>
-        <div class='example-box-dotnet' (mousedown)="rotate($event)"></div>
+<div class='create-template'>
+    <div class='template-list'>
+        <app-create-template-list></app-create-template-list>
+    </div>
+    <div class='template-view'>
+        <app-create-template-view></app-create-template-view>
+    </div>
+    <div class='template-info'>
+        <app-create-template-info></app-create-template-info>
     </div>
 </div>

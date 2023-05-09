@@ -1,20 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateTemplateComponent } from './create-template.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import { CreateTemplateInfoComponent } from './create-template-info/create-template-info.component';
+import { CreateTemplateListComponent } from './create-template-list/create-template-list.component';
+import { CreateTemplateService } from './create-template.service';
+import { CreateTemplateViewComponent } from './create-template-view/create-template-view.component';
 
 
 @NgModule({
   declarations: [
-    CreateTemplateComponent
+    CreateTemplateComponent,
+    CreateTemplateInfoComponent,
+    CreateTemplateListComponent,
+    CreateTemplateViewComponent
   ],
   imports: [
     CommonModule,
-    DragDropModule
   ],
   exports: [
     CreateTemplateComponent
+  ],
+  providers: [
+    CreateTemplateService
   ]
 })
 export class CreateTemplateModule { }
