@@ -1,49 +1,16 @@
 <div class='list'>
-    <div class='list-item list-item-fisrt'>
+    <div class='list-item list-item-fisrt' (click)='changeActiveTemplate(null)'>
         <span>
             Background
         </span>
-        <span (click)="fullScreen()"><i class="fa-solid fa-expand"></i></span>
+        <span (click)="fullScreen($event)"><i class="fa-solid fa-expand"></i></span>
     </div>
     <div class='line'></div>
     <div>
-        <div class='list-item list-item-active'>
+        <div class='list-item' (click)='changeActiveTemplate(item)'
+            [ngClass]="{'list-item-active' : activeTemplate?.id === item.id}" *ngFor="let item of listTemplate">
             <span>
-                element 1
-            </span>
-            <i class="fa-regular fa-eye"></i>
-        </div>
-        <div class='list-item'>
-            <span>
-                element 2
-            </span>
-            <i class="fa-regular fa-eye"></i>
-
-        </div>
-        <div class='list-item'>
-            <span>
-                element 3
-            </span>
-            <i class="fa-regular fa-eye"></i>
-
-        </div>
-        <div class='list-item'>
-            <span>
-                element 4
-            </span>
-            <i class="fa-regular fa-eye"></i>
-
-        </div>
-        <div class='list-item'>
-            <span>
-                element 5
-            </span>
-            <i class="fa-regular fa-eye"></i>
-
-        </div>
-        <div class='list-item'>
-            <span>
-                element 6
+                {{item.name}}
             </span>
             <i class="fa-regular fa-eye"></i>
         </div>

@@ -9,7 +9,7 @@ import { CreateTemplateService } from '../create-template.service';
 export class CreateTemplateViewComponent implements OnInit {
 
   constructor(
-    private createTemplateService: CreateTemplateService,
+    public createTemplateService: CreateTemplateService,
     private ele: ElementRef
   ) { }
 

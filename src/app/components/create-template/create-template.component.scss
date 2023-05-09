@@ -4,9 +4,9 @@
     display: flex;
 
     .template-list {
-        width: 240px;
+        width: 238px;
         height: calc(100vh - 56px);
-        border-right: 1px solid #e5e5e5;
+        border-right: 2px solid #e5e5e5;
     }
 
     .template-view {
@@ -15,9 +15,9 @@
     }
 
     .template-info {
-        width: 240px;
+        width: 238px;
         height: calc(100vh - 56px);
-        border-left: 1px solid #e5e5e5;
+        border-left: 2px solid #e5e5e5;
 
     }
 }
