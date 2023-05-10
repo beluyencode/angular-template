@@ -12,7 +12,8 @@
             <span>
                 {{item.name}}
             </span>
-            <i class="fa-regular fa-eye"></i>
+            <i class="fa-regular" [ngClass]="{'fa-eye': !item.hidden, 'fa-eye-slash' : item.hidden}"
+                (click)="hidden(item)"></i>
         </div>
     </div>
 </div>

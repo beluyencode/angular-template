@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { Template } from '../create-template';
 import { CreateTemplateService } from '../create-template.service';
 
 @Component({
@@ -7,13 +8,18 @@ import { CreateTemplateService } from '../create-template.service';
   styleUrls: ['./create-template-view.component.scss']
 })
 export class CreateTemplateViewComponent implements OnInit {
-
+  listTemplate: Template[];
   constructor(
     public createTemplateService: CreateTemplateService,
     private ele: ElementRef
   ) { }
 
   ngOnInit(): void {
+    this.createTemplateService.listen_change_list_element().subscribe((res: Template[]) => {
+      if (res) {
+        this.listTemplate = res;
+      }
+    })
     this.createTemplateService.listen_full_screen().subscribe((res: boolean) => {
       if (res) {
         if (this.ele.nativeElement.requestFullscreen) {

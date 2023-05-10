@@ -1,3 +1,4 @@
 <div class='view'>
     <img [src]="this.createTemplateService.background.url" alt="">
+    <app-create-template-view-ele *ngFor="let data of listTemplate" [data]="data"></app-create-template-view-ele>
 </div>

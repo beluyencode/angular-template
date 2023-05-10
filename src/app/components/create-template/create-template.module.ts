@@ -5,6 +5,8 @@ import { CreateTemplateInfoComponent } from './create-template-info/create-templ
 import { CreateTemplateListComponent } from './create-template-list/create-template-list.component';
 import { CreateTemplateService } from './create-template.service';
 import { CreateTemplateViewComponent } from './create-template-view/create-template-view.component';
+import { FormsModule } from '@angular/forms';
+import { CreateTemplateViewEleComponent } from './create-template-view/create-template-view-ele/create-template-view-ele.component';
 
 
 @NgModule({
@@ -12,16 +14,16 @@ import { CreateTemplateViewComponent } from './create-template-view/create-templ
     CreateTemplateComponent,
     CreateTemplateInfoComponent,
     CreateTemplateListComponent,
-    CreateTemplateViewComponent
+    CreateTemplateViewComponent,
+    CreateTemplateViewEleComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule
   ],
   exports: [
     CreateTemplateComponent
   ],
-  providers: [
-    CreateTemplateService
-  ]
+  providers: []
 })
 export class CreateTemplateModule { }

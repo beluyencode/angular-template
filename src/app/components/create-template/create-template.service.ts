@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { BackgroundTemplate, Template, TypeTemplate } from './create-template';
+import { BackgroundTemplate, Template, TypeAction, TypeTemplate } from './create-template';
 
 @Injectable()
 export class CreateTemplateService {
   //data
-  background: BackgroundTemplate = {
-    name: 'background',
-    url: './../../../../assets/create-template/background.png'
-  }
+  background: BackgroundTemplate = new BackgroundTemplate();
   listElement: Template[] = []
+  ramdon = Math.random();
 
   //event
   load_list_element;
@@ -17,23 +15,16 @@ export class CreateTemplateService {
   active_template;
 
   constructor() {
+    console.log(this.ramdon);
+
     this.fullScreen = new BehaviorSubject<any>(false);
     this.active_template = new BehaviorSubject<any>(null);
     this.listElement = [...Array(5)].map((ele: any, index: number) => {
-      return {
-        x: 0,
-        y: 0,
-        content: '123',
-        name: 'element ' + index,
-        width: 0,
-        height: 0,
-        color: '',
-        align: '',
-        hidden: false,
-        type: TypeTemplate.TEXT,
-        id: this.ObjectId()
-      }
+      return new Template('element' + index);
     });
+    this.listElement = [
+      new Template('element')
+    ]
     this.load_list_element = new BehaviorSubject<any>(this.listElement);
   }
 
@@ -53,5 +44,33 @@ export class CreateTemplateService {
     return this.load_list_element.asObservable();
   }
 
-
+  changeTemplate(template: Template | BackgroundTemplate, action: TypeAction) {
+    if (template instanceof Template) {
+      switch (action) {
+        case TypeAction.ADD:
+          this.listElement = [
+            ...this.listElement,
+            template
+          ];
+          this.load_list_element.next(this.listElement);
+          break;
+        case TypeAction.CHANGE:
+          this.listElement = this.listElement.map((ele: Template) => {
+            if (ele.id === template.id) {
+              return template
+            }
+            return ele;
+          });
+          break;
+        case TypeAction.DELETE:
+          this.listElement = this.listElement.filter((ele: Template) => ele.id !== template.id);
+          this.load_list_element.next(this.listElement);
+          break;
+        default:
+          break;
+      }
+    } else {
+      this.background = template
+    }
+  }
 }

@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
+import { CreateTemplateService } from './create-template.service';
 
 @Component({
   selector: 'app-create-template',
   templateUrl: './create-template.component.html',
-  styleUrls: ['./create-template.component.scss']
+  styleUrls: ['./create-template.component.scss'],
+  providers: [
+    CreateTemplateService
+  ]
 })
 export class CreateTemplateComponent {
 

@@ -2,49 +2,67 @@
     <div class='info-title'>
         {{activeTemplate.name}}
     </div>
-    <div class='item'>
+    <div class='item' *ngIf="!isTemplate">
         <div class='item-title'>
-            Nội dung
+            Link
         </div>
         <div class='item-data'>
-            <textarea name="" id="" cols="30" rows="3"></textarea>
+            <input type="text" [(ngModel)]='activeTemplate.url'>
         </div>
     </div>
-    <div class='item'>
-        <div class='item-title'>
-            Độ rộng
+    <ng-container *ngIf="isTemplate">
+        <div class='item'>
+            <div class='item-title'>
+                Nội dung
+            </div>
+            <div class='item-data'>
+                <textarea name="" id="" cols="30" rows="3" [(ngModel)]='activeTemplate.content'></textarea>
+            </div>
         </div>
-        <div class='item-data'>
-            <input type="number" min='0'>
-
+        <div class='item'>
+            <div class='item-title'>
+                Độ rộng
+            </div>
+            <div class='item-data'>
+                <input type="number" min='0' [(ngModel)]='activeTemplate.width'>
+            </div>
         </div>
-    </div>
-    <div class='item'>
-        <div class='item-title'>
-            Cỡ chữ
+        <div class='item'>
+            <div class='item-title'>
+                Cỡ chữ
+            </div>
+            <div class='item-data'>
+                <input type="number" min='0' [(ngModel)]='activeTemplate.fontSize'>
+            </div>
         </div>
-        <div class='item-data'>
-            <input type="number" min='0'>
+        <div class='item'>
+            <div class='item-title'>
+                Màu chữ
+            </div>
+            <div class='item-data'>
+                <input type="color" [(ngModel)]='activeTemplate.color'>
+                <span class='item-data-input-color-title'>{{activeTemplate.color}}</span>
+            </div>
         </div>
-    </div>
-    <div class='item'>
-        <div class='item-title'>
-            Màu sắc
+        <div class='item'>
+            <div class='item-title'>
+                Màu nền
+            </div>
+            <div class='item-data'>
+                <input type="color" [(ngModel)]='activeTemplate.background'>
+                <span class='item-data-input-color-title'>{{activeTemplate.background}}</span>
+            </div>
         </div>
-        <div class='item-data'>
-            <input type="color">
-            <span class='item-data-input-color-title'>#000000D9</span>
+        <div class='item'>
+            <div class='item-title'>
+                Căn lề
+            </div>
+            <div class='item-data'>
+                <input type="text" [(ngModel)]='activeTemplate.align'>
+            </div>
         </div>
-    </div>
-    <div class='item'>
-        <div class='item-title'>
-            Căn lề
-        </div>
-        <div class='item-data'>
-            <input type="text">
-        </div>
-    </div>
-    <div class='item action'>
-        <button>lưu</button>
-    </div>
+    </ng-container>
+    <!-- <div class='item action'>
+        <button (click)="saveAttr()">lưu</button>
+    </div> -->
 </div>

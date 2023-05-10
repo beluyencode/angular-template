@@ -39,4 +39,8 @@ export class CreateTemplateListComponent implements OnInit {
     }
   }
 
+  hidden(template: Template) {
+    template.hidden = !template.hidden;
+  }
+
 }
