@@ -10,7 +10,7 @@ import { CreateTemplateService } from '../../create-template.service';
 export class CreateTemplateViewEleComponent implements OnInit {
   @Input() data: Template;
   activeTemplate: Template | null;
-
+  isSelect = false;
   constructor(
     public createTemplateService: CreateTemplateService,
   ) { }
@@ -18,6 +18,11 @@ export class CreateTemplateViewEleComponent implements OnInit {
   ngOnInit(): void {
     this.createTemplateService.listen_active_template().subscribe((res: Template | null) => {
       this.activeTemplate = res;
+      if (this.data.id === this.activeTemplate?.id) {
+        this.isSelect = true;
+      } else {
+        this.isSelect = false;
+      }
     })
   }
 

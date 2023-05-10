@@ -1,4 +1,4 @@
-<div class='view-ele' [ngStyle]="{
+<div class='view-ele' appMoveSettingTemplateEle [data]="data" [isSelect]="isSelect" [ngStyle]="{
     color: data.color,
     'font-size': data.fontSize +'px',
     display: data.hidden ? 'none' : 'block',
@@ -7,5 +7,5 @@
     'text-align': data.align,
     'background-color': data.background
   }" (click)="active()">
-    {{data.content}}
+  {{data.content}}
 </div>
