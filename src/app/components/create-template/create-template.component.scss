@@ -12,6 +12,11 @@
     .template-view {
         width: calc(100vw - 480px);
         height: calc(100vh - 56px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #c6c6c6;
+        overflow: auto;
     }
 
     .template-info {

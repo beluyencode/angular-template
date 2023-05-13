@@ -1,4 +1,6 @@
-<div class='view'>
-    <img [src]="this.createTemplateService.background.url" alt="">
+<div class='view' (wheel)="wheel($event)" #eleView [ngStyle]="{
+    'aspect-ratio': background.scale
+  }">
+    <img [src]="this.createTemplateService.background.url" alt="" draggable='false'>
     <app-create-template-view-ele *ngFor="let data of listTemplate" [data]="data"></app-create-template-view-ele>
 </div>

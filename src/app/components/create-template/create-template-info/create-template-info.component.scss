@@ -53,7 +53,7 @@
                 width: 100%;
                 border: 1px solid #b4b4b4;
                 padding: 3px 6px;
-
+                border-radius: 4px;
             }
 
             textarea:focus-visible {
@@ -65,6 +65,7 @@
                 width: 100%;
                 border: 1px solid #b4b4b4;
                 padding: 3px 6px;
+                border-radius: 4px;
             }
 
             input:focus-visible {
@@ -79,6 +80,10 @@
 
             .item-data-input-color-title {
                 font-weight: 500;
+            }
+
+            .custom-ngselect {
+                width: 100%;
             }
 
         }

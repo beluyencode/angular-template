@@ -1,11 +1,12 @@
-<div class='view-ele' appMoveSettingTemplateEle [data]="data" [isSelect]="isSelect" [ngStyle]="{
+<div class='view-ele' #ele appMoveSettingTemplateEle [data]="data" [isSelect]="isSelect" [ngStyle]="{
     color: data.color,
     'font-size': data.fontSize +'px',
     display: data.hidden ? 'none' : 'block',
-    top: data.y + 'px',
-    left: data.x + 'px',
+    top: data.y + '%',
+    left: data.x + '%',
     'text-align': data.align,
-    'background-color': data.background
+    'background-color': data.background,
+    width: data.width ? data.width +'px' : 'auto'
   }" (click)="active()">
   {{data.content}}
 </div>

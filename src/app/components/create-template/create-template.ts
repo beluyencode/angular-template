@@ -16,15 +16,15 @@ export interface Template {
 }
 
 export class Template implements Template {
-    constructor(name: string) {
-        this.x = 50;
-        this.y = 50;
-        this.content = '123';
+    constructor(name: string, pos: number) {
+        this.x = pos;
+        this.y = pos;
+        this.content = name;
         this.name = name;
         this.width = 100;
         this.height = 0;
         this.color = '#ffffff';
-        this.align = TypeAlign.left;
+        this.align = TypeAlign.LEFT;
         this.hidden = false;
         this.type = TypeTemplate.TEXT;
         this.id = ObjectId();
@@ -39,13 +39,15 @@ export function ObjectId(m = Math, d = Date, h = 16, s = (sELe: any) => m.floor(
 
 export interface BackgroundTemplate {
     url: string,
-    name: string
+    name: string,
+    scale: string
 }
 
-export class BackgroundTemplate {
+export class BackgroundTemplate implements BackgroundTemplate {
     constructor() {
         this.name = 'background';
-        this.url = './../../../../assets/create-template/background.jpg'
+        this.url = './../../../../assets/create-template/background.jpg';
+        this.scale = TypeScreen.PC
     }
 }
 
@@ -64,5 +66,11 @@ export enum TypeAction {
 export enum TypeAlign {
     CENTER = 'center',
     RIGHT = 'right',
-    left = 'left'
+    LEFT = 'left'
+}
+
+
+export enum TypeScreen {
+    PC = '16/9',
+    MOBILE = '9/18'
 }

@@ -7,7 +7,7 @@ export class CreateTemplateService {
   //data
   background: BackgroundTemplate = new BackgroundTemplate();
   listElement: Template[] = []
-  ramdon = Math.random();
+  scaleDefault = 854;
 
   //event
   load_list_element;
@@ -15,15 +15,14 @@ export class CreateTemplateService {
   active_template;
 
   constructor() {
-    console.log(this.ramdon);
-
     this.fullScreen = new BehaviorSubject<any>(false);
     this.active_template = new BehaviorSubject<any>(null);
-    this.listElement = [...Array(5)].map((ele: any, index: number) => {
-      return new Template('element' + index);
-    });
+    // this.listElement = [...Array(5)].map((ele: any, index: number) => {
+    //   return new Template('element' + index);
+    // });
     this.listElement = [
-      new Template('element')
+      new Template('element', 10),
+      new Template('element 2', 30),
     ]
     this.load_list_element = new BehaviorSubject<any>(this.listElement);
   }

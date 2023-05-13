@@ -8,7 +8,7 @@ import { CreateTemplateViewComponent } from './create-template-view/create-templ
 import { FormsModule } from '@angular/forms';
 import { CreateTemplateViewEleComponent } from './create-template-view/create-template-view-ele/create-template-view-ele.component';
 import { MoveSettingTemplateEleDirective } from './create-template-view/create-template-view-ele/move-setting-template-ele.directive';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { MoveSettingTemplateEleDirective } from './create-template-view/create-t
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ],
   exports: [
     CreateTemplateComponent

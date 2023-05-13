@@ -2,14 +2,26 @@
     <div class='info-title'>
         {{activeTemplate.name}}
     </div>
-    <div class='item' *ngIf="!isTemplate">
-        <div class='item-title'>
-            Link
+    <ng-container *ngIf="!isTemplate">
+        <div class='item'>
+            <div class='item-title'>
+                Link
+            </div>
+            <div class='item-data'>
+                <input type="text" [(ngModel)]='activeTemplate.url'>
+            </div>
         </div>
-        <div class='item-data'>
-            <input type="text" [(ngModel)]='activeTemplate.url'>
+        <div class='item'>
+            <div class='item-title'>
+                tỉ lệ màn hình
+            </div>
+            <div class='item-data'>
+                <ng-select [(ngModel)]="activeTemplate.scale" [clearable]='false' class='custom-ngselect'>
+                    <ng-option *ngFor="let car of typeScreen" [value]="car">{{car}}</ng-option>
+                </ng-select>
+            </div>
         </div>
-    </div>
+    </ng-container>
     <ng-container *ngIf="isTemplate">
         <div class='item'>
             <div class='item-title'>
@@ -58,7 +70,9 @@
                 Căn lề
             </div>
             <div class='item-data'>
-                <input type="text" [(ngModel)]='activeTemplate.align'>
+                <ng-select [(ngModel)]="activeTemplate.align" [clearable]='false' class='custom-ngselect'>
+                    <ng-option *ngFor="let car of typeAlign" [value]="car">{{car}}</ng-option>
+                </ng-select>
             </div>
         </div>
     </ng-container>
