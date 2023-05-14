@@ -30,3 +30,13 @@
 
     }
 }
+
+.view-no-edit {
+    width: 100% !important;
+
+    .view-no-edit-center {
+        position: relative !important;
+        transform: none !important;
+        top: 0% !important;
+    }
+}

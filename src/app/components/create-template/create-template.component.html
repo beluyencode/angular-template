@@ -1,13 +1,16 @@
 <div class='create-template'>
-    <div class='template-list'>
+    <div class='template-list' *ngIf="edit">
         <app-create-template-list></app-create-template-list>
     </div>
-    <div class='template-view' #view>
-        <div class='template-view-center '>
-            <app-create-template-view></app-create-template-view>
+    <div class='template-view' #view [ngClass]="{'view-no-edit': !edit}">
+        <div class='template-view-center' [ngClass]="{'view-no-edit-center': !edit}">
+            <app-create-template-view [edit]="edit"></app-create-template-view>
         </div>
     </div>
-    <div class='template-info'>
+    <div class='template-info' *ngIf="edit">
         <app-create-template-info></app-create-template-info>
     </div>
 </div>
+<!-- <div class='view-no-edit' *ngIf="!edit">
+    <app-create-template-view [edit]="edit"></app-create-template-view>
+</div> -->

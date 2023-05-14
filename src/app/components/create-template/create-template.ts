@@ -12,7 +12,9 @@ export interface Template {
     url?: string;
     id: string;
     fontSize: number,
-    background: string
+    background: string,
+    rotate: number;
+    padding: number
 }
 
 export class Template implements Template {
@@ -29,7 +31,9 @@ export class Template implements Template {
         this.type = TypeTemplate.TEXT;
         this.id = ObjectId();
         this.fontSize = 14;
-        this.background = 'transparent'
+        this.background = 'transparent';
+        this.rotate = 0;
+        this.padding = 0
     }
 }
 

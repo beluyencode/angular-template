@@ -8,6 +8,16 @@
         width: 100%;
         white-space: pre-line;
 
+        .view-ele-ab-no-select {
+            position: absolute;
+            width: calc(100% + 10px);
+            height: calc(100% + 10px);
+            border: 1px #6d6d6d dashed;
+            top: -5px;
+            left: -5px;
+            padding: 5px;
+        }
+
         .view-ele-ab {
             position: absolute;
             width: calc(100% + 10px);
@@ -26,6 +36,15 @@
                 border-width: 10px;
                 z-index: 1000;
             }
+
+            .rotate {
+                position: absolute;
+                color: #0d99ff;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                bottom: 100%;
+            }
+
 
             .dotnet-top-left {
                 top: -4px;
@@ -47,7 +66,7 @@
 
             .dotnet-bottom-left {
                 top: calc(100% - 10px);
-                left: calc(100% - 10px);
+                left: calc(100% - 9px);
                 cursor: nwse-resize;
             }
 

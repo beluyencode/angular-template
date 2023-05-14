@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { TypeScreen } from './create-template';
 import { CreateTemplateService } from './create-template.service';
 
@@ -12,7 +12,7 @@ import { CreateTemplateService } from './create-template.service';
 })
 export class CreateTemplateComponent implements OnInit {
   @ViewChild('view') ele: ElementRef;
-
+  @Input() edit = true;
   constructor(
     public createTemplateService: CreateTemplateService,
   ) { }

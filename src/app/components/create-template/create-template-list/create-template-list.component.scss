@@ -24,7 +24,7 @@
     .list-item-active:hover {
         opacity: 0.8;
         background-color: #0d99ff !important;
-        color: white;
+        color: white !important;
     }
 
     .list-item-fisrt {
@@ -34,7 +34,7 @@
     }
 
     .list-item-fisrt:hover {
-        background-color: white !important;
+        background-color: white;
     }
 
     .list-item:hover {
@@ -44,6 +44,11 @@
     .line {
         width: 100%;
         border-bottom: 1px solid #e5e5e5;
+    }
+
+    .list-view {
+        overflow-y: auto;
+        height: calc(100% - 40px);
     }
 
 }

@@ -14,10 +14,12 @@ export class CreateTemplateService {
   load_list_element;
   fullScreen;
   active_template;
+  mouse_over_view;
 
   constructor() {
     this.fullScreen = new BehaviorSubject<any>(false);
     this.active_template = new BehaviorSubject<any>(null);
+    this.mouse_over_view = new BehaviorSubject<any>(false);
     // this.listElement = [...Array(5)].map((ele: any, index: number) => {
     //   return new Template('element' + index);
     // });

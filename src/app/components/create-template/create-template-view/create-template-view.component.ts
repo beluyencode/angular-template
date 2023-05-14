@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { BackgroundTemplate, Template, TypeScreen } from '../create-template';
 import { CreateTemplateService } from '../create-template.service';
 
@@ -8,6 +8,7 @@ import { CreateTemplateService } from '../create-template.service';
   styleUrls: ['./create-template-view.component.scss']
 })
 export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
+  @Input() edit: boolean = true;
   @ViewChild('eleView') ele: ElementRef
   listTemplate: Template[];
   background: BackgroundTemplate;
@@ -26,7 +27,6 @@ export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
       this.createTemplateService.currentHeight = (this.ele.nativeElement as HTMLDivElement).clientHeight;
       console.log(this.scale);
       console.log(this.createTemplateService.currentWidth);
-
     });
   }
 

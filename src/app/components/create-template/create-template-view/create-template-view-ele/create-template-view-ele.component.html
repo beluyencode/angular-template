@@ -7,16 +7,19 @@
     'text-align': data.align,
     'background-color': data.background,
     width: data.width ? data.width * scale  +'px' : 'auto',
+    transform: 'rotate('+ data.rotate + 'deg'+')'
   }" (click)="active($event)">
   <div class='view-ele-rev' (mousedown)="moveEle($event)">
     {{data.content}}
+    <div class='view-ele-ab-no-select' *ngIf="!isSelect && edit"></div>
     <div class='view-ele-ab' *ngIf="isSelect">
       <!-- <div class="dotnet dotnet-top-left" (mousedown)="changeSize($event)"></div>
       <div class="dotnet dotnet-top-right" (mousedown)="changeSize($event)"></div>
       <div class="dotnet dotnet-bottom-right" (mousedown)="changeSize($event)"></div> -->
-      <div class="dotnet dotnet-bottom-left" (mousedown)="changeSize($event)"></div>
-
-      <div class="dotnet dotnet-bottom-left" (mousedown)="changeSize($event)"></div>
+      <div class="rotate" (mousedown)="rotate($event)" *ngIf="edit">
+        <i class="fa-solid fa-rotate-left"></i>
+      </div>
+      <div class="dotnet dotnet-bottom-left" *ngIf="edit" (mousedown)="changeSize($event)"></div>
     </div>
   </div>
 </div>

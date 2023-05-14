@@ -13,6 +13,11 @@
         align-items: center;
     }
 
+    .info-view {
+        overflow-y: auto;
+        height: calc(100% - 40px);
+    }
+
     .action {
         display: flex;
         justify-content: flex-end;
@@ -47,6 +52,11 @@
             margin-bottom: 8px;
             display: flex;
             align-items: center;
+
+            .width-100 {
+                width: 100px;
+                margin-right: 10px;
+            }
 
             textarea {
                 resize: vertical;

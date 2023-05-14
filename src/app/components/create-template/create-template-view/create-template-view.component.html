@@ -1,15 +1,14 @@
-<div>
+<!-- <div>
   {{this.scale}}
   {{this.createTemplateService.currentWidth}}
   {{this.createTemplateService.currentHeight}}
-
-</div>
+</div> -->
 <div class='view' (wheel)="wheel($event)" (click)="selectBackground()" #eleView [ngStyle]="{
     'aspect-ratio': background.scale
   }" (mouseover)="mouseOver($event)">
   <img [src]="this.createTemplateService.background.url" alt="" draggable='false'>
   <ng-container *ngIf="scale">
-    <app-create-template-view-ele [scale]="scale" *ngFor="let data of listTemplate"
+    <app-create-template-view-ele [edit]='edit' [scale]="scale" *ngFor="let data of listTemplate"
       [data]="data"></app-create-template-view-ele>
   </ng-container>
 </div>

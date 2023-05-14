@@ -1,12 +1,13 @@
 <div class='list'>
-    <div class='list-item list-item-fisrt' (click)='changeActiveTemplate(null)'>
+    <div class='list-item list-item-fisrt' [ngClass]="{'list-item-active' : !activeTemplate?.id}"
+        (click)='changeActiveTemplate(null)'>
         <span>
             Background
         </span>
         <span (click)="fullScreen($event)"><i class="fa-solid fa-expand"></i></span>
     </div>
     <div class='line'></div>
-    <div>
+    <div class='list-view'>
         <div class='list-item' (click)='changeActiveTemplate(item)'
             [ngClass]="{'list-item-active' : activeTemplate?.id === item.id}" *ngFor="let item of listTemplate">
             <span>
