@@ -32,4 +32,8 @@ export class CreateTemplateInfoComponent implements OnInit {
     this.createTemplateService.changeTemplate(this.activeTemplate, TypeAction.CHANGE);
   }
 
+  log(e: any) {
+    console.log(e);
+
+  }
 }

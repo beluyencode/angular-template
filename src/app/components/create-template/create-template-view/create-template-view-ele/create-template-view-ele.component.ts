@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Template } from '../../create-template';
 import { CreateTemplateService } from '../../create-template.service';
 
@@ -10,17 +10,28 @@ import { CreateTemplateService } from '../../create-template.service';
 export class CreateTemplateViewEleComponent implements OnInit, AfterViewInit {
   @ViewChild('ele') ele: ElementRef;
   @Input() data: Template;
+  @Input() scale: number;
+  private _listeners: any = [];
   activeTemplate: Template | null;
   isSelect = false;
+  prevSize = {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0
+  }
+  prevPos = {
+    x: 0,
+    y: 0
+  }
 
   constructor(
     public createTemplateService: CreateTemplateService,
+    private renderer: Renderer2
   ) { }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.data.width = (this.ele.nativeElement as HTMLDivElement).clientWidth;
-    });
+
   }
 
   ngOnInit(): void {
@@ -34,7 +45,80 @@ export class CreateTemplateViewEleComponent implements OnInit, AfterViewInit {
     })
   }
 
-  active() {
+  active(event: MouseEvent) {
+    event.stopPropagation();
     this.createTemplateService.active_template.next(this.data);
   }
+
+  changeSize(event: MouseEvent) {
+    event.stopPropagation();
+    if (this.activeTemplate) {
+      this.prevSize = {
+        x: event.clientX,
+        y: event.clientY,
+        width: this.data.width,
+        height: this.data.height
+      }
+      this._listeners.push(
+        this.renderer.listen(document, 'mousemove', (e) => {
+          const dx = e.clientX - this.prevSize.x;
+          const dy = e.clientY - this.prevSize.y;
+          this.data.width = this.prevSize.width + Math.round((dx * this.scale) * 100) / 100;
+          this.data.height = this.prevSize.height + Math.round((dy * this.scale) * 100) / 100;
+        })
+      );
+      this.cancelListenMouseUp();
+    }
+  }
+
+  moveEle(event: MouseEvent) {
+    if (this.activeTemplate) {
+      this.prevPos = {
+        x: event.clientX,
+        y: event.clientY
+      };
+      this._listeners.push(
+        this.renderer.listen(document, 'mousemove', (e) => {
+          const deltaX = e.clientX - this.prevPos.x;
+          const deltaY = e.clientY - this.prevPos.y;
+          this.data.x += Math.round((deltaX * 100 / this.createTemplateService.currentWidth) * 10) / 10;
+          this.data.y += Math.round((deltaY * 100 / this.createTemplateService.currentHeight) * 10) / 10;
+          this.prevPos = {
+            x: e.clientX,
+            y: e.clientY
+          };
+        })
+      );
+      this.cancelListenMouseUp();
+    }
+  }
+
+  rotate(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log((event.target as HTMLDivElement).parentElement);
+    let boxBoundingRect = (event.target as HTMLDivElement).parentElement!.getBoundingClientRect();
+    let boxCenter = {
+      x: boxBoundingRect.left + boxBoundingRect.width / 2,
+      y: boxBoundingRect.top + boxBoundingRect.height / 2
+    };
+    this._listeners.push(
+      this.renderer.listen(document, 'mousemove', (e) => {
+        let angle = Math.atan2(e.pageX - boxCenter.x, - (e.pageY - boxCenter.y)) * (180 / Math.PI);
+        const rotate = (event.target as HTMLDivElement).parentElement!.style.transform.split('rotate')[0] + ` rotate(${angle}deg)`;
+        (event.target as HTMLDivElement).parentElement!.style.transform = rotate;
+      })
+    )
+    this.cancelListenMouseUp();
+  }
+
+  cancelListenMouseUp() {
+    this._listeners.push(
+      this.renderer.listen(document, 'mouseup', (e) => {
+        this._listeners.forEach((fn: Function) => fn());
+        this._listeners = [];
+      })
+    );
+  }
+
 }

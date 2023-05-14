@@ -12,11 +12,15 @@
     .template-view {
         width: calc(100vw - 480px);
         height: calc(100vh - 56px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
         background-color: #c6c6c6;
-        overflow: auto;
+        position: relative;
+
+        .template-view-center {
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            width: 100%;
+        }
     }
 
     .template-info {

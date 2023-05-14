@@ -19,6 +19,7 @@ export class MoveSettingTemplateEleDirective implements OnInit {
     this.createTemplateService.listen_active_template().subscribe((res: Template) => {
       if (res?.id === this.data.id) {
         this.isSelect = true;
+
       } else {
         this.isSelect = false;
       }

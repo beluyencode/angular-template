@@ -72,5 +72,5 @@ export enum TypeAlign {
 
 export enum TypeScreen {
     PC = '16/9',
-    MOBILE = '9/18'
+    // MOBILE = '9/18'
 }

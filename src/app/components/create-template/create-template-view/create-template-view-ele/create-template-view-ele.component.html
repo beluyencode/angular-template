@@ -1,12 +1,22 @@
-<div class='view-ele' #ele appMoveSettingTemplateEle [data]="data" [isSelect]="isSelect" [ngStyle]="{
+<div class='view-ele' #ele appMoveSettingTemplateEle *ngIf="scale" [data]="data" [isSelect]="isSelect" [ngStyle]="{
     color: data.color,
-    'font-size': data.fontSize +'px',
+    'font-size': data.fontSize * scale +'px',
     display: data.hidden ? 'none' : 'block',
-    top: data.y + '%',
-    left: data.x + '%',
+    top: data.y  + '%',
+    left: data.x  + '%',
     'text-align': data.align,
     'background-color': data.background,
-    width: data.width ? data.width +'px' : 'auto'
-  }" (click)="active()">
-  {{data.content}}
+    width: data.width ? data.width * scale  +'px' : 'auto',
+  }" (click)="active($event)">
+  <div class='view-ele-rev' (mousedown)="moveEle($event)">
+    {{data.content}}
+    <div class='view-ele-ab' *ngIf="isSelect">
+      <!-- <div class="dotnet dotnet-top-left" (mousedown)="changeSize($event)"></div>
+      <div class="dotnet dotnet-top-right" (mousedown)="changeSize($event)"></div>
+      <div class="dotnet dotnet-bottom-right" (mousedown)="changeSize($event)"></div> -->
+      <div class="dotnet dotnet-bottom-left" (mousedown)="changeSize($event)"></div>
+
+      <div class="dotnet dotnet-bottom-left" (mousedown)="changeSize($event)"></div>
+    </div>
+  </div>
 </div>

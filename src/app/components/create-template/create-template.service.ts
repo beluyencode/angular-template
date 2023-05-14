@@ -8,7 +8,8 @@ export class CreateTemplateService {
   background: BackgroundTemplate = new BackgroundTemplate();
   listElement: Template[] = []
   scaleDefault = 854;
-
+  currentWidth = 0;
+  currentHeight = 0;
   //event
   load_list_element;
   fullScreen;
@@ -22,7 +23,7 @@ export class CreateTemplateService {
     // });
     this.listElement = [
       new Template('element', 10),
-      new Template('element 2', 30),
+      new Template('element 2', 60),
     ]
     this.load_list_element = new BehaviorSubject<any>(this.listElement);
   }

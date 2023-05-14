@@ -28,7 +28,8 @@
                 Nội dung
             </div>
             <div class='item-data'>
-                <textarea name="" id="" cols="30" rows="3" [(ngModel)]='activeTemplate.content'></textarea>
+                <textarea name="" id="" cols="30" rows="3" [(ngModel)]='activeTemplate.content'
+                    (ngModelChange)="log($event)"></textarea>
             </div>
         </div>
         <div class='item'>
