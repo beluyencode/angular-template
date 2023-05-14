@@ -66,6 +66,7 @@ export class CreateTemplateService {
         case TypeAction.DELETE:
           this.listElement = this.listElement.filter((ele: Template) => ele.id !== template.id);
           this.load_list_element.next(this.listElement);
+          this.active_template.next(null);
           break;
         default:
           break;
