@@ -2,6 +2,7 @@
     width: 100vw;
     height: calc(100vh - 56px);
     display: flex;
+    overflow: hidden;
 
     .template-list {
         width: 238px;
@@ -18,7 +19,6 @@
         .template-view-center {
             position: absolute;
             top: 50%;
-            transform: translate(0, -50%);
             width: 100%;
         }
     }

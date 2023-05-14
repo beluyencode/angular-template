@@ -15,11 +15,13 @@ export class CreateTemplateService {
   fullScreen;
   active_template;
   mouse_over_view;
+  save_to_img;
 
   constructor() {
     this.fullScreen = new BehaviorSubject<any>(false);
     this.active_template = new BehaviorSubject<any>(null);
     this.mouse_over_view = new BehaviorSubject<any>(false);
+    this.save_to_img = new BehaviorSubject<any>(false);
     // this.listElement = [...Array(5)].map((ele: any, index: number) => {
     //   return new Template('element' + index);
     // });
@@ -46,16 +48,13 @@ export class CreateTemplateService {
     return this.load_list_element.asObservable();
   }
 
-  changeTemplate(template: Template | BackgroundTemplate, action: TypeAction) {
+  listen_save_to_img() {
+    return this.save_to_img.asObservable();
+  }
+
+  changeTemplate(action: TypeAction, template: Template | BackgroundTemplate,) {
     if (template instanceof Template) {
       switch (action) {
-        case TypeAction.ADD:
-          this.listElement = [
-            ...this.listElement,
-            template
-          ];
-          this.load_list_element.next(this.listElement);
-          break;
         case TypeAction.CHANGE:
           this.listElement = this.listElement.map((ele: Template) => {
             if (ele.id === template.id) {
@@ -72,7 +71,17 @@ export class CreateTemplateService {
           break;
       }
     } else {
-      this.background = template
+      if (template) {
+        this.background = template
+      }
     }
+  }
+
+  addTemplate() {
+    this.listElement = [
+      ...this.listElement,
+      new Template('element' + (this.listElement.length + 1), 70),
+    ];
+    this.load_list_element.next(this.listElement);
   }
 }

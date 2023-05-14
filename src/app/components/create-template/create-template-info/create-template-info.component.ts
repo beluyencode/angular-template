@@ -29,7 +29,7 @@ export class CreateTemplateInfoComponent implements OnInit {
   }
 
   saveAttr() {
-    this.createTemplateService.changeTemplate(this.activeTemplate, TypeAction.CHANGE);
+    this.createTemplateService.changeTemplate(TypeAction.CHANGE, this.activeTemplate);
   }
 
   log(e: any) {

@@ -7,9 +7,12 @@
     'text-align': data.align,
     'background-color': data.background,
     width: data.width ? data.width * scale  +'px' : 'auto',
-    transform: 'rotate('+ data.rotate + 'deg'+')'
+    transform: 'rotate('+ data.rotate + 'deg'+')',
+    'border-radius': data.borderRadius + 'px'
   }" (click)="active($event)">
-  <div class='view-ele-rev' (mousedown)="moveEle($event)">
+  <div class='view-ele-rev' [ngStyle]="{
+    padding: data.padding + 'px'
+  }" (mousedown)="moveEle($event)">
     {{data.content}}
     <div class='view-ele-ab-no-select' *ngIf="!isSelect && edit"></div>
     <div class='view-ele-ab' *ngIf="isSelect">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Template } from '../create-template';
+import { Template, TypeAction } from '../create-template';
 import { CreateTemplateService } from '../create-template.service';
 
 @Component({
@@ -41,6 +41,25 @@ export class CreateTemplateListComponent implements OnInit {
 
   hidden(template: Template) {
     template.hidden = !template.hidden;
+  }
+
+  save() {
+    console.log({
+      background: this.createTemplateService.background,
+      listElement: this.createTemplateService.listElement
+    });
+  }
+
+  saveToImg() {
+    this.createTemplateService.save_to_img.next(true);
+  }
+
+  deleteELe(ele: Template) {
+    this.createTemplateService.changeTemplate(TypeAction.DELETE, ele);
+  }
+
+  addEle() {
+    this.createTemplateService.addTemplate();
   }
 
 }

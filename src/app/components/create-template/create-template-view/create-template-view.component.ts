@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { BackgroundTemplate, Template, TypeScreen } from '../create-template';
 import { CreateTemplateService } from '../create-template.service';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-create-template-view',
@@ -22,20 +23,13 @@ export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.scale = (this.ele.nativeElement as HTMLDivElement).clientWidth / this.createTemplateService.scaleDefault;
-      this.createTemplateService.currentWidth = (this.ele.nativeElement as HTMLDivElement).clientWidth;
-      this.createTemplateService.currentHeight = (this.ele.nativeElement as HTMLDivElement).clientHeight;
-      console.log(this.scale);
-      console.log(this.createTemplateService.currentWidth);
+      this.changeScale();
     });
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    this.scale = (this.ele.nativeElement as HTMLDivElement).clientWidth / this.createTemplateService.scaleDefault;
-    this.createTemplateService.currentWidth = (this.ele.nativeElement as HTMLDivElement).clientWidth;
-    this.createTemplateService.currentHeight = (this.ele.nativeElement as HTMLDivElement).clientHeight;
-    console.log(this.scale);
+    this.changeScale();
   }
 
   ngOnInit(): void {
@@ -44,6 +38,40 @@ export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
         this.listTemplate = res;
       }
     });
+    this.createTemplateService.listen_save_to_img().subscribe((res: boolean) => {
+      this.edit = !res;
+      if (res) {
+        if (this.createTemplateService.background.scale === this.typeScreen.PC) {
+          this.renderer2.setStyle(this.ele.nativeElement, 'width', 2560 + 'px');
+        } else {
+          this.renderer2.setStyle(this.ele.nativeElement, 'width', 1059 + 'px');
+          this.renderer2.setStyle(this.ele.nativeElement, 'height', 2118 + 'px');
+        }
+        this.changeScale();
+        setTimeout(() => {
+          // const sizeImg = this.createTemplateService.background.scale === this.typeScreen.PC ? {
+          //   width: 2560,
+          //   height: 1440
+          // } : {
+          //   width: 1059,
+          //   height: 2118
+          // }
+          html2canvas(this.ele.nativeElement).then((canvas) => {
+            const a = this.renderer2.createElement('a');
+            a.href = canvas.toDataURL('image/png');
+            a.download = 'test.png';
+            a.click();
+            this.renderer2.setStyle(this.ele.nativeElement, 'width', '100%');
+            if (this.createTemplateService.background.scale === this.typeScreen.MOBILE) {
+              this.renderer2.setStyle(this.ele.nativeElement, 'height', '100%');
+
+            }
+            this.changeScale();
+            this.createTemplateService.save_to_img.next(false);
+          })
+        });
+      }
+    })
     this.background = this.createTemplateService.background;
     this.createTemplateService.listen_full_screen().subscribe((res: boolean) => {
       if (res && this.createTemplateService.background.scale === TypeScreen.PC) {
@@ -56,6 +84,17 @@ export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
         }
       }
     });
+  }
+
+  changeScale() {
+    if (this.createTemplateService.background.scale === this.typeScreen.MOBILE) {
+      this.createTemplateService.scaleDefault = 353;
+    } else {
+      this.createTemplateService.scaleDefault = 854;
+    }
+    this.scale = (this.ele.nativeElement as HTMLDivElement).clientWidth / this.createTemplateService.scaleDefault;
+    this.createTemplateService.currentWidth = (this.ele.nativeElement as HTMLDivElement).clientWidth;
+    this.createTemplateService.currentHeight = (this.ele.nativeElement as HTMLDivElement).clientHeight;
   }
 
   mouseOver(e: MouseEvent) {

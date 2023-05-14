@@ -14,7 +14,8 @@ export interface Template {
     fontSize: number,
     background: string,
     rotate: number;
-    padding: number
+    padding: number;
+    borderRadius: number;
 }
 
 export class Template implements Template {
@@ -33,7 +34,8 @@ export class Template implements Template {
         this.fontSize = 14;
         this.background = 'transparent';
         this.rotate = 0;
-        this.padding = 0
+        this.padding = 0;
+        this.borderRadius = 0
     }
 }
 
@@ -63,7 +65,6 @@ export enum TypeTemplate {
 export enum TypeAction {
     CHANGE = 'change',
     DELETE = 'delete',
-    ADD = 'add'
 }
 
 
@@ -76,5 +77,5 @@ export enum TypeAlign {
 
 export enum TypeScreen {
     PC = '16/9',
-    // MOBILE = '9/18'
+    MOBILE = '9/18'
 }
