@@ -42,6 +42,7 @@ export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
     this.createTemplateService.listen_save_to_img().subscribe((res: boolean) => {
       this.edit = !res;
       if (res) {
+        this.createTemplateService.active_template.next(null);
         this.renderer2.setStyle(this.ele.nativeElement, 'width', 99 + '%');
         this.loading = true;
         if (this.createTemplateService.background.scale === this.typeScreen.PC) {
