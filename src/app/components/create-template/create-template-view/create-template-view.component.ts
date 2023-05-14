@@ -15,6 +15,7 @@ export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
   background: BackgroundTemplate;
   typeScreen = TypeScreen;
   scale: number;
+  loading = false;
 
   constructor(
     public createTemplateService: CreateTemplateService,
@@ -41,6 +42,8 @@ export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
     this.createTemplateService.listen_save_to_img().subscribe((res: boolean) => {
       this.edit = !res;
       if (res) {
+        this.renderer2.setStyle(this.ele.nativeElement, 'width', 99 + '%');
+        this.loading = true;
         if (this.createTemplateService.background.scale === this.typeScreen.PC) {
           this.renderer2.setStyle(this.ele.nativeElement, 'width', 2560 + 'px');
         } else {
@@ -49,13 +52,6 @@ export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
         }
         this.changeScale();
         setTimeout(() => {
-          // const sizeImg = this.createTemplateService.background.scale === this.typeScreen.PC ? {
-          //   width: 2560,
-          //   height: 1440
-          // } : {
-          //   width: 1059,
-          //   height: 2118
-          // }
           html2canvas(this.ele.nativeElement).then((canvas) => {
             const a = this.renderer2.createElement('a');
             a.href = canvas.toDataURL('image/png');
@@ -67,6 +63,7 @@ export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
 
             }
             this.changeScale();
+            this.loading = false;
             this.createTemplateService.save_to_img.next(false);
           })
         });
