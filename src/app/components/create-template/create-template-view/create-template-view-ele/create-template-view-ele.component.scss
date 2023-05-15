@@ -7,10 +7,17 @@
         position: relative;
         width: 100%;
         white-space: pre-line;
+        height: 100%;
 
         img {
             width: 100%;
             height: 100%;
+        }
+
+        .view-img-empty {
+            width: 100%;
+            height: 100%;
+            background-color: #6d6d6d;
         }
 
         .view-ele-ab-no-select {

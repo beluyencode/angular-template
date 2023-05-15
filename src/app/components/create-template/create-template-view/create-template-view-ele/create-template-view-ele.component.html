@@ -39,7 +39,10 @@
     'border-radius': data.borderRadius + 'px'
   }" (click)="active($event)">
   <div class='view-ele-rev' (mousedown)="moveEle($event)">
-    <img [src]="data.url" alt="">
+    <img [src]="data.url" alt="" *ngIf="data.url !== ''">
+    <div class='view-img-empty' *ngIf="data.url === ''">
+
+    </div>
     <div class='view-ele-ab-no-select' *ngIf="!isSelect && edit"></div>
     <div class='view-ele-ab' *ngIf="isSelect">
       <!-- <div class="dotnet dotnet-top-left" (mousedown)="changeSize($event)"></div>
