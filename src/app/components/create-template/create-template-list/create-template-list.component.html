@@ -14,6 +14,7 @@
                 {{item.name}}
             </span>
             <div class='list-item-action'>
+                <i class="fa-solid fa-copy" (click)="copyEle(item)"></i>
                 <i class="fa-regular" [ngClass]="{'fa-eye': !item.hidden, 'fa-eye-slash' : item.hidden}"
                     (click)="hidden(item)"></i>
                 <i class="fa-regular fa-trash-can" (click)="deleteELe(item)"></i>
@@ -21,7 +22,6 @@
         </div>
         <div class='line'></div>
         <div class='div-action'>
-
             <button (click)="addEle()">Thêm</button>
             <button (click)="saveToImg()">Lưu File ảnh</button>
             <button (click)="save()">Lưu</button>

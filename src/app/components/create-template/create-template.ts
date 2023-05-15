@@ -38,6 +38,12 @@ export class Template implements Template {
         this.borderRadius = 0
         this.url = ''
     }
+
+    clone() {
+        const cloned = Object.assign(Object.create(Object.getPrototypeOf(this)), this);
+        Object.setPrototypeOf(cloned, this.constructor.prototype);
+        return cloned;
+    }
 }
 
 export function ObjectId(m = Math, d = Date, h = 16, s = (sELe: any) => m.floor(sELe).toString(h)) {
@@ -66,6 +72,7 @@ export enum TypeTemplate {
 export enum TypeAction {
     CHANGE = 'change',
     DELETE = 'delete',
+    COPY = 'copy'
 }
 
 

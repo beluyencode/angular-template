@@ -1,5 +1,4 @@
-<div class='view-ele' #ele appMoveSettingTemplateEle *ngIf="scale && data.type === typeTemplate.TEXT" [data]="data"
-  [isSelect]="isSelect" [ngStyle]="{
+<div class='view-ele' #ele *ngIf="scale && data.type === typeTemplate.TEXT" [ngStyle]="{
     color: data.color,
     'font-size': data.fontSize * scale +'px',
     display: data.hidden ? 'none' : 'block',
@@ -28,8 +27,7 @@
   </div>
 </div>
 
-<div class='view-ele' #ele appMoveSettingTemplateEle *ngIf="scale && data.type === typeTemplate.IMAGE" [data]="data"
-  [isSelect]="isSelect" [ngStyle]="{
+<div class='view-ele' #ele *ngIf="scale && data.type === typeTemplate.IMAGE" [ngStyle]="{
     display: data.hidden ? 'none' : 'block',
     top: data.y  + '%',
     left: data.x  + '%',
@@ -39,9 +37,12 @@
     'border-radius': data.borderRadius + 'px'
   }" (click)="active($event)">
   <div class='view-ele-rev' (mousedown)="moveEle($event)">
-    <img [src]="data.url" alt="" *ngIf="data.url !== ''">
-    <div class='view-img-empty' *ngIf="data.url === ''">
-
+    <img [src]="data.url" [ngStyle]="{
+      'border-radius': data.borderRadius + 'px'
+    }" alt="" *ngIf="data.url !== ''">
+    <div class='view-img-empty' [ngStyle]="{
+      'border-radius': data.borderRadius + 'px'
+    }" *ngIf="data.url === ''">
     </div>
     <div class='view-ele-ab-no-select' *ngIf="!isSelect && edit"></div>
     <div class='view-ele-ab' *ngIf="isSelect">

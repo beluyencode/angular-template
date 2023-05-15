@@ -141,8 +141,6 @@ export class CreateTemplateViewEleComponent implements OnInit, AfterViewInit {
     this._listeners.push(
       this.renderer.listen(document, 'mouseup', (e) => {
         this._listeners.forEach((fn: Function) => fn());
-        console.log(this.data);
-
         this._listeners = [];
       })
     );

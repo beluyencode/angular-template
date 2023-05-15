@@ -39,6 +39,10 @@ export class CreateTemplateListComponent implements OnInit {
     }
   }
 
+  copyEle(template: Template) {
+    this.createTemplateService.changeTemplate(TypeAction.COPY, template)
+  }
+
   hidden(template: Template) {
     template.hidden = !template.hidden;
   }
@@ -55,6 +59,8 @@ export class CreateTemplateListComponent implements OnInit {
   }
 
   deleteELe(ele: Template) {
+    console.log(ele);
+
     this.createTemplateService.changeTemplate(TypeAction.DELETE, ele);
   }
 

@@ -59,8 +59,17 @@ export class CreateTemplateService {
   }
 
   changeTemplate(action: TypeAction, template: Template | BackgroundTemplate,) {
+    console.log(template instanceof Template);
+
     if (template instanceof Template) {
       switch (action) {
+        case TypeAction.COPY:
+          const clone = template.clone();
+          clone.id = this.ObjectId();
+          clone.name = 'element ' + (this.listElement.length + 1);
+          clone.content = 'element ' + (this.listElement.length + 1);
+          this.listElement.push(clone);
+          break;
         case TypeAction.CHANGE:
           this.listElement = this.listElement.map((ele: Template) => {
             if (ele.id === template.id) {
@@ -87,7 +96,7 @@ export class CreateTemplateService {
   addTemplate() {
     this.listElement = [
       ...this.listElement,
-      new Template('element' + (this.listElement.length + 1), 70),
+      new Template('element ' + (this.listElement.length + 1), 70),
     ];
     this.load_list_element.next(this.listElement);
   }
