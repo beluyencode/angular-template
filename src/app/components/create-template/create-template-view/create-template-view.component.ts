@@ -34,6 +34,13 @@ export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.createTemplateService.listen_change_scale_screen().subscribe((res: any) => {
+      if (res) {
+        setTimeout(() => {
+          this.changeScale();
+        });
+      }
+    });
     this.createTemplateService.listen_change_list_element().subscribe((res: Template[]) => {
       if (res) {
         this.listTemplate = res;

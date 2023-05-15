@@ -16,12 +16,14 @@ export class CreateTemplateService {
   active_template;
   mouse_over_view;
   save_to_img;
+  changeScaleScreen;
 
   constructor() {
     this.fullScreen = new BehaviorSubject<any>(false);
     this.active_template = new BehaviorSubject<any>(null);
     this.mouse_over_view = new BehaviorSubject<any>(false);
     this.save_to_img = new BehaviorSubject<any>(false);
+    this.changeScaleScreen = new BehaviorSubject<any>(null);
     // this.listElement = [...Array(5)].map((ele: any, index: number) => {
     //   return new Template('element' + index);
     // });
@@ -50,6 +52,10 @@ export class CreateTemplateService {
 
   listen_save_to_img() {
     return this.save_to_img.asObservable();
+  }
+
+  listen_change_scale_screen() {
+    return this.changeScaleScreen.asObservable();
   }
 
   changeTemplate(action: TypeAction, template: Template | BackgroundTemplate,) {

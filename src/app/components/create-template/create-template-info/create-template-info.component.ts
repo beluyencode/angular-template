@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BackgroundTemplate, Template, TypeAction, TypeAlign, TypeScreen } from '../create-template';
+import { BackgroundTemplate, Template, TypeAction, TypeAlign, TypeScreen, TypeTemplate } from '../create-template';
 import { CreateTemplateService } from '../create-template.service';
 
 @Component({
@@ -12,6 +12,7 @@ export class CreateTemplateInfoComponent implements OnInit {
   isTemplate = false;
   typeAlign: Array<string> = Object.values(TypeAlign);
   typeScreen = Object.values(TypeScreen);
+  typeTemplate = Object.values(TypeTemplate);
   constructor(
     public createTemplateService: CreateTemplateService,
   ) { }
@@ -32,8 +33,9 @@ export class CreateTemplateInfoComponent implements OnInit {
     this.createTemplateService.changeTemplate(TypeAction.CHANGE, this.activeTemplate);
   }
 
-  log(e: any) {
-    console.log(e);
+  changeScale(value: string) {
+    console.log(value);
 
+    this.createTemplateService.changeScaleScreen.next(value);
   }
 }

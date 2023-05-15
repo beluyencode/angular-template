@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Template } from '../../create-template';
+import { Template, TypeTemplate } from '../../create-template';
 import { CreateTemplateService } from '../../create-template.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class CreateTemplateViewEleComponent implements OnInit, AfterViewInit {
   private _listeners: any = [];
   activeTemplate: Template | null;
   isSelect = false;
+  typeTemplate = TypeTemplate;
   prevSize = {
     x: 0,
     y: 0,
@@ -86,15 +87,24 @@ export class CreateTemplateViewEleComponent implements OnInit, AfterViewInit {
           const deltaY = e.clientY - this.prevPos.y;
           const newX = this.data.x + +(deltaX * 100 / this.createTemplateService.currentWidth).toFixed(2);
           const newY = this.data.y + +(deltaY * 100 / this.createTemplateService.currentHeight).toFixed(2);
-          const filterAlign = this.createTemplateService.listElement.filter((ele: Template) => this.data.id !== ele.id)
+          const filterAlignLeft = this.createTemplateService.listElement.filter((ele: Template) => this.data.id !== ele.id)
             .filter((ele: Template) => +(ele.x).toFixed(2) - +newX.toFixed(2) > -.5 && +(ele.x).toFixed(2) - +newX.toFixed(2) < .5);
-          if (filterAlign.length) {
-            this.data.x = filterAlign[0].x;
-            this.data.y = +newY.toFixed(2);
+          const filterAlignTop = this.createTemplateService.listElement.filter((ele: Template) => this.data.id !== ele.id)
+            .filter((ele: Template) => +(ele.y).toFixed(2) - +newY.toFixed(2) > -.5 && +(ele.y).toFixed(2) - +newY.toFixed(2) < .5);
+          if (filterAlignLeft.length || filterAlignTop.length) {
+            if (filterAlignLeft.length) {
+              this.data.x = filterAlignLeft[0].x;
+            } else {
+              this.data.x = +newX.toFixed(2);
+            }
+            if (filterAlignTop.length) {
+              this.data.y = filterAlignTop[0].y;
+            } else {
+              this.data.y = +newY.toFixed(2);
+            }
           } else {
             this.data.x = newX;
             this.data.y = newY;
-
           }
           this.prevPos = {
             x: e.clientX,

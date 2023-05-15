@@ -25,7 +25,7 @@ export class Template implements Template {
         this.content = name;
         this.name = name;
         this.width = 100;
-        this.height = 0;
+        this.height = 100;
         this.color = '#ffffff';
         this.align = TypeAlign.LEFT;
         this.hidden = false;
@@ -36,6 +36,7 @@ export class Template implements Template {
         this.rotate = 0;
         this.padding = 0;
         this.borderRadius = 0
+        this.url = ''
     }
 }
 
@@ -73,7 +74,6 @@ export enum TypeAlign {
     RIGHT = 'right',
     LEFT = 'left'
 }
-
 
 export enum TypeScreen {
     PC = '16/9',
