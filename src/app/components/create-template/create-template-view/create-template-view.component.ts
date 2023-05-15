@@ -10,7 +10,8 @@ import html2canvas from 'html2canvas';
 })
 export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
   @Input() edit: boolean = true;
-  @ViewChild('eleView') ele: ElementRef
+  @ViewChild('eleView') ele: ElementRef;
+  @ViewChild('eleViewParent') eleParent: ElementRef;
   listTemplate: Template[];
   background: BackgroundTemplate;
   typeScreen = TypeScreen;
@@ -59,6 +60,9 @@ export class CreateTemplateViewComponent implements OnInit, AfterViewInit {
           this.renderer2.setStyle(this.ele.nativeElement, 'height', 2118 + 'px');
         }
         this.changeScale();
+        setTimeout(() => {
+          console.log((this.eleParent.nativeElement as HTMLDivElement).innerHTML);
+        });
         setTimeout(() => {
           html2canvas(this.ele.nativeElement).then((canvas) => {
             const a = this.renderer2.createElement('a');
