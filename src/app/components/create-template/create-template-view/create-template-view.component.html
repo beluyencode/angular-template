@@ -3,7 +3,11 @@
   {{this.createTemplateService.currentWidth}}
   {{this.createTemplateService.currentHeight}}
 </div> -->
-<div #eleViewParent>
+<div #eleViewParent [ngStyle]="{
+  'aspect-ratio': background.scale,
+  width: background.scale === typeScreen.PC ? '100%' :'auto',
+  height: background.scale === typeScreen.PC ? 'auto' :'100%'
+}">
   <div class='view' [style]="{
     'background-color': 'white',
     position: 'relative',
