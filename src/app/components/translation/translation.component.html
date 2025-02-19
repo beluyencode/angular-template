@@ -1,0 +1,6 @@
+<div id="test">
+    <input *ngIf="!viewDocx" type="file" accept=".pdf" (change)="onChangeOriginFile($event)">
+    <input *ngIf="!viewDocx" type="file" accept=".pdf" (change)="onChangeTranslationFile($event)">
+    <button *ngIf="!viewDocx" (click)="viewDocxFile()">Translate</button>
+    <div #viewer class="viewDocx"></div>
+</div>

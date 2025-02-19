@@ -8,6 +8,7 @@ import { HighlightNoteComponent } from './components/highlight-note/highlight-no
 import { LandingComponent } from './components/landing/landing.component';
 import { CreateTemplateModule } from './components/create-template/create-template.module';
 import { CreateTemplateComponent } from './components/create-template/create-template.component';
+import { TranslationComponent } from './components/translation/translation.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'create-template',
         component: CreateTemplateComponent
+      },
+      {
+        path: 'translation',
+        component: TranslationComponent
       }
     ]
   }
@@ -35,6 +40,7 @@ const routes: Routes = [
     AppComponent,
     HighlightNoteComponent,
     LandingComponent,
+    TranslationComponent,
   ],
   imports: [
     BrowserModule,
